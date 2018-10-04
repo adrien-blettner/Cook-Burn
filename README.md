@@ -3,7 +3,7 @@ ProjetPHP Cook&amp;Burn
 
 Membres du groupe (3B) :
 
-- Adrien BLETTNE
+- Adrien BLETTNER
 - Kelyan DRUEZ-PHILIP
 - Joan FABRE
 - Damien FONTES
