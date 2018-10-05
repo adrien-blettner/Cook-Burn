@@ -1,0 +1,22 @@
+#inscriptionForm input {
+    margin-top: 25px;
+}
+
+#inscriptionDiv.div{
+    text-align: center;
+}
+
+#inscriptionForm input[type = text], input[type = password] {
+    text-align: center;
+    width: 30%;
+    padding: 12px 20px;
+}
+
+/*{
+    padding: 50px;
+    text-align: center;
+}*/
+
+.submitButton {
+    margin-right: auto;
+}
