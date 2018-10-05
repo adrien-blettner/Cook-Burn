@@ -1,3 +1,8 @@
 mysql database alwaysdata (read only):
   login: 167330_everybody
   pass:  superPassword
+
+ftp alwaysdata:
+  login:   projetwebcookburn_everybody
+  pass:    superPasswordv2
+  address: ftp-projetwebcookburn.alwaysdata.net
