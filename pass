@@ -1,5 +1,6 @@
 mysql database alwaysdata (read only):
-  host(pas php): https://phpmyadmin.alwaysdata.com/phpmyadmin/index.php
+  site web: https://phpmyadmin.alwaysdata.com/phpmyadmin/index.php
+  host: mysql-projetwebcookburn.alwaysdata.net
   login: 167330_everybody
   pass:  superPassword
 
