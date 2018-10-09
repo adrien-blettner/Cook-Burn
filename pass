@@ -1,4 +1,5 @@
 mysql database alwaysdata (read only):
+  host(pas php): https://phpmyadmin.alwaysdata.com/phpmyadmin/index.php
   login: 167330_everybody
   pass:  superPassword
 
