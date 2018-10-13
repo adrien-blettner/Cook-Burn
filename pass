@@ -1,3 +1,4 @@
+OBSOLETE BIENTOT !!!
 mysql database alwaysdata (read only):
   site web: https://phpmyadmin.alwaysdata.com/phpmyadmin/index.php
   host: mysql-projetwebcookburn.alwaysdata.net
@@ -8,3 +9,12 @@ ftp alwaysdata:
   login:   projetwebcookburn_everybody
   pass:    superPasswordv2
   address: ftp-projetwebcookburn.alwaysdata.net
+  
+  
+nouveau ident BD
+  - utlisateur sans droit ecriture
+      user : 167330_read
+      pass : L@s88WQJUXJq4Xk0E
+  - utilisateur avec droit écriture
+      user : 167330_write
+      pass : aAmZCw*hR!Mv9WkbB
