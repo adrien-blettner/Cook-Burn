@@ -1,6 +1,13 @@
 <?php
-require_once 'vues/formatPage.inc.php';
-require_once 'modeles/OLD.dataBaseRequest.php';
+
+# TODO supprimer cette classe avec damien, je pense que le traitement intermediaire et lourd et chiant (en plus plein de warning chelou,d'où les double include)
+
+include '../modeles/OLD.dataBaseRequest.php';
+include 'modeles/OLD.dataBaseRequest.php';
+
+include '../vues/formatPage.inc.php';
+include 'vues/formatPage.inc.php';
+
 start_page ('Process_formulaire', array ('styles.css','formulaire.css'));
 
 $pseudo = $_POST['Pseudo'];
@@ -16,7 +23,7 @@ if ($action == 'S\'inscrire')
     {
         $message = '<h2>Veuillez remplir tous les champs !</h2>';
         echo $message;
-        echo '<a href="index.php">Retour</a>';
+        echo '<a href="/inscription">Retour</a>';
     }
     elseif ($mdp != $mdpVerif )     //Si le mot de passe est différent de la vérification
     {
@@ -43,7 +50,7 @@ elseif ($action == 'Connexion')
     {
         $message = '<h2>Veuillez remplir tous les champs</h2>';
         echo $message;
-        echo '<a href="connexion.php">Retour</a>';
+        echo '<a href="/connexion">Retour</a>';
     }
     else
     {
@@ -56,7 +63,7 @@ elseif ($action == 'Connexion')
         {
             $message = '<h2>Erreur dans le Pseudo ou le Mot de passe</h2>';
             echo $message;
-            echo '<a href="connexion.php">Retour</a>';
+            echo '<a href="/connexion">Retour</a>';
         }
     }
 }

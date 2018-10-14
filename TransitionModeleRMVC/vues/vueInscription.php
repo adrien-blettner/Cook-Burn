@@ -7,7 +7,7 @@ start_page ('Inscription', array ('formulaire.css'))
 
     <h2>Inscription</h2>
     <div class="inscriptionConnexionDiv">
-        <form action="../modeles/process_formulaire.php" method="post" class="inscriptionConnexionForm"><br>
+        <form action="/modeles/process_formulaire.php" method="post" class="inscriptionConnexionForm"><br>
             <fieldset class="inscriptionConnexionFieldset">
                 <input type="text" name="Pseudo" placeholder="Pseudo"/></br>
 
