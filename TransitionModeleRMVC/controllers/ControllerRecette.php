@@ -1,5 +1,4 @@
 <?php
-require 'modeles/RequettesRecettee.php';
 
 class ControllerRecette extends Controller
 {
