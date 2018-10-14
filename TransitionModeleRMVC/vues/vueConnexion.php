@@ -6,7 +6,7 @@ start_page ('Connexion', array ('formulaire.css'));
 ?>
     <h2>Connexion</h2>
     <div class="inscriptionConnexionDiv">
-        <form action="process_formulaire" method="post" class="inscriptionConnexionForm"><br>
+        <form action="/modeles/process_formulaire" method="post" class="inscriptionConnexionForm"><br>
             <fieldset class="inscriptionConnexionFieldset">
                 <input type="text" name="Pseudo" placeholder="Pseudo"/></br>
 

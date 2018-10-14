@@ -1,8 +1,7 @@
 <?php
 require_once 'vues/formatPage.inc.php';
-require './models/dataBaseRequest.php';
-start_page ('Process_formulaire', array ('<link rel="stylesheet" type="text/css" href="/views/css/styles.css">',
-                                         '<link rel="stylesheet" type="text/css" href="/views/css/formulaire.css">'));
+require_once 'modeles/OLD.dataBaseRequest.php';
+start_page ('Process_formulaire', array ('styles.css','formulaire.css'));
 
 $pseudo = $_POST['Pseudo'];
 $email = $_POST['Email'];
@@ -63,7 +62,7 @@ elseif ($action == 'Connexion')
 }
 elseif ($action == 'Retour')
 {
-    header('location:index.php');
+    header('location:/');
 }
 else{
     echo $action;

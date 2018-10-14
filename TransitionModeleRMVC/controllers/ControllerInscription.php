@@ -4,7 +4,7 @@ class ControllerInscription extends  Controller
 {
     public function __construct($args)
     {
-        # TODO
+        # TODO Traitement direct ici du post commeconnection
     }
 
     function render()

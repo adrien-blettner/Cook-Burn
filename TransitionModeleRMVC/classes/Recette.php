@@ -4,121 +4,121 @@
 
 class Recette
 {
-    private $ID;
-    private $NOM;
-    private $CREATEUR;
-    private $NB_CONVIVES;
-    private $DESC_COURTE;
-    private $DESC_LONGUE;
-    private $INGREDIENTS;
-    private $IMAGE_URL;
-    private $ETAPES;
-    private $BURN;
-    private $LAST_UPDATE;
+    private $id;
+    private $nom;
+    private $createur;
+    private $nbConvives;
+    private $descriptionCourte;
+    private $descriptionLongue;
+    private $ingredients;
+    private $imageURL;
+    private $etapes;
+    private $burn;
+    private $lastUpdate;
 
     public static $recetteVide;
 
-    function __construct ($ID, $CREATEUR, $NOM, $NB_CONIVES, $DESCRIPTION_COURTE, $DESCRIPTION_LONGUE, $INGREDIENTS,$IMAGE_URL, $ETAPES, $BURN, $LAST_UPDATE)
+    function __construct ($id, $createut, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn, $lastUpdate)
     {
-        $this->ID          = $ID;
-        $this->CREATEUR    = $CREATEUR;
-        $this->NOM         = $NOM;
-        $this->NB_CONVIVES = $NB_CONIVES;
-        $this->DESC_COURTE = $DESCRIPTION_COURTE;
-        $this->DESC_LONGUE = $DESCRIPTION_LONGUE;
-        $this->INGREDIENTS = explode ('↨', $INGREDIENTS);
-        $this->IMAGE_URL   = $IMAGE_URL;
-        $this->ETAPES      = explode ('↨', $ETAPES);
-        $this->BURN        = $BURN;
-        $this->LAST_UPDATE = $LAST_UPDATE;
+        $this->id          = $id;
+        $this->createur    = $createut;
+        $this->nom         = $nom;
+        $this->nbConvives  = $nbConvives;
+        $this->descriptionCourte = $descriptionCourte;
+        $this->descriptionLongue = $descriptionLongue;
+        $this->ingredients = explode ('↨', $ingredients);
+        $this->imageURL    = $imageURL;
+        $this->etapes      = explode ('↨', $etapes);
+        $this->burn        = $burn;
+        $this->lastUpdate  = $lastUpdate;
     }
 
     static function FromDBRow ($dbRow)
     {
         if ($dbRow == null)
             return Recette::$recetteVide;
-        $ID          = $dbRow ['ID'];
+        $id          = $dbRow ['ID'];
         // TODO getUserByID
-        $CREATEUR    = $dbRow ['ID_CREATEUR'];
-        $NOM         = $dbRow ['NOM'];
-        $NB_CONVIVES = $dbRow ['NB_CONIVES'];
-        $DESC_COURTE = $dbRow ['DESCRIPTION_COURTE'];
-        $DESC_LONGUE = $dbRow ['DESCRIPTION_LONGUE'];
-        $INGREDIENTS = $dbRow ['INGREDIENTS'];
-        $ETAPES      = $dbRow ['ETAPES'];
-        $BURN        = $dbRow ['BURN'];
-        $IMAGE_URL   = $dbRow ['IMAGE_URL'];
-        $LAST_UPDATE = $dbRow ['LAST_BURN_UPDATE'];
-        return new Recette ($ID, $CREATEUR, $NOM, $NB_CONVIVES, $DESC_COURTE, $DESC_LONGUE, $INGREDIENTS, $IMAGE_URL, $ETAPES, $BURN, $LAST_UPDATE);
+        $createut    = $dbRow ['ID_CREATEUR'];
+        $nom         = $dbRow ['NOM'];
+        $nbConvives  = $dbRow ['NB_CONIVES'];
+        $descriptionCourte = $dbRow ['DESCRIPTION_COURTE'];
+        $descriptionLongue = $dbRow ['DESCRIPTION_LONGUE'];
+        $ingredients = $dbRow ['INGREDIENTS'];
+        $imageURL    = $dbRow ['IMAGE_URL'];
+        $etapes      = $dbRow ['ETAPES'];
+        $burn        = $dbRow ['BURN'];
+        $lastUpdate  = $dbRow ['LAST_BURN_UPDATE'];
+        return new Recette ($id, $createut, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn, $lastUpdate);
     }
 
     public function equals (Recette $recette)
     {
-        return  $this->ID          == $recette->getID ()
-            and $this->NOM         == $recette->getNOM()
-            and $this->NB_CONVIVES == $recette->getNBCONVIVES()
-            and $this->DESC_LONGUE == $recette->getDESCLONGUE()
-            and $this->DESC_COURTE == $recette->getDESCCOURTE()
-            and $this->INGREDIENTS == $recette->getINGREDIENTS()
-            and $this->IMAGE_URL   == $recette->getIMAGEURL()
-            and $this->ETAPES      == $recette->getETAPES()
-            and $this->IMAGE_URL   == $recette->getIMAGEURL()
-            and $this->BURN        == $recette->getBURN();
+        return  $this->id          == $recette->getId ()
+            and $this->nom         == $recette->getNom()
+            and $this->nbConvives == $recette->getNbConvives()
+            and $this->descriptionLongue == $recette->getDescriptionLongue()
+            and $this->descriptionCourte == $recette->getDescriptionCourte()
+            and $this->ingredients == $recette->getIngredients()
+            and $this->imageURL   == $recette->getImageURL()
+            and $this->etapes      == $recette->getEtapes()
+            and $this->imageURL   == $recette->getImageURL()
+            and $this->burn        == $recette->getBurn();
     }
 
-    public function getID()
+    public function getId()
     {
-        return $this->ID;
+        return $this->id;
     }
 
-    public function getNOM()
+    public function getNom()
     {
-        return $this->NOM;
+        return $this->nom;
     }
 
-    public function getNBCONVIVES()
+    public function getNbConvives()
     {
-        return $this->NB_CONVIVES;
+        return $this->nbConvives;
     }
 
-    public function getDESCCOURTE()
+    public function getDescriptionCourte()
     {
-        return $this->DESC_COURTE;
+        return $this->descriptionCourte;
     }
 
-    public function getDESCLONGUE()
+    public function getDescriptionLongue()
     {
-        return $this->DESC_LONGUE;
+        return $this->descriptionLongue;
     }
 
-    public function getINGREDIENTS()
+    public function getIngredients()
     {
-        return $this->INGREDIENTS;
+        return $this->ingredients;
     }
 
-    public function getETAPES()
+    public function getEtapes()
     {
-        return $this->ETAPES;
+        return $this->etapes;
     }
 
-    public function getBURN()
+    public function getBurn()
     {
-        return $this->BURN;
+        return $this->burn;
     }
 
-    public function getIMAGEURL()
+    public function getImageURL()
     {
-        return $this->IMAGE_URL;
+        return $this->imageURL;
     }
 
-    public function getCREATEUR()
+    public function getCreateur()
     {
-        return $this->CREATEUR;
+        return $this->createur;
     }
 
-    public function getLASTUPDATE()
+    public function getLastUdate()
     {
-        return $this->LAST_UPDATE;
+        return $this->lastUpdate;
     }
 
 }

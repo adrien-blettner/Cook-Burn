@@ -9,10 +9,9 @@ class ControllerAccueil extends Controller
 
     function render ()
     {
-        require 'modeles/RequetteRecette.php';
-        require_once 'classes/Recette.php';
+        require 'modeles/RequettesRecette.php';
 
-        $recetteDuMoment = RequetteRecette::getRecetteDuMoment();
+        $recetteDuMoment = RequettesRecette::getRecetteDuMoment();
 
         require 'vues/vueAccueil.php';
     }

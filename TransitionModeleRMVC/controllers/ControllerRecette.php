@@ -1,5 +1,5 @@
 <?php
-require 'modeles/RequetteRecette.php';
+require 'modeles/RequettesRecettee.php';
 
 class ControllerRecette extends Controller
 {
@@ -8,7 +8,7 @@ class ControllerRecette extends Controller
 
     public function __construct($id)
     {
-        $this->recette = RequetteRecette::getRecetteById($id);
+        $this->recette = RequettesRecette::getRecetteById($id);
 
         # Si la recette demandée n'est pas valide / existante, on redirige vers la liste des recettes
         if ($id !== null and $this->recette == Recette::$recetteVide)

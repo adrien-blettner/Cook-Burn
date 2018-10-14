@@ -52,6 +52,11 @@ try {
         $renderer->render();
     });
 
+    # TODO remove this temp
+    $routeur->ajouterRoute('/modeles/process_formulaire','POST', function (){
+        require 'modeles/process_formulaire.php';
+    });
+
     # Lance le routeur
     $routeur->run();
 
