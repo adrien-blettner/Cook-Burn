@@ -9,7 +9,7 @@ class ControllerInscription extends  Controller
 
     function render()
     {
-        // TODO: Implement render() method.
+        require 'vues/vueInscription.php';
     }
 
 }

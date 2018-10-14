@@ -52,6 +52,12 @@ try {
         $renderer->render();
     });
 
+    $routeur->ajouterRoute ('/inscription', 'GET', function (){
+        require 'controllers/ControllerInscription.php';
+        $renderer = new ControllerInscription(null);
+        $renderer->render();
+    });
+
     # TODO remove this temp
     $routeur->ajouterRoute('/modeles/process_formulaire','POST', function (){
         require 'modeles/process_formulaire.php';

@@ -9,7 +9,7 @@ class ControllerAccueil extends Controller
 
     function render ()
     {
-        require 'modeles/RequettesRecette.php';
+        require_once 'modeles/RequettesRecette.php';
 
         $recetteDuMoment = RequettesRecette::getRecetteDuMoment();
 

@@ -1,6 +1,7 @@
 <?php
 
 # TODO renommer les variables en lowerCase (pas des const)
+# TODO WTF pk la description longue marche pas ??
 
 class Recette
 {
@@ -56,13 +57,13 @@ class Recette
     {
         return  $this->id          == $recette->getId ()
             and $this->nom         == $recette->getNom()
-            and $this->nbConvives == $recette->getNbConvives()
+            and $this->nbConvives  == $recette->getNbConvives()
             and $this->descriptionLongue == $recette->getDescriptionLongue()
             and $this->descriptionCourte == $recette->getDescriptionCourte()
             and $this->ingredients == $recette->getIngredients()
-            and $this->imageURL   == $recette->getImageURL()
+            and $this->imageURL    == $recette->getImageURL()
             and $this->etapes      == $recette->getEtapes()
-            and $this->imageURL   == $recette->getImageURL()
+            and $this->imageURL    == $recette->getImageURL()
             and $this->burn        == $recette->getBurn();
     }
 

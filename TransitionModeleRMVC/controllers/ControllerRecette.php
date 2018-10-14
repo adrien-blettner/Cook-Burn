@@ -1,5 +1,7 @@
 <?php
 
+require_once 'modeles/RequettesRecette.php';
+
 class ControllerRecette extends Controller
 {
     private $id;

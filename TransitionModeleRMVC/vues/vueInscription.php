@@ -1,7 +1,7 @@
 <?php
 require_once 'formatPage.inc.php';
 
-start_page ('Inscription', array ('<link rel="stylesheet" type="text/css" href="/views/css/formulaire.css">'))
+start_page ('Inscription', array ('formulaire.css'))
 # TODO verif formulaire car lien changé
 ?>
 
