@@ -1,4 +1,13 @@
 <?php
+# Partie initialisation de session (commune pour toute les pages du coup)
+session_start();
+
+if (!isset($_SESSION['isConnected']) or $_SESSION['isConnected'] == False)
+{
+    $_SESSION['pseudo'] = '';
+    $_SESSION['rôle'] = 'visiteur';
+}
+
 
 require      'Routeur/Routeur.php';
 require_once 'classes/Recette.php';
