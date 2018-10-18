@@ -1,9 +1,9 @@
 <?php
 
-require_once 'utils.inc.php';
+require_once 'formatPage.inc.php';
 
 
-start_page ('form', array ('<link rel="stylesheet" type="text/css" href="/views/css/styles.css">','<link rel="stylesheet" type="text/css" href="/views/css/MenuDeroulant.css">'));
+start_page ('form', array ('menu.css','MenuDeroulant.css'));
 ?>
 <ul id="menu-vertical">
     <li><a href="#"></a>
@@ -14,7 +14,7 @@ start_page ('form', array ('<link rel="stylesheet" type="text/css" href="/views/
             <li><a href="#">Déconnexion</a></li>
         </ul>
         <div class="topnav">
-            <a classe="nom" href="index.php" id="cookBurn">Cook&Burn</a>
+            <a classe="nom" href="../index.php" id="cookBurn">Cook&Burn</a>
             <a href="#recette">Recettes</a>
             <a href="#description">Description</a>
         </div>

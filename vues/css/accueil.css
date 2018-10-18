@@ -70,6 +70,12 @@ body { /* on aligne le + à gauche */
     background-color: #313233;
 }
 
+.topRecette img{
+    width: 650px;
+    height: 450px;
+    border-radius: 50px;
+}
+
 .recettes{
     text-align: center;
     font-size: 15px;
@@ -77,3 +83,8 @@ body { /* on aligne le + à gauche */
     background-color: #313233;
 }
 
+.recettes img{
+    width: 400px;
+    height: 250px;
+    border-radius: 50px;
+}

@@ -12,6 +12,7 @@ class ControllerAccueil extends Controller
         require_once 'modeles/RequettesRecette.php';
 
         $recetteDuMoment = RequettesRecette::getRecetteDuMoment();
+        $lastRecettes = RequettesRecette::getLastRecettes();
 
         require 'vues/vueAccueil.php';
     }

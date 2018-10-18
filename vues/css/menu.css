@@ -23,8 +23,6 @@ body { /* on aligne le + à gauche */
     background-image: linear-gradient(to bottom, #729EBF 0%, #333A40 100%);
     border-radius: 6px;
     margin-bottom:2px;
-
-
 }
 #menu-vertical li li {
     max-height:0;
