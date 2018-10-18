@@ -19,6 +19,14 @@ class Routeur
 
     public function ajouterRoute ($chemin, $methode, $fonction)
     {
+        # Si on a une list de méthode on ajoute les routes une à une
+        if (is_array($methode))
+        {
+            foreach ($methode as $meth)
+                $this->ajouterRoute($chemin, $meth, $fonction);
+            return;
+        }
+
         # Créer une 'route' qui fait correspondre un chemin et une fonction
         $route = new Route ($chemin, $fonction);
 

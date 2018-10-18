@@ -13,29 +13,42 @@ class RequettesUtilisateur
         $testMail = $lienBD->prepare ('SELECT * FROM MEMBRE WHERE EMAIL = ?');
         $testMail->bind_param('s',$user);
         $testPseudo->bind_param('s', $user);
-        $testPseudo->execute();
-        $testMail->execute();
+        if ($testPseudo->execute() === False and $testMail->execute() === False)
+            return False;
+
         $resultMail = $testMail->get_result();
+        if (!is_bool($resultMail))
+            $resultMail = $resultMail->fetch_assoc();
+
         $resultPseudo = $testPseudo->get_result();
+        if (!is_bool($resultPseudo))
+            $resultPseudo = $resultPseudo->fetch_assoc();
+
         $testPseudo->close();
         $testMail->close ();
 
         #TODO test hash php
-        if (!password_verify($pass, $testMail['PASSWORD']) and !password_verify($pass, $testPseudo['PASSWORD']))
-        {
-            echo 'password invalid';
+        if (!password_verify($pass, $resultMail['PASSWORD']) and !password_verify($pass, $resultPseudo['PASSWORD']))
             return false;
-        }
 
-        if (is_bool($resultMail) and is_bool($resultPseudo))
+
+        if (!is_bool($resultPseudo))
         {
-            echo 'pseudo or mail invalid';
-            return false;
+            $result = Utilisateur::FromDbRow($resultPseudo);
+            # On met le mot de passe à '' car pas besoin et volonté de sécu
+            $result->setPassword('');
+            return $result;
         }
 
         if (!is_bool($resultMail))
-            return Utilisateur::FromDbRow(mysqli_fetch_assoc($resultMail));
-        if (!is_bool($resultPseudo))
-            return Utilisateur::FromDbRow(mysqli_fetch_assoc($resultPseudo));
+        {
+            $result = Utilisateur::FromDbRow($resultMail);
+            # On met le mot de passe à '' car pas besoin et volonté de sécu
+            $result->setPassword('');
+            return $result;
+        }
+
+        # Pseudo ou mail invalide
+        return false;
     }
 }
