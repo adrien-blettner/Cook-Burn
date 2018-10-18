@@ -1,0 +1,36 @@
+body {
+    background-color: #404040;
+    color: white;
+}
+
+#titreRecette {
+    text-align: center;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    padding-top: 3%;
+}
+
+#leftPanel {
+    order: 0;
+    position: absolute;
+    height: 100%;
+    width: 40%;
+}
+
+#rightPanel {
+    order: 1;
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    left: 40%;
+}
+
+.inline {
+    display: inline-block;
+    text-align: center;
+    padding-left: 25%;
+}
