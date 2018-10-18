@@ -74,6 +74,7 @@ body { /* on aligne le + à gauche */
     width: 650px;
     height: 450px;
     border-radius: 50px;
+    border : 2px white solid;
 }
 
 .recettes{
@@ -87,4 +88,5 @@ body { /* on aligne le + à gauche */
     width: 400px;
     height: 250px;
     border-radius: 50px;
+    border : 2px white solid;
 }
