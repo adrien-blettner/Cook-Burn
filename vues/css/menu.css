@@ -20,17 +20,18 @@ body { /* on aligne le + à gauche */
     width: 100%;
     border: solid black 0px;
     top: 0;
-    color: #e5e5e5;
+
 }
 
 /* Stylisation des elements du topnav */
 .topnav a {
     float: left;
-    color: black;
+    color: #e5e5e5;
     text-align: center;
     padding: 0px 0px;
     text-decoration: none;
     font-size: 35px;
+    font-family: Corbel;
 }
 
 /* Coloration sur passage de souris */
