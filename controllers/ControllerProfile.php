@@ -4,7 +4,9 @@ class ControllerProfile extends Controller
 {
     public function __construct($args)
     {
-        # TODO init les variables et $_SESSION
+        if (!$_SESSION['isConnected']);
+            # TODO GOTO CONNEXION
+
     }
 
     public function render()

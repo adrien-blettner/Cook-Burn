@@ -16,7 +16,11 @@ class ControllerRecette extends Controller
             header('location: /recette');
 
         if ($this->recette->getBurn() < 10 and $_POST['role'] == 'visiteur')
-            #generer une requette vers connection
+        {
+            xhttp.open("POST", "demo_post2.asp", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("fname=Henry&lname=Ford");
+        }
 
         $this->id = $id;
     }
