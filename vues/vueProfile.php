@@ -7,10 +7,10 @@ start_page ('Profile', array ('profil.css','rolesUtilisateur.css'));
         <table>
             <tr>
                 <td>
-                    <div class="presentation_groupe"
-                    <div class="presentation_membre"
+                    <div class="presentation_groupe">
+                    <div class="presentation_membre">
                     <p></p>
-                    <img class="image_groupe" src="images/bart.jpg" alt="Photo de ">
+                    <img class="image_groupe" src="images/bart.jpg" alt="Photo de "/>
     </div>
     </div>
     </td>
@@ -52,33 +52,6 @@ start_page ('Profile', array ('profil.css','rolesUtilisateur.css'));
     </div>
 
     </head>
-
-    <h1> Rôles et permissions </h1>
-
-
-    <blockquote>
-        <div class="Titre"> Voici les différents rôles: </div><br>
-        - (Super) Administrateur (tous les droits)
-
-        <br>
-
-        - Membre
-
-
-        <br>- Visiteur
-        <div class="Titre"> Description des différents permissions:</h2></div>
-
-        <div class="Role">Administrateur: <br></div>
-        <div class="Text">  L'administrateur aura tous les droits. <br></div>
-
-        <div class="Role"> Membre : <br></div>
-        <div class="Text">   Le membre pourra disposer de son propre compte, et aura ainsi la possibilité d'ajouter ses propres recettes, de noter grâce au système de burn et commenter celles des autres utilisateurs.<br></div>
-
-        <div class="Role"> Visiteur : <br></div>
-        <div class="Text"> Le visiteur aura simplement la possibilité de " visiter" la page sans rien ne pouvoir y changer. Il consultera seulement les pages publiques.<br></div>
-
-        <div class = "TitreMembre"> Devenez membre en vous connectant ici!  <br></div>
-        <div class="bord"> <a href="http://projetwebcookburn.alwaysdata.net/connexion.php" class="bouton13"> Devenir membre </a></div>
 
 
     </blockquote>
