@@ -24,6 +24,7 @@ start_page ('Menu', array ('menu.css','MenuDeroulant.css'));
                     <input type="text" class="searchTerm" placeholder="Rechercher...">
                     <button type="submit" class="searchButton">
                         <i class="fa fa-search"></i>
+                        <img class="search-icon" src="images/look.png"/>
                     </button>
                 </div>
             </div>
