@@ -1,11 +1,12 @@
 <?php
 require_once 'formatPage.inc.php';
+require_once 'MenuDeroulant.php';
 
 start_page ('Inscription', array ('formulaire.css'))
 # TODO verif formulaire car lien changé
 ?>
 
-    <h2>Inscription</h2>
+    <h2 id="inscriptionTitre">Inscription</h2>
     <div class="inscriptionConnexionDiv">
         <form action="/modeles/process_formulaire.php" method="post" class="inscriptionConnexionForm"><br>
             <fieldset class="inscriptionConnexionFieldset">

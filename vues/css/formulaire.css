@@ -3,7 +3,7 @@ body {
     color: #F5F5F5;
 }
 
-h2 {
+#inscriptionTitre, #connexionTitre {
     margin-top : 50px;
     margin-bottom : 1px;
     text-align: center;
@@ -43,7 +43,7 @@ h2 {
     background-color: #ddd;
 }
 
-a {
+/*a {
     padding: 14px 16px;
     float : left;
     margin: 10px 48%;
@@ -56,4 +56,4 @@ a {
 
 a:hover {
     background-color: #ddd;
-}
+}*/
