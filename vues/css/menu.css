@@ -107,7 +107,7 @@ body { /* on aligne le + à gauche */
 /*Resize the wrap to see the search bar change!*/
 .BoutonRecherche{
     width: 30%;
-    position: absolute;
+    position: relative;
     padding: 450px;
     top: 50%;
     left: 50%;
