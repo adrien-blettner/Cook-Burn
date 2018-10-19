@@ -13,8 +13,8 @@ body {
 
 .presentation_groupe {
     background-color: #474849;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 5%;
+    margin-right: 5%;
     margin-top: 1%;
     margin-bottom: 1%;
     font-family: Corbel;
@@ -22,14 +22,11 @@ body {
 }
 
 .presentation_membre {
-    padding-top: 260%;
-    background: #404040;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    text-align: center;
+    padding-top: 5%;
     padding-bottom: 5%;
+    background: #404040;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
     border: 3px solid #d34836;
     border-radius: 40px;
     font-family: Corbel;
