@@ -3,7 +3,7 @@
 require_once 'formatPage.inc.php';
 
 
-start_page ('form', array ('menu.css','MenuDeroulant.css'));
+start_page ('Menu', array ('menu.css','MenuDeroulant.css'));
 ?>
 <ul id="menu-vertical">
     <li><a href="#"></a>
@@ -30,3 +30,6 @@ start_page ('form', array ('menu.css','MenuDeroulant.css'));
         </div>
     </li>
 </ul>
+
+<?php
+end_page();
