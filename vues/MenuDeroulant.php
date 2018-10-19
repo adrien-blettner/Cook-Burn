@@ -17,7 +17,16 @@ start_page ('form', array ('menu.css','MenuDeroulant.css'));
             <a classe="nom" href="../index.php" id="cookBurn">Cook&Burn</a>
             <a href="#recette">Recettes</a>
             <a href="#description">Description</a>
-            <a href="#"
+            <a href="#profil">Profil</a>
+
+            <div class="BoutonRecherche">
+                <div class="search">
+                    <input type="text" class="searchTerm" placeholder="Rechercher...">
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </li>
 </ul>
