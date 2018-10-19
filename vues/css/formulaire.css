@@ -57,3 +57,17 @@ body {
 a:hover {
     background-color: #ddd;
 }*/
+
+@media only screen and (max-width: 768px) {
+    .inscriptionConnexionFieldset {
+        margin-left : 5%;
+        margin-right : 5%;
+    }
+
+    .submitButton{
+        margin-top: 1px;
+        margin-bottom: 10px;
+        background-color : #E70739;
+        padding: 14px 16px;
+    }
+}
