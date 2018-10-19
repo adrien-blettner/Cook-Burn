@@ -16,7 +16,7 @@ start_page ('Profile', array ('profil.css','rolesUtilisateur.css'));
                     <td>
                         <div class="presentation_membre"
                         <p></p>
-                        <p>Pseudo: </p>
+                        <p>Pseudo: </p>zzzz
                         <p>Age: </p>
                         <p>Email: </p>
                         <label for="DateDeNaissance"><p>Date de naissance</p></label>
