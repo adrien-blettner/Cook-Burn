@@ -31,7 +31,7 @@ class ControllerConnexion extends Controller
         if ($_POST['action'] == 'connexion')
         {
             # Vérification que tout les champs sont remplie
-            if (!isset($_POST['pseudo'], $_POST['password']) or $_POST['pseudo'] == "" or $_POST['password'] == "")
+            if (!isset($_POST['Pseudo'], $_POST['Mot_de_passe']) or $_POST['Pseudo'] == "" or $_POST['Mot_de_passe'] == "")
             {
                 echo
                  '<form id="test" action="/connexion" method="post">
@@ -43,7 +43,7 @@ class ControllerConnexion extends Controller
             }
 
             # Tente la connection de l'utilisateur
-            $utilisateur = RequettesUtilisateur::connect($_POST['pseudo'],$_POST['password']);
+            $utilisateur = RequettesUtilisateur::connect($_POST['Pseudo'],$_POST['Mot_de_passe']);
 
             # Verification que la connection a réussie
             if ($utilisateur === False)
@@ -60,14 +60,19 @@ class ControllerConnexion extends Controller
             # Assigne les nouvelle variable de session
             $_SESSION['isConnected'] = True;
             $_SESSION['pseudo'] = $utilisateur->getPseudo();
-            $_SESSION['role']   = $utilisateur->getRole();
+
+            if ($utilisateur->getIsAdmin() == 0)
+                $_SESSION['role'] = 'membre';
+            else
+                $_SESSION['role'] = 'admin';
 
             # Redirige vers la page suivante
-            header('location ' . $this->pageSuivante);
+            header('location: ' . $this->pageSuivante);
+
         }
 
         # Retour à l'accueil
-        elseif ($_POST['action'] == 'retour')
+        elseif ($_POST['action'] == 'Retour')
             header ('location: /');
     }
 

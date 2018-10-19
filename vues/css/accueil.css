@@ -88,15 +88,18 @@ body {
     border : 2px white solid;
 }
 
+/* FLEXBOX pour les recettes (DEBUT) */
 #conteneurRecettes{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
 }
 
-.recettesContenue{
-
+.recetteContenue{
+    width: 50%;
 }
+
+/* FLEXBOX pour les recettes (FIN) */
 
 .recettes{
     text-align: center;

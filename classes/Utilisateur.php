@@ -6,7 +6,7 @@ class Utilisateur
     private $pseudo;
     private $email;
     private $password;
-    private $role;
+    private $isAdmin;
     static  $utilisateurNull;
 
     public function __construct($id, $pseudo, $email, $password, $role)
@@ -16,7 +16,7 @@ class Utilisateur
         $this->email = $email;
         $this->password = $password;
         # TODO verif bd bool ?
-        $this->role = $role;
+        $this->isAdmin = $role;
     }
 
     public static function FromDbRow($dbrow)
@@ -57,9 +57,9 @@ class Utilisateur
         $this->password = $password;
     }
 
-    public function getRole()
+    public function getIsAdmin()
     {
-        return $this->role;
+        return $this->isAdmin;
     }
 }
 # Initialise l'utilisateur static vide

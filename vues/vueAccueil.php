@@ -38,7 +38,8 @@ start_page('accueil', array('accueil.css'));
         <div id="conteneurRecettes">
                 <?php foreach ($lastRecettes as $recettes)
                 {
-                    echo '<div class="recetteContenue">' , '<img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecettes"/>' ,/* $recettes->getNom() ,  */'</div>' , PHP_EOL;
+                    echo '<div class="recetteContenue">' , '<a href="/recette/' , $recettes->getId() ,'"><img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecettes"/></a>' ,
+                    '<p>' , $recettes->getNom() , '</p>' , '<p>' , $recettes->getBurn() , '</p>' , '<p>' , $recettes->getDescriptionCourte() , '</p>' , '</div>' , PHP_EOL;
                 }
                 ?>
         </div>

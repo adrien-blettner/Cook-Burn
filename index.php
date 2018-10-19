@@ -4,16 +4,19 @@ session_start();
 
 if (!isset($_SESSION['isConnected'], $_SESSION['pseudo'], $_SESSION['role'])
     or $_SESSION['isConnected'] !== True
-    or !in_array($_SESSION['role'], ['visiteur','utilisateur', 'admin']))
+    or !in_array($_SESSION['role'], ['visiteur','membre', 'admin']))
 {
     $_SESSION['pseudo'] = '';
     $_SESSION['role'] = 'visiteur';
 }
 
+var_dump($_SESSION);
+
 require      'Routeur/Routeur.php';
 require_once 'classes/Recette.php';
 require_once 'classes/Utilisateur.php';
 require_once 'controllers/Controller.php';
+require_once 'modeles/tools.inc.php';
 
 try {
     $routeur = new Routeur ();
