@@ -58,7 +58,7 @@ a:hover {
     background-color: #ddd;
 }*/
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
     .inscriptionConnexionFieldset {
         margin-left : 5%;
         margin-right : 5%;
