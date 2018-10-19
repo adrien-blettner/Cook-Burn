@@ -2,6 +2,8 @@ body { /* on aligne le + à gauche */
     margin: 0px;
     padding: 0px;
     width: 100%;
+    background: #f2f2f2;
+    font-family: 'Corbel', sans-serif;
 }
 
 #menu-vertical {
@@ -123,14 +125,11 @@ body { /* on aligne le + à gauche */
 
 }
 
-body{
-    background: #f2f2f2;
-    font-family: 'Open Sans', sans-serif;
-}
 
 .search {
     width: 100%;
-    position: relative
+    position: relative;
+    padding-left: 450px;
 }
 
 .searchTerm {
