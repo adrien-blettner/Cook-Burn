@@ -10,10 +10,7 @@ start_page('accueil', array('accueil.css'));
         <a href="#description">Description</a>
     </div>
 
-    <div class="banniereImg">
-
-    </div>
-
+    <div class="banniereImg"></div>
     <div class="description">
         <h1>Présentation du service</h1>
         <p>
@@ -24,14 +21,12 @@ start_page('accueil', array('accueil.css'));
 
     <div class="topRecette">
         <h1>Top recette</h1>
-        <p>
-            <img src="<?php echo $recetteDuMoment->getImageUrl(); ?>" alt="bug_imgTopRecette"/>
-        </p>
+        <a href="/recette/<?php echo $recetteDuMoment->getId();?>"><img src="<?php echo $recetteDuMoment->getImageUrl(); ?>" alt="bug_imgTopRecette"/></a>
         <p>
             <?php echo $recetteDuMoment->getNom(); ?>
         </p>
         <p>
-            <?php echo $recetteDuMoment->getBurn(); ?>
+            <?php echo 'Burns : ' , $recetteDuMoment->getBurn(); ?>
         </p>
         <p>
             <?php echo $recetteDuMoment->getDescriptionCourte(); ?>
@@ -40,9 +35,13 @@ start_page('accueil', array('accueil.css'));
 
     <div class="recettes">
         <h1>Liste des recettes</h1>
-        <p>
-            <?php foreach ($lastRecettes as $recettes) {echo '<img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecette"/>';} ?>
-        </p>
+        <div id="conteneurRecettes">
+                <?php foreach ($lastRecettes as $recettes)
+                {
+                    echo '<div class="recetteContenue">' , '<a href="/recette/' , $recettes->getId() ,'"><img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecettes"/></a>' , '<p>' , $recettes->getNom() , '</p>' , '</div>' , PHP_EOL;
+                }
+                ?>
+        </div>
     </div>
 
 <?php

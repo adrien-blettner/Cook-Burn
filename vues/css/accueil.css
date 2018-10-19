@@ -1,13 +1,13 @@
-body { /* on aligne le + à gauche */
-    margin: 0px;
-    padding: 0px;
+body {
+    margin: 0;
+    padding: 0;
     width: 100%;
 }
 
 /* Création d'une banniere dynamique avec photos */
 /* Configuration de l'animation */
 .banniereImg{
-    margin: 70px auto 0px;
+    margin: 70px auto 0;
     width: 1920px;
     height: 520px;
     border: solid black 2px;
@@ -54,7 +54,6 @@ body { /* on aligne le + à gauche */
 
 .description{
     text-align: center;
-    font-size: 15px;
     color: white;
     background-color: #4f5051;
 }
@@ -63,11 +62,23 @@ body { /* on aligne le + à gauche */
     font-size: 35px;
 }
 
+.description p{
+    font-size: 15px;
+}
+
 .topRecette{
     text-align: center;
-    font-size: 15px;
     color: white;
     background-color: #313233;
+    font-size: 0;
+}
+
+.topRecette h1{
+    font-size: 35px;
+}
+
+.topRecette p{
+    font-size: 15px;
 }
 
 .topRecette img{
@@ -77,11 +88,29 @@ body { /* on aligne le + à gauche */
     border : 2px white solid;
 }
 
+/* FLEXBOX pour les recettes (DEBUT) */
+#conteneurRecettes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.recetteContenue{
+    width: 50%;
+
+}
+
+/* FLEXBOX pour les recettes (FIN) */
+
 .recettes{
     text-align: center;
     font-size: 15px;
     color: white;
     background-color: #313233;
+}
+
+.recettes h1{
+    font-size: 35px;
 }
 
 .recettes img{
