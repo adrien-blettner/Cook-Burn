@@ -15,11 +15,12 @@ body { /* on aligne le + à gauche */
 
 /* menu de navigation, fond noir */
 .topnav {
-    background-color: #E70739;
+    background-color: #d34836;
     position: fixed;
     width: 100%;
     border: solid black 0px;
     top: 0;
+    color: #e5e5e5;
 }
 
 /* Stylisation des elements du topnav */
