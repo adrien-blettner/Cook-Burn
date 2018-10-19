@@ -108,6 +108,7 @@ body { /* on aligne le + à gauche */
 .BoutonRecherche{
     width: 30%;
     position: absolute;
+    padding: 450px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
