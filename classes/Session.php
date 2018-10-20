@@ -107,4 +107,10 @@ class Session
         $_SESSION['expiration'] = time() - (5*60);
         self::initSession();
     }
+
+    # Rallonge la session
+    public static function extendSessionLife ()
+    {
+        $_SESSION['expiration'] = time() + (60*60);
+    }
 }

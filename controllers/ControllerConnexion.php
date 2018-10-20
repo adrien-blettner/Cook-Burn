@@ -9,20 +9,26 @@ class ControllerConnexion extends Controller
 
     public function __construct($args)
     {
-        # TODO vérif que $_SESSION pas déjà mis (déjà co) si oui rediriger direct vers /profil
-
+        # Prépare la page suivante
         if (!isset($_POST['pageSuivante']))
             $this->pageSuivante = '/profil';
         else
             $this->pageSuivante = $_POST['pageSuivante'];
 
+        # Si la personne est déjà connecté, rallonge la session (car action prouve activité) et redrige immédiatement
+        if ($_SESSION['isConnected'] == true)
+        {
+            Session::extendSessionLife();
+            header('location: ' . $this->pageSuivante);
+        }
+
+        # Check s'il y a un message erreur à afficher
         if (!isset($_POST['messageErreur']))
             $this->messageErreur = null;
         else
             $this->messageErreur = $_POST['messageErreur'];
 
-        var_dump($this->messageErreur, $this->pageSuivante);
-
+        # Si il n'y a rien à faire on quitte
         if (!isset($_POST['action']))
             return;
 
