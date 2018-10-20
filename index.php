@@ -11,6 +11,7 @@ require_once 'classes/Session.php';
 Session::initSession();
 # TODO Delete
 var_dump($_SESSION);
+var_dump(Tools::randomPassword(8));
 
 try {
     $routeur = new Routeur ();
@@ -27,7 +28,6 @@ try {
         require_once 'controllers/ControllerProfile.php';
         $renderer = new ControllerProfile(null);
         $renderer->render();
-        #TODO controller profile
     });
 
     $routeur->ajouterRoute('process_formulaire', 'POST', function () {

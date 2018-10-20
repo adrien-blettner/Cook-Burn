@@ -27,7 +27,6 @@ class RequettesUtilisateur
         $testPseudo->close();
         $testMail->close ();
 
-        #TODO test hash php
         if (!password_verify($pass, $resultMail['PASSWORD']) and !password_verify($pass, $resultPseudo['PASSWORD']))
             return false;
 
