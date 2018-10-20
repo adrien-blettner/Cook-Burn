@@ -47,6 +47,8 @@ class RequettesUtilisateur
             return $result;
         }
 
+         $lienBD->close();
+
         # Pseudo ou mail invalide
         return false;
     }

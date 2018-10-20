@@ -10,10 +10,10 @@ class ControllerConnexion extends Controller
     public function __construct($args)
     {
         # TODO parler avec damien, on pourrait faire le traitement sur la même page et renvoyer sur /profil  -> evite de devoir charger un lien intermédiaire
-        # TODO vérif que $_SESSION pas déjà mis (déjà co) si oui rediriger direct vers /profile
+        # TODO vérif que $_SESSION pas déjà mis (déjà co) si oui rediriger direct vers /profil
 
         if (!isset($_POST['pageSuivante']))
-            $this->pageSuivante = '/profile';
+            $this->pageSuivante = '/profil';
         else
             $this->pageSuivante = $_POST['pageSuivante'];
 
@@ -58,13 +58,7 @@ class ControllerConnexion extends Controller
             }
 
             # Assigne les nouvelle variable de session
-            $_SESSION['isConnected'] = True;
-            $_SESSION['pseudo'] = $utilisateur->getPseudo();
-
-            if ($utilisateur->getIsAdmin() == 0)
-                $_SESSION['role'] = 'membre';
-            else
-                $_SESSION['role'] = 'admin';
+            Session::connect($utilisateur->getPseudo(), intval($utilisateur->getIsAdmin()));
 
             # Redirige vers la page suivante
             header('location: ' . $this->pageSuivante);

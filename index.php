@@ -11,7 +11,6 @@ require_once 'classes/Session.php';
 Session::initSession();
 # TODO Delete
 var_dump($_SESSION);
-var_dump(Tools::randomPassword(8));
 
 try {
     $routeur = new Routeur ();

@@ -15,8 +15,12 @@ class RequettesRecette
         $preparedStatement->bind_param('i',$id);
         $preparedStatement->execute();
         $result = $preparedStatement->get_result();
+
         if (is_bool($result))
             return false;
+
+        $preparedStatement->close();
+        $lienBD->close();
 
         return Recette::FromDBRow (mysqli_fetch_assoc($result));
     }
@@ -30,9 +34,10 @@ class RequettesRecette
         $listLastRecettes = array();
 
         while ($row = mysqli_fetch_assoc($result))
-        {
             $listLastRecettes[] = Recette::FromDBRow ($row);
-        }
+
+        $lienBD->close();
+
         return $listLastRecettes;
     }
 
@@ -56,6 +61,8 @@ class RequettesRecette
         $recette = Recette::FromDbRow ($result);
         if ($recette == Recette::$recetteVide)
             return false;
+
+        $lienBD->close();
 
         return $recette;
     }

@@ -12,7 +12,7 @@ class Session
         session_start();
 
         # Vérifie que la session est secure
-        if (self::mightBeenHijacking() or self::wrongValues())
+        if (self::mightBeenHijacking() or self::wrongValues() or self::tooOld())
         {
             self::destroySession();
             # On rappelle session_start car la fonction précdéente supprime la session, il faut la redémarrer
@@ -49,11 +49,21 @@ class Session
         if (!isset($_SESSION['isConnected'], $_SESSION['pseudo'], $_SESSION['role']))
             return true;
 
-        if ($_SESSION['isConnected'] !== True)
+        if ($_SESSION['isConnected'] !== true and $_SESSION['isConnected'] !== false)
             return true;
 
         if (!in_array($_SESSION['role'], ['visiteur','membre', 'admin']))
             return true;
+
+        return false;
+    }
+
+    # Fonction qui verifie que la session n'est pas trop vieille (1 heure)
+    private static function tooOld ()
+    {
+        if (isset($_SESSION['isConnected']) and $_SESSION['isConnected'] === true)
+            if (!isset($_SESSION['expiration']) or time() >= $_SESSION['expiration'])
+                return true;
 
         return false;
     }
@@ -65,5 +75,18 @@ class Session
         session_unset();
         session_destroy();
         session_write_close();
+    }
+
+    public static function connect ($pseudo, $isAdmin)
+    {
+        $_SESSION['isConnected'] = true;
+
+        if (!is_bool($isAdmin) or $isAdmin == false)
+            $_SESSION['role'] = 'membre';
+        else
+            $_SESSION['role'] = 'admin';
+
+        $_SESSION['pseudo'] = $pseudo;
+        $_SESSION['expiration'] = time() + (60*60);
     }
 }

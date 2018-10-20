@@ -40,4 +40,57 @@ class Tools
 
         return $pass;
     }
+
+    # Fonction qui envoie un mail de type "création de compte"
+    public static function sendNewAccountMail ($mail, $pseudo, $password)
+    {
+        $subject = 'Votre compte cook and burn';
+        $message = '
+        <html>
+        <head>
+        <title>Création de votre compte</title>
+        <style>
+        h1 { text-align: center; }
+        </style>
+        </head>
+        <body>
+        <hi>Félicitations et bienvenue chez cook and burn !</hi>
+        <br>
+        <p>Bravo vous possédez maintenant un compte chez Cook and Burn.</p>
+        <p>Vous pouvez mainteant vous connecter avec:</p>
+        <p> - votre pseudo ( '. $pseudo .' ) ou email.</p>
+        <p> - votre mot de passe temporaire ( '. $password .' )</p>
+        <br>
+        <b>Nous vous conseillons de changer votre mot de passe !</b>
+        <br>
+        <a href="https://projetwebcookburn.alwaysdata.net/connexion"></a>
+        </body>
+        </html>';
+
+        return mail($mail, $subject, $message);
+    }
+
+    # Fonction qui envoie un mail de type "supression de compte"
+    public static function sendRemovedAccountMail ($mail, $raison)
+    {
+        $subject = 'Votre compte cook and burn';
+        $message = '
+        <html>
+        <head>
+        <title>Création de votre compte</title>
+        <style>
+        h1 { text-align: center; }
+        </style>
+        </head>
+        <body>
+        <hi>Votre compte à été suprimé !</hi>
+        <br>
+        <p>Raison:</p>';
+        $message .= wordwrap($raison, 70, "<br />\n");
+        $message .= '
+        </body>
+        </html>';
+
+        return mail($mail, $subject, $message);
+    }
 }
