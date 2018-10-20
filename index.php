@@ -1,22 +1,16 @@
 <?php
-# Partie initialisation de session (commune pour toute les pages du coup)
-session_start();
-
-if (!isset($_SESSION['isConnected'], $_SESSION['pseudo'], $_SESSION['role'])
-    or $_SESSION['isConnected'] !== True
-    or !in_array($_SESSION['role'], ['visiteur','membre', 'admin']))
-{
-    $_SESSION['pseudo'] = '';
-    $_SESSION['role'] = 'visiteur';
-}
-
-var_dump($_SESSION);
 
 require      'Routeur/Routeur.php';
 require_once 'classes/Recette.php';
 require_once 'classes/Utilisateur.php';
 require_once 'controllers/Controller.php';
 require_once 'modeles/tools.inc.php';
+require_once 'classes/Session.php';
+
+# Partie initialisation de session (commune pour toute les pages du coup)
+Session::initSession();
+# TODO Delete
+var_dump($_SESSION);
 
 try {
     $routeur = new Routeur ();
@@ -29,7 +23,7 @@ try {
     });
 
     # Ajout de la route vers /profil ->  le profil
-    $routeur->ajouterRoute ('/profile', 'GET', function () {
+    $routeur->ajouterRoute ('/profil', 'GET', function () {
         require_once 'controllers/ControllerProfile.php';
         $renderer = new ControllerProfile(null);
         $renderer->render();
@@ -81,17 +75,4 @@ try {
 
 } catch (RouteurException $r) {
     $r->getTrace(); // meh
-}
-
-if (isset($_POST['tag_to_jump']))
-{
-    $tag = $_POST['tag_to_jump'];
-    if (strpos('#', $tag) !== 0)
-        $tag = '#' + $tag;
-
-    echo '
-        <script type="text/javascript">
-        window.location.hash = \' ' . $tag . '\'
-        </script>
-        ';
 }
