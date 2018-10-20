@@ -8,8 +8,10 @@ class Session
     # Fonction qui démarre la session
     public static function initSession ()
     {
-        # Démarre la session ou récupere la session courrente
-        session_start();
+        # Démarre la session ou récupere la session courrente (test isset car delete appel init)
+        if (!isset($_SESSION)) {
+            session_start();
+        }
 
         # Vérifie que la session est secure
         if (self::mightBeenHijacking() or self::wrongValues() or self::tooOld())
@@ -77,6 +79,7 @@ class Session
         session_write_close();
     }
 
+    # Met à jour les valeurs de la session lors de la connexion
     public static function connect ($pseudo, $isAdmin)
     {
         $_SESSION['isConnected'] = true;
@@ -88,5 +91,20 @@ class Session
 
         $_SESSION['pseudo'] = $pseudo;
         $_SESSION['expiration'] = time() + (60*60);
+    }
+
+    # Permet de mettre à jour la pseudo
+    public static function updatePseudo ($pseudo)
+    {
+        $_SESSION['pseudo'] = $pseudo;
+    }
+
+    # Met à jour les valeurs lors de la déconnection
+    public static function disconnect ()
+    {
+        # Approche très simple (comme un cookie souvent) :
+        # mettre la date d'expiration dans le passé (5 min avant maintenant)
+        $_SESSION['expiration'] = time() - (5*60);
+        self::initSession();
     }
 }

@@ -7,33 +7,15 @@ class RequettesAdmin
     # Ajouter un utilisateur à la bd
     public static function addUser ($pseudo, $email, $isAdmin = 0)
     {
-        $lienBD = ConnectionLectureSeul::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
-
         # Verification que le pseudo n'est pas déjà pris
-        $test = $lienBD->prepare('SELECT ID FROM MEMBRE WHERE PSEUDO = ?');
-        $test->bind_param('s', $pseudo);
-        $test->execute();
-        $test->store_result();
-        # TODO return message erreur
-        # On test si il y a un pseudo si on en a pas 0 c'est que le pseudo est déjà pris
-        if ($test->num_rows !=0)
+        if (!RequettesUtilisateur::pseudoIsAvailable($pseudo))
+            # TODO return message erreur
             return;
-        $test->close();
 
         # Verification que le mail n'est pas déjà pris
-        $test = $lienBD->prepare('SELECT ID FROM MEMBER WHERE EMAIL = ?');
-        $test->bind_param('s', $email);
-        $test->execute();
-        $test->store_result();
-        # TODO return message erreur
-        # On test si il y a un mail si on en a pas 0 c'est que le mail est déjà pris
-        if ($test->num_rows !=0)
+        if (!RequettesUtilisateur::mailIsAvailable($email))
+            # TODO return message erreur
             return;
-        $test->close();
-
-        $lienBD->close();
-
 
         # Vérifie que la variable isAdmin est bien un int valide
         if (is_bool($isAdmin))
@@ -44,7 +26,6 @@ class RequettesAdmin
         # Créer le mot de passe aléatoire -> même l'admin ne le connait pas
         $password = Tools::randomPassword(12);
 
-
         # Ajoute le nouveau membre
         $lienBD = ConnectionEcriture::getConnection();
         assert ($lienBD instanceof mysqli, 'Erreur de connection.');
@@ -53,51 +34,27 @@ class RequettesAdmin
         $lienBD->autocommit(false);
 
         $insert = $lienBD->prepare ('INSERT INTO MEMBRE (PSEUDO, EMAIL, PASSWORD, IS_ADMIN) VALUES (?,?,?,?)');
-        $insert->bind_param ('sssi',$pseudo, $email, password_hash($password, PASSWORD_BCRYPT, $isAdmin));
+        $insert->bind_param ('sssi',$pseudo, $email, password_hash($password, PASSWORD_BCRYPT), $isAdmin);
         $insert->execute();
 
         # Si l'insertion ou le mail échoue on rollback -> annulation de l'insertion
         if (!$lienBD->commit() or !Tools::sendNewAccountMail($email, $pseudo, $password))
+        {
             $lienBD->rollback();
+            return false;
+        }
 
         $lienBD->autocommit(true);
+
+        $insert->close();
+        $lienBD->close();
+
+        return true;
     }
 
     # Fonction qui supprime un compte utilisateur
     public static function deleteUser ($pseudo, $email, $raison)
     {
-        $lienBD = ConnectionLectureSeul::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
-
-        # Verification que le pseudo n'est pas déjà pris
-        $test = $lienBD->prepare('SELECT ID FROM MEMBRE WHERE PSEUDO = ?');
-        $test->bind_param('s', $pseudo);
-        $test->execute();
-        $test->store_result();
-        # TODO return message erreur
-        # On test si il y a un pseudo si on en a pas 0 c'est que le pseudo est déjà pris
-        if ($test->num_rows !=0)
-            return;
-        $test->close();
-
-        # Verification que le mail n'est pas déjà pris
-        $test = $lienBD->prepare('SELECT ID FROM MEMBER WHERE EMAIL = ?');
-        $test->bind_param('s', $email);
-        $test->execute();
-        $test->store_result();
-        # TODO return message erreur
-        # On test si il y a un mail si on en a pas 0 c'est que le mail est déjà pris
-        if ($test->num_rows !=0)
-            return;
-        $test->close();
-
-        $lienBD->close();
-
-
-        # Créer le mot de passe aléatoire -> même l'admin ne le connait pas
-        $password = Tools::randomPassword(12);
-
-
         # Ajoute le nouveau membre
         $lienBD = ConnectionEcriture::getConnection();
         assert ($lienBD instanceof mysqli, 'Erreur de connection.');
@@ -111,20 +68,16 @@ class RequettesAdmin
 
         # Si l'insertion ou le mail échoue on rollback -> annulation de l'insertion
         if (!$lienBD->commit() or !Tools::sendRemovedAccountMail($email, $raison))
+        {
             $lienBD->rollback();
+            return false;
+        }
 
         $lienBD->autocommit(true);
-    }
 
-    # Fonction qui change le pseudo
-    public static function changePseudo ()
-    {
+        $delete->close();
+        $lienBD->close();
 
-    }
-
-    # Fonction qui change le mail
-    public static function changeEMail ()
-    {
-
+        return true;
     }
 }

@@ -52,4 +52,97 @@ class RequettesUtilisateur
         # Pseudo ou mail invalide
         return false;
     }
+
+    # Fonction qui premet de mettre à jour le pseudo
+    public static function updatePseudo ($newPseudo)
+    {
+        $lienBD = ConnectionEcriture::getConnection();
+        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
+
+        if (!self::pseudoIsAvailable($newPseudo))
+            #TODO send error message mail already used
+            return false;
+
+        $statement = $lienBD->prepare('UPDATE MEMBRE SET PSEUDO = ?');
+        $statement->bind_param('s', $newPseudo);
+        $result = $statement->execute();
+        $statement->close();
+        $lienBD->close();
+
+        return $result;
+    }
+
+    # Fonction qui premet de mettre à jour le mail
+    public static function updateEMail ($newMail)
+    {
+        $lienBD = ConnectionEcriture::getConnection();
+        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
+
+        if (!self::mailIsAvailable($newMail))
+            #TODO send error message mail already used
+            return false;
+
+        $statement = $lienBD->prepare('UPDATE MEMBRE SET EMAIL = ?');
+        $statement->bind_param('s', $newMail);
+        $result = $statement->execute();
+        $statement->close();
+        $lienBD->close();
+
+        return $result;
+    }
+
+    # Fonction qui premet de mettre à jour le mot de passe
+    public static function updatePassword ($newPassword)
+    {
+        $lienBD = ConnectionEcriture::getConnection();
+        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
+
+        $statement = $lienBD->prepare('UPDATE MEMBRE SET PASSWORD = ?');
+        $statement->bind_param('s', password_hash($newPassword, PASSWORD_BCRYPT));
+        $result = $statement->execute();
+        $statement->close();
+        $lienBD->close();
+
+        return $result;
+    }
+
+    # Fonction qui renvoie vrai si le mail est libre
+    public static function mailIsAvailable ($mailToTest)
+    {
+        $lienBD = ConnectionLectureSeul::getConnection();
+        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
+
+        $test = $lienBD->prepare('SELECT ID FROM MEMBER WHERE EMAIL = ?');
+        $test->bind_param('s', $mailToTest);
+        $test->execute();
+        $test->store_result();
+
+        if ($test->num_rows !=0)
+            return false;
+
+        $test->close();
+        $lienBD->close();
+
+        return true;
+    }
+
+    # Fonction qui renvoie vrai si le pseudo est libre
+    public static function pseudoIsAvailable ($pseudoToTest)
+    {
+        $lienBD = ConnectionLectureSeul::getConnection();
+        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
+
+        $test = $lienBD->prepare('SELECT ID FROM MEMBRE WHERE PSEUDO = ?');
+        $test->bind_param('s', $pseudoToTest);
+        $test->execute();
+        $test->store_result();
+
+        if ($test->num_rows !=0)
+            return false;
+
+        $test->close();
+        $lienBD->close();
+
+        return true;
+    }
 }
