@@ -1,8 +1,5 @@
 <?php
 
-require 'Route.php';
-require 'RouteurException.php';
-
 # source inspiration: https://www.grafikart.fr/tutoriels/php/router-628 
 
 class Routeur

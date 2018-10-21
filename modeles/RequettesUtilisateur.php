@@ -1,7 +1,5 @@
 <?php
 
-require_once 'classes/ConnectionLectureSeul.php';
-
 class RequettesUtilisateur
 {
     # Renvoie l'utilisateur lié au pseudo/email et mot de passe, sinon renvoi un boolean == false

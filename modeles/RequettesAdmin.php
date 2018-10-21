@@ -1,7 +1,5 @@
 <?php
 
-require_once 'classes/ConnectionEcriture.php';
-
 class RequettesAdmin
 {
     # Ajouter un utilisateur à la bd

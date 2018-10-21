@@ -7,8 +7,6 @@ class ControllerAccueil extends Controller
 
     protected function init ($args)
     {
-        require_once 'modeles/RequettesRecette.php';
-
         # Récupère la recette du moment
         $this->recetteDuMoment = RequettesRecette::getRecetteDuMoment();
         # Récupère la liste de recettes

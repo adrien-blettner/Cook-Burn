@@ -2,12 +2,11 @@
 
 class Route
 {
-
     private $url;
     private $fonction;
     private $correspondances;
 
-    public function __construct($url, $fonction)
+    public function __construct($url, callable $fonction)
     {
         $this->url = trim ($url, '/');
         $this->fonction = $fonction;

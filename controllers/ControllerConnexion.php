@@ -1,7 +1,5 @@
 <?php
 
-require 'modeles/RequettesUtilisateur.php';
-
 class ControllerConnexion extends Controller
 {
     private $pageSuivante;

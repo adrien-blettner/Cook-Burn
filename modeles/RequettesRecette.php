@@ -1,7 +1,5 @@
 <?php
 
-require_once 'classes/ConnectionLectureSeul.php';
-
 # cheatSheet : http://php.net/manual/fr/mysqli-stmt.bind-param.php#parameter
 
 class RequettesRecette
