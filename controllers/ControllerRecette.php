@@ -7,7 +7,7 @@ class ControllerRecette extends Controller
     private $id;
     private $recette;
 
-    public function __construct($id)
+    public function init ($id)
     {
         $this->recette = RequettesRecette::getRecetteById($id);
 

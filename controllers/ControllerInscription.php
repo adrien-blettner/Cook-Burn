@@ -1,15 +1,15 @@
 <?php
 
+# Controller de la page d'inscription
 class ControllerInscription extends  Controller
 {
-    public function __construct($args)
+    protected function init ($args)
     {
-        # TODO Traitement direct ici du post commeconnection
+        # TODO Traitement direct ici du post comme connection
     }
 
-    function render()
+    protected function render ()
     {
         require 'vues/vueInscription.php';
     }
-
 }

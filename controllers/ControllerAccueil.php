@@ -2,17 +2,24 @@
 
 class ControllerAccueil extends Controller
 {
-    public function __construct($args)
-    {
-        var_dump($args);
-    }
+    private $recetteDuMoment;
+    private $lastRecettes;
 
-    function render ()
+    protected function init ($args)
     {
         require_once 'modeles/RequettesRecette.php';
 
-        $recetteDuMoment = RequettesRecette::getRecetteDuMoment();
-        $lastRecettes = RequettesRecette::getLastRecettes();
+        # Récupère la recette du moment
+        $this->recetteDuMoment = RequettesRecette::getRecetteDuMoment();
+        # Récupère la liste de recettes
+        $this->lastRecettes = RequettesRecette::getLastRecettes();
+    }
+
+    protected function render ()
+    {
+        # On créer des variable avec une 'scope' lié a la fonction pour éviter d'écrrie $this-> partout dans la vue de l'accueil (syntax sugar un peu)
+        $recetteDuMoment = $this->recetteDuMoment;
+        $lastRecettes = $this->lastRecettes;
 
         require 'vues/vueAccueil.php';
     }

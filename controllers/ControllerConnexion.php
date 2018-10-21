@@ -7,7 +7,7 @@ class ControllerConnexion extends Controller
     private $pageSuivante;
     private $messageErreur;
 
-    public function __construct($args)
+    protected function init ($args)
     {
         # Prépare la page suivante
         if (!isset($_POST['pageSuivante']))
@@ -75,7 +75,7 @@ class ControllerConnexion extends Controller
             header ('location: /');
     }
 
-    public function render()
+    protected function render ()
     {
         require 'vues/vueConnexion.php';
     }
