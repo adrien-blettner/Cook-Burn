@@ -1,67 +1,76 @@
 <?php
 
-# cheatSheet : http://php.net/manual/fr/mysqli-stmt.bind-param.php#parameter
-
+/**
+ * Classes qui contient les requêttes liés aux recettes.
+ *
+ * Class RequettesRecette
+ */
 class RequettesRecette
 {
-    # Renvoie la recette qui correspond à l'id demander
+    /**
+     * Renvoie une recette correspondant à l'id passer en paramètre.
+     *
+     * @param  int                $id  L'id de la recette souhaitée.
+     * @return bool|Recette            La recette demandé ou false si non trouvée.
+     * @throws RequetteException       Exception générique des requêtes sur la BD.
+     */
     static function getRecetteById ($id)
     {
-        $lienBD = ConnectionLectureSeul::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
-        $preparedStatement = $lienBD->prepare('SELECT * FROM RECETTE WHERE ID = ?');
-        $preparedStatement->bind_param('i',$id);
-        $preparedStatement->execute();
-        $result = $preparedStatement->get_result();
+        $result = Requetes::requeteSecuriseeSurBD('SELECT * FROM RECETTE WHERE ID = ?', 'i', $id);
 
-        if (is_bool($result))
+        if ($result === false)
             return false;
 
-        $preparedStatement->close();
-        $lienBD->close();
-
+        $result->close();
         return Recette::FromDBRow (mysqli_fetch_assoc($result));
     }
 
-    # Renvoie une liste des recettes de la plus récente à la plus ancienne
+
+    /**
+     * Renvoie la liste des recettes de la plus récente à la plus ancienne.
+     *
+     * @return bool|array  La liste des recettes ou false.
+     */
     static function getLastRecettes ()
     {
-        $lienBD = ConnectionLectureSeul::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
-        $result = mysqli_query($lienBD, 'SELECT * FROM RECETTE ORDER BY LAST_BURN_UPDATE DESC');
+        $result = Requetes::requeteSimpleSurBD('SELECT * FROM RECETTE ORDER BY LAST_BURN_UPDATE DESC');
+
+        if ($result === false)
+            return false;
+
         $listLastRecettes = array();
 
         while ($row = mysqli_fetch_assoc($result))
             $listLastRecettes[] = Recette::FromDBRow ($row);
 
-        $lienBD->close();
-
+        $result->close();
         return $listLastRecettes;
     }
 
-    # Renvoie la recette du moment (dernière recette qui a atteint les 15 burn)
+
+    /**
+     * Renvoie la recette du moment (dernière recette à avoir atteint 15 burn ou sinon recette avec + de 15 burn est liké le plus réccement.
+     *
+     * @return bool|Recette  La recette du moment ou false.
+     */
     static function getRecetteDuMoment ()
     {
-        $lienBD = ConnectionLectureSeul::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
-        $result = mysqli_fetch_assoc(mysqli_query($lienBD, 'SELECT * FROM RECETTE WHERE BURN = 15 ORDER BY LAST_BURN_UPDATE DESC'));
-
-        $recette = Recette::FromDbRow ($result);
+        $result = Requetes::requeteSimpleSurBD('SELECT * FROM RECETTE WHERE BURN = 15 ORDER BY LAST_BURN_UPDATE DESC');
+        $recette = Recette::FromDbRow (mysqli_fetch_assoc($result));
+        $result->close();
 
         # Si la recette n'est pas vide on la renvoie
-        if ($recette != Recette::$recetteVide)
+        if (!$recette->isEmpty())
             return $recette;
 
         # Si la requête précédente ne renvoie rien on tente d'obtenir la recette qui à été liké le plus réccement et avec + de 15 burns
-        $result = mysqli_fetch_assoc(mysqli_query($lienBD, 'SELECT * FROM RECETTE WHERE BURN > 15 ORDER BY LAST_BURN_UPDATE DESC'));
+        $result = Requetes::requeteSimpleSurBD( 'SELECT * FROM RECETTE WHERE BURN > 15 ORDER BY LAST_BURN_UPDATE DESC');
+        $recette = Recette::FromDbRow (mysqli_fetch_assoc($result));
+        $result->close();
 
-        # Renvoie la recette ou faux si elle est vide
-        $recette = Recette::FromDbRow ($result);
-        if ($recette == Recette::$recetteVide)
-            return false;
+        if (!$recette->isEmpty())
+            return $recette;
 
-        $lienBD->close();
-
-        return $recette;
+        return false;
     }
 }

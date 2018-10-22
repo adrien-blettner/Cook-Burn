@@ -104,42 +104,42 @@ class RequettesUtilisateur
         return $result;
     }
 
-    # Fonction qui renvoie vrai si le mail est libre
+
+    /**
+     * Renvoie vrai si le mail est libre, faux sinon.
+     *
+     * @param string $mailToTest    Le pseudo à test.
+     * @return bool                 Résultat.
+     * @throws RequetteException    Exception générique des requêtes sur la BD.
+     */
     public static function mailIsAvailable ($mailToTest)
     {
-        $lienBD = ConnectionLectureSeul::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
-
-        $test = $lienBD->prepare('SELECT ID FROM MEMBER WHERE EMAIL = ?');
-        $test->bind_param('s', $mailToTest);
-        $test->execute();
-        $test->store_result();
+        $test = Requetes::requeteSecuriseeSurBD('SELECT ID FROM MEMBER WHERE EMAIL = ?', 's', $mailToTest);
 
         if ($test->num_rows !=0)
             return false;
 
         $test->close();
-        $lienBD->close();
 
         return true;
     }
 
-    # Fonction qui renvoie vrai si le pseudo est libre
+
+    /**
+     * Renvoie vrai si le pseudo est libre, faux sinon.
+     *
+     * @param string $pseudoToTest  Le pseudo à test.
+     * @return bool                 Résultat.
+     * @throws RequetteException    Exception générique des requêtes sur la BD.
+     */
     public static function pseudoIsAvailable ($pseudoToTest)
     {
-        $lienBD = ConnectionLectureSeul::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
-
-        $test = $lienBD->prepare('SELECT ID FROM MEMBRE WHERE PSEUDO = ?');
-        $test->bind_param('s', $pseudoToTest);
-        $test->execute();
-        $test->store_result();
+        $test = Requetes::requeteSecuriseeSurBD('SELECT ID FROM MEMBRE WHERE PSEUDO = ?', 's', $pseudoToTest);
 
         if ($test->num_rows !=0)
             return false;
 
         $test->close();
-        $lienBD->close();
 
         return true;
     }

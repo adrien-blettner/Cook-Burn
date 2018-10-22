@@ -1,5 +1,7 @@
 <?php
 
+#TODO Delete car intégrer à Requete.php
+
 class ConnectionLectureSeul
 {
     private static $lienBD;

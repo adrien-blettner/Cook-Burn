@@ -1,5 +1,7 @@
 <?php
 
+#TODO Delete car intégrer à Requete.php
+
 class ConnectionEcriture
 {
     private static $lienBD;
