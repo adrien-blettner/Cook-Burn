@@ -89,6 +89,7 @@ class RequettesUtilisateur
         return $result;
     }
 
+
     # Fonction qui premet de mettre à jour le mot de passe
     public static function updatePassword ($newPassword)
     {
