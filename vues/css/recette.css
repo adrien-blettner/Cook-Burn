@@ -1,32 +1,36 @@
 body {
     background-color: #404040;
     color: white;
-}
-
-#titreRecette {
-    text-align: center;
+    font-family: Andale Mono, monospace;
 }
 
 #container {
     display: flex;
-    flex-direction: row;
-    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
     padding-top: 3%;
 }
 
 #leftPanel {
-    order: 0;
-    position: absolute;
+    height: 100%;
+    width: 40%;
+    text-align: center;
+}
+
+#leftPanel img{
+    width: 560px;
+    height: 350px;
+    border-radius: 50px;
+    border : 2px white solid;
+}
+
+#rightPanel {
     height: 100%;
     width: 40%;
 }
 
-#rightPanel {
-    order: 1;
-    position: absolute;
-    height: 100%;
-    width: 40%;
-    left: 40%;
+#titreRecette {
+    text-align: center;
 }
 
 .inline {

@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
+    font-family: Andale Mono, monospace;
 }
 
 /* Création d'une banniere dynamique avec photos */
@@ -15,19 +16,19 @@ body {
 
     /* utilisation des prefixe -webkit- et -moz- par soucis de compatibilité */
     -webkit-animation-name: banniere1;
-    -webkit-animation-duration: 12s;
+    -webkit-animation-duration: 16s;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-direction: normal;
 
     -moz-animation-name: banniere1;
-    -moz-animation-duration: 12s;
+    -moz-animation-duration: 16s;
     -moz-animation-timing-function: linear;
     -moz-animation-iteration-count: infinite;
     -moz-animation-direction: normal;
 
     animation-name: banniere1;
-    animation-duration: 12s;
+    animation-duration: 16s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: normal;
@@ -93,6 +94,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    width: 100%;
 }
 
 .recetteContenue{
