@@ -124,7 +124,8 @@ class Requetes
 
         $result = mysqli_query($connection, $requete);
 
-        $connection->close();
+        # TODO NULLL
+        #$connection->close();
 
         return $result;
     }

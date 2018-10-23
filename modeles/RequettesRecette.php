@@ -43,7 +43,9 @@ class RequettesRecette
         while ($row = mysqli_fetch_assoc($result))
             $listLastRecettes[] = Recette::FromDBRow ($row);
 
-        $result->close();
+        # TODO Why null ?
+        #$result->close();
+
         return $listLastRecettes;
     }
 
