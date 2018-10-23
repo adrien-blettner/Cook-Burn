@@ -1,19 +1,32 @@
 <?php
 
+/**
+ * # TODO
+ *
+ * Class RequettesAdmin
+ */
 class RequettesAdmin
 {
-    # Ajouter un utilisateur à la bd
+    /**
+     * Ajoute un utilisateur à la BD et lui envoie un mail pour le prévenir de son nouveau compte et mdp.
+     *
+     * @param string  $pseudo           # TODO
+     * @param string  $email        # TODO
+     * @param int     $isAdmin     # TODO
+     * @return bool|mysqli_result  Echec/Succès.
+     * @throws RequetteException
+     */
     public static function addUser ($pseudo, $email, $isAdmin = 0)
     {
         # Verification que le pseudo n'est pas déjà pris
         if (!RequettesUtilisateur::pseudoIsAvailable($pseudo))
             # TODO return message erreur
-            return;
+            return false;
 
         # Verification que le mail n'est pas déjà pris
         if (!RequettesUtilisateur::mailIsAvailable($email))
             # TODO return message erreur
-            return;
+            return false;
 
         # Vérifie que la variable isAdmin est bien un int valide
         if (is_bool($isAdmin))
@@ -23,59 +36,39 @@ class RequettesAdmin
 
         # Créer le mot de passe aléatoire -> même l'admin ne le connait pas
         $password = Tools::randomPassword(12);
+        $password = password_hash($password, PASSWORD_BCRYPT);
 
-        # Ajoute le nouveau membre
-        $lienBD = ConnectionEcriture::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
+        $requete = 'INSERT INTO MEMBRE (PSEUDO, EMAIL, PASSWORD, IS_ADMIN) VALUES (?,?,?,?)';
+        $types = 'sssi';
+        $values = [$pseudo, $email, $password, $isAdmin];
 
-        # Désactive autocommit pour éviter de forcer l'insertion si le mail fail ou autre
-        $lienBD->autocommit(false);
+        $succes = Requetes::requeteSecuriseeSurBD($requete, $types, $values, true);
 
-        $insert = $lienBD->prepare ('INSERT INTO MEMBRE (PSEUDO, EMAIL, PASSWORD, IS_ADMIN) VALUES (?,?,?,?)');
-        $insert->bind_param ('sssi',$pseudo, $email, password_hash($password, PASSWORD_BCRYPT), $isAdmin);
-        $insert->execute();
+        Tools::sendNewAccountMail($email, $pseudo, $password);
 
-        # Si l'insertion ou le mail échoue on rollback -> annulation de l'insertion
-        if (!$lienBD->commit() or !Tools::sendNewAccountMail($email, $pseudo, $password))
-        {
-            $lienBD->rollback();
-            return false;
-        }
-
-        $lienBD->autocommit(true);
-
-        $insert->close();
-        $lienBD->close();
-
-        return true;
+        return $succes;
     }
 
-    # Fonction qui supprime un compte utilisateur
+
+    /**
+     * Supprime le membre lié à ce pseudo et email puis, envoie un mail pour le prévenir en donnant un motif de suppression.
+     *
+     * @param string  $pseudo     le pseudo de l'utilisateur.
+     * @param string  $email      Le mail de l'utilisateur.
+     * @param string  $raison     Raison de la suppression du compte.
+     * @return bool               Echec/succès.
+     * @throws RequetteException  Exception générique des requêtes sur la BD.
+     */
     public static function deleteUser ($pseudo, $email, $raison)
     {
-        # Ajoute le nouveau membre
-        $lienBD = ConnectionEcriture::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
+        $requete = 'DELETE FROM MEMBER WHERE PSEUDO = ? AND EMAIL = ?';
+        $types = 'ss';
+        $values = [$pseudo, $email];
 
-        # Désactive autocommit pour éviter de forcer l'insertion si le mail fail ou autre
-        $lienBD->autocommit(false);
+        $succes = Requetes::requeteSecuriseeSurBD($requete, $types, $values, true);
 
-        $delete = $lienBD->prepare ('DELETE FROM MEMBER WHERE PSEUDO = ? AND EMAIL = ?');
-        $delete->bind_param ('ss', $pseudo, $email);
-        $delete->execute();
+        Tools::sendRemovedAccountMail($email, $raison);
 
-        # Si l'insertion ou le mail échoue on rollback -> annulation de l'insertion
-        if (!$lienBD->commit() or !Tools::sendRemovedAccountMail($email, $raison))
-        {
-            $lienBD->rollback();
-            return false;
-        }
-
-        $lienBD->autocommit(true);
-
-        $delete->close();
-        $lienBD->close();
-
-        return true;
+        return $succes;
     }
 }

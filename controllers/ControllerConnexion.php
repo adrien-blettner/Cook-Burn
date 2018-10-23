@@ -61,6 +61,7 @@ class ControllerConnexion extends Controller
             }
 
             # Assigne les nouvelle variable de session
+            # TODO Passer un objet utilisateur
             Session::connect($utilisateur->getPseudo(), intval($utilisateur->getIsAdmin()));
 
             # Redirige vers la page suivante

@@ -51,58 +51,72 @@ class RequettesUtilisateur
         return false;
     }
 
-    # Fonction qui premet de mettre à jour le pseudo
-    public static function updatePseudo ($newPseudo)
-    {
-        $lienBD = ConnectionEcriture::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
 
+    /**
+     * Met à jour le pseudo du memebre.
+     *
+     * @param int     $id         L'id du membre.
+     * @param string  $newPseudo  Le nouveau pseudo.
+     * @return bool               Echec/succès.
+     * @throws RequetteException  Exception générique des requêtes sur la BD.
+     */
+    public static function updatePseudo ($id, $newPseudo)
+    {
         if (!self::pseudoIsAvailable($newPseudo))
             #TODO send error message mail already used
             return false;
 
-        $statement = $lienBD->prepare('UPDATE MEMBRE SET PSEUDO = ?');
-        $statement->bind_param('s', $newPseudo);
-        $result = $statement->execute();
-        $statement->close();
-        $lienBD->close();
+        $requete = 'UPDATE MEMBRE SET PSEUDO = ? WHERE ID = ?';
+        $types = 'si';
+        $values = [$newPseudo, $id];
 
-        return $result;
+        $succes = Requetes::requeteSecuriseeSurBD($requete, $types, $values, true);
+
+        return $succes;
     }
 
-    # Fonction qui premet de mettre à jour le mail
-    public static function updateEMail ($newMail)
-    {
-        $lienBD = ConnectionEcriture::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
 
+    /**
+     * Met à jour le mail du memebre.
+     *
+     * @param int     $id         L'id du membre.
+     * @param string  $newMail    Le nouveau mail.
+     * @return bool               Echec/succès.
+     * @throws RequetteException  Exception générique des requêtes sur la BD.
+     */
+    public static function updateEMail ($id, $newMail)
+    {
         if (!self::mailIsAvailable($newMail))
             #TODO send error message mail already used
             return false;
 
-        $statement = $lienBD->prepare('UPDATE MEMBRE SET EMAIL = ?');
-        $statement->bind_param('s', $newMail);
-        $result = $statement->execute();
-        $statement->close();
-        $lienBD->close();
+        $requete = 'UPDATE MEMBRE SET EMAIL = ? WHERE ID = ?';
+        $types = 'si';
+        $values = [$newMail, $id];
 
-        return $result;
+        $succes = Requetes::requeteSecuriseeSurBD($requete, $types, $values, true);
+
+        return $succes;
     }
 
 
-    # Fonction qui premet de mettre à jour le mot de passe
-    public static function updatePassword ($newPassword)
+    /**
+     * Met à jour le mot de passe du membre.
+     *
+     * @param int     $id           L'id du membre.
+     * @param string  $newPassword  Le nouveau mot de passe.
+     * @return bool                 Echec/succès.
+     * @throws RequetteException    Exception générique des requêtes sur la BD.
+     */
+    public static function updatePassword ($id, $newPassword)
     {
-        $lienBD = ConnectionEcriture::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
+        $requete = 'UPDATE MEMBRE SET PASSWORD = ? WHERE ID = ?';
+        $types = 'si';
+        $values = [password_hash($newPassword, PASSWORD_BCRYPT), $id];
 
-        $statement = $lienBD->prepare('UPDATE MEMBRE SET PASSWORD = ?');
-        $statement->bind_param('s', password_hash($newPassword, PASSWORD_BCRYPT));
-        $result = $statement->execute();
-        $statement->close();
-        $lienBD->close();
+        $succes = Requetes::requeteSecuriseeSurBD($requete, $types, $values, true);
 
-        return $result;
+        return $succes;
     }
 
 

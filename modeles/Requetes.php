@@ -9,8 +9,7 @@ class Requetes
 {
     private static $connectionEcriture;
     private static $connectionLecture;
-    # A voir pour stocker les prepared statement
-    # private static $listPreparedStatement;
+    # TODO voir si on stock les prepared statement dans un cache pour + de vitesse ?
 
 
     /**
@@ -23,7 +22,7 @@ class Requetes
         # Si la connection n'est pas initialisée, le faire
         if (!isset(self::$connectionEcriture))
         {
-            self::$connectionEcriture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_read', 'L@s88WQJUXJq4Xk0E');
+            self::$connectionEcriture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_write', 'aAmZCw*hR!Mv9WkbB');
             mysqli_select_db(self::$connectionEcriture, 'projetwebcookburn_maindatabase');
         }
         return self::$connectionEcriture;
@@ -40,7 +39,7 @@ class Requetes
         # Si la connection n'est pas initialisée, le faire
         if (!isset(self::$connectionLecture))
         {
-            self::$connectionLecture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_write', 'aAmZCw*hR!Mv9WkbB');
+            self::$connectionLecture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_read', 'L@s88WQJUXJq4Xk0E');
             mysqli_select_db(self::$connectionLecture, 'projetwebcookburn_maindatabase');
         }
         return self::$connectionLecture;
@@ -69,23 +68,24 @@ class Requetes
      * @param   string|null         $types      Les types des $valeurs associées dans l'ordre ('i' == int, 's' == string et 'd' == float).
      * @param   null                $valeurs    Les valeurs à "bind" à la requete.
      * @param   bool                $ecriture   Spécification du besoin du mode écriture (pour un insert par exemple).
-     * @return  bool|mysqli_result              Le résultat de la requête.
+     * @return  bool|mysqli_result              Le résultat de la requête ou vrai si MàJ ou faux si échec.
      * @throws  RequetteException               Exception générique des requêtes sur la BD.
      */
     public static function requeteSecuriseeSurBD ($requete, $types = null, $valeurs = null, $ecriture = false)
     {
-        # S'il n'y a pas de paramètres, c'est une requete normale (sans risque injection utilisateur)
-        # S'il il a un type mais pas de valeur (oou inversement) c'est qu'il y a une erreur de code et on va
-        # tenter de le traiter comme une requête non securisée (si c'est pas bon on retournera false)
-        if ($types === null or $valeurs === null)
-            return self::requeteSimpleSurBD($requete, $ecriture);
+        # Petite vérif qui va regarder si la requête commence par UPDATE, DELETE ou INSERT
+        # Si c'est vrai alors on force la virable écriture à vrai car on a besoin de modifier des données dans la BD
+        # Note: c'est une faible sécurité qui ne doit pas remplacer une bonne écriture du code ni penser à demandé le droit d'écriture si besoin.
+        #       de plus si il y a un espace ça ne marche pas
+        foreach (['UPDATE, INSERT, DELETE'] as $needle)
+            if (strpos(strtoupper($requete), $needle) === 0)
+                $ecriture = true;
 
         $connection = self::getConnection($ecriture);
         $stmt = $connection->prepare($requete);
 
         if ($stmt === false)
             throw new RequetteException('Preparation of statement failed.');
-
 
         if (!is_array($valeurs))
             $valeurs = array($valeurs);
@@ -98,10 +98,22 @@ class Requetes
         if ($stmt->execute() === false)
             throw new RequetteException('Execution of request failed.');
 
-        $resultat = $stmt->get_result();
+        $resultat = false;
 
-        if ($resultat === false)
-            throw new RequetteException('Getting result failed.');
+        # On test si la requêtte est une MàJ (update,insert..) qui à réussi.
+        # un MàJ peut ne pas échouer mais avoir un WHERE qui ne correspond à personne et donc affected_rows == 0
+        if ($stmt->affected_rows > 0)
+        {
+            $resultat = true;
+        }
+        # Partie si on a un select réussi.
+        else
+        {
+            $resultat = $stmt->get_result();
+
+            if ($resultat === false)
+                throw new RequetteException('Getting result failed.');
+        }
 
         $stmt->close();
         $connection->close();

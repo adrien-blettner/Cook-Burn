@@ -20,6 +20,7 @@ class Session
             # On rappelle session_start car la fonction précdéente supprime la session, il faut la redémarrer
             session_start();
             $_SESSION['isConnected'] = false;
+            $_SESSION['id'] = -1;
             $_SESSION['pseudo'] = '';
             $_SESSION['role'] = 'visiteur';
             $_SESSION['adresseIP'] = $_SERVER['REMOTE_ADDR'];
@@ -80,6 +81,7 @@ class Session
     }
 
     # Met à jour les valeurs de la session lors de la connexion
+    # TODO prendre un objet utilisateur + $_SESSION['id']
     public static function connect ($pseudo, $isAdmin)
     {
         $_SESSION['isConnected'] = true;

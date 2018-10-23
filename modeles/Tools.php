@@ -86,8 +86,8 @@ class Tools
         <hi>Votre compte à été suprimé !</hi>
         <br>
         <p>Raison:</p>';
-        $message .= wordwrap($raison, 70, "<br />\n");
-        $message .= '
+
+        $message .= wordwrap($raison, 70, "<br />\n") . '
         </body>
         </html>';
 

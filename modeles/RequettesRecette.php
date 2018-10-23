@@ -21,6 +21,7 @@ class RequettesRecette
         if ($result === false)
             return false;
 
+        # TODO  deplacer après utilisation
         #$result->close();
         return Recette::FromDBRow (mysqli_fetch_assoc($result));
     }
