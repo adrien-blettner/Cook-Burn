@@ -13,7 +13,7 @@ var_dump($_SESSION);
 try {
     $routeur = new Routeur ();
 
-    # Ajout de la rouye vers '/' ou ' ' -> acceuil
+    # Ajout de la route vers '/' ou ' ' -> acceuil
     $routeur->ajouterRoute ('/', 'GET', function (){
         new ControllerAccueil(null);
     });
@@ -54,6 +54,12 @@ try {
     # TODO remove this temp
     $routeur->ajouterRoute('/modeles/process_formulaire','POST', function (){
         require 'modeles/process_formulaire.php';
+    });
+
+    # Ajout de la route vers /creationRecette -> page avec le formulaire de création de recette
+    $routeur->ajouterRoute ('/creationRecette', 'GET', function () {
+        new ControllerCreationRecette(null);
+
     });
 
     # Lance le routeur
