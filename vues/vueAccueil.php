@@ -39,7 +39,7 @@ start_page('accueil', array('accueil.css'));
                 <?php foreach ($lastRecettes as $recettes)
                 {
                     echo '<div class="recetteContenue">' , '<a href="/recette/' , $recettes->getId() ,'"><img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecettes"/></a>' ,
-                    '<p>' , $recettes->getNom() , '</p>' , '<p>' , $recettes->getBurn() , '</p>' , '<p>' , $recettes->getDescriptionCourte() , '</p>' , '</div>' , PHP_EOL;
+                    '<p>' , $recettes->getNom() , '</p>' , '<p>' , 'Burns : ' ,$recettes->getBurn() , '</p>' , '<p>' , $recettes->getDescriptionCourte() , '</p>' , '</div>' , PHP_EOL;
                 }
                 ?>
         </div>

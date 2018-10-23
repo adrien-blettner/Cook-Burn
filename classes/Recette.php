@@ -19,10 +19,10 @@ class Recette
 
     public static $recetteVide;
 
-    function __construct ($id, $createut, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn, $lastUpdate)
+    function __construct ($id, $createur, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn, $lastUpdate)
     {
         $this->id          = $id;
-        $this->createur    = $createut;
+        $this->createur    = $createur;
         $this->nom         = $nom;
         $this->nbConvives  = $nbConvives;
         $this->descriptionCourte = $descriptionCourte;
