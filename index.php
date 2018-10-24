@@ -14,7 +14,7 @@ try {
     $routeur = new Routeur ();
 
     # Ajout de la route vers '/' ou ' ' -> acceuil
-    $routeur->ajouterRoute ('/', 'GET', function (){
+    $routeur->ajouterRoute ('/', ['GET', 'POST'], function (){
         new ControllerAccueil(null);
     });
 
