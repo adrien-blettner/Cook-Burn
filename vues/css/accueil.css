@@ -8,7 +8,7 @@ body {
 /* Création d'une banniere dynamique avec photos */
 /* Configuration de l'animation */
 .banniereImg{
-    margin: 70px auto 0;
+    margin:0 auto 0;
     width: 100%;
     height: 520px;
     border: solid black 2px;
@@ -55,6 +55,7 @@ body {
 
 .description{
     text-align: center;
+    padding: 1% 0;
     color: white;
     background-color: #4f5051;
 }
@@ -69,6 +70,7 @@ body {
 
 .topRecette{
     text-align: center;
+    padding: 1% 0;
     color: white;
     background-color: #313233;
     font-size: 0;
@@ -90,6 +92,7 @@ body {
 }
 
 .recettes{
+    padding: 1% 0;
     text-align: center;
     font-size: 15px;
     color: white;
