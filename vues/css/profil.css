@@ -3,16 +3,8 @@ body {
     background-color: #404040;
 }
 
+
 .presentation {
-    background-color: #474849;
-    margin: 5px 30px 5px 30px;
-    font-family: Corbel;
-    text-align: center;
-}
-
-
-.presentation_groupe {
-    background-color: #474849;
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 1%;
@@ -22,10 +14,9 @@ body {
 }
 
 .presentation_membre {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    background: #404040;
-    margin: 5px 5px 5px 5px;
+    background-color: #474849;
+    padding: 10px 10% 10px 10%;
+    margin: 5px 10px 5px 10px;
     text-align: center;
     border: 3px solid #d34836;
     border-radius: 40px;
@@ -33,79 +24,19 @@ body {
 }
 
 .image_groupe {
-    width: 250px;
+    width: 100%;
     height: 100%;
+    max-width: 250px;
     border-radius: 15px;
     border: 2px solid black;
-}
-
-p {
-    font-size: 20px;
-    color: #C9C9C9;
-    font-family: Corbel;
 
 }
 
-.bouton13 {
-    border:none;
-    padding:0px 26px 1px 26px;
-    margin: 25px 2px 25px 0px;
-    border-radius:8px;
-    background:#d34836;
-    font:bold 20px Arial;
-    color:#e5e5e5;
-    cursor: pointer;
-    border: 0px solid #1CBC14;
-    border-radius: 20px;
-    text-transform:capitalize;
-    text-decoration: none;
-
-}
-
-.bouton14 {
-    border:none;
-    padding:0px 26px 1px 26px;
-    margin: 25px 2px 25px 0px;
-    border-radius:8px;
-    background:#1CBC14;
-    font:bold 20px Arial;
-    color:#e5e5e5;
-    cursor: pointer;
-    border: 0px solid #d34836;
-    border-radius: 20px;
-    text-transform:capitalize;
-    text-decoration: none;
-}
-
-
-az
-
-.bouton13:hover{
-    background: linear-gradient(#d26c35 0%, #d26c35 100%);
-    background: -moz-linear-gradient(top, #d26c35 0%, #d26c35 100%);
-    background: -webkit-linear-gradient(top, #d26c35 0%, #d26c35 100%);
-    background: -o-linear-gradient(top, #d26c35 0%, #d26c35 100%);
-}
-
-.bouton14:hover {
-    background: linear-gradient(#56B0A5 0%, #56B0A5 100%);
-    background: -moz-linear-gradient(top, #56B0A5 0%, #56B0A5 100%);
-    background: -webkit-linear-gradient(top, #56B0A5 0%, #56B0A5 100%);
-    background: -o-linear-gradient(top, #56B0A5 0%, #56B0A5 100%);
-}
-
-.bord {
-    border-top: solid white;
-    border-bottom: solid white;
-    border-color: #E70739;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    margin: 5px 0px 5px 0px;
+.titre {
+    color: #d34836;
+    font:bold 40px Arial;
     text-align: center;
-}
 
-span {
-    display: block;
 }
 
 
