@@ -28,6 +28,10 @@ body {
     background-color: #F5F5F5;
 }
 
+.sous-menu li:hover {
+    background-color: #E70739;
+}
+
 .sideNav a{
     display: inline-block;
     text-align: center;
@@ -43,13 +47,32 @@ body {
     padding-right: 5px;
 }
 
+#BarreRecherche {
+    padding: 0 15px 0 15px;
+    float : left;
+}
+
+#champRecherche {
+    margin-top: 14px;
+    float : left;
+    height: 29px;
+}
+
+#boutonRecherche {
+    margin-top: 12px;
+    padding-left: 8px;
+    width : auto;
+    height: 37px;
+}
+
 .sous-menu{
     display: none;
     left: 0;
     top : 60px;
     position: absolute;
     padding-left: 0;
-    background-color: #f1f1f1;
+    /*background-color: #b7b5b6;*/
+    background-color: #F5F5F5;
     border: 1px solid #555;
     list-style-type: none;
     z-index: 1;
