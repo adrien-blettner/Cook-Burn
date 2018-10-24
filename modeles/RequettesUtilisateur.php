@@ -76,7 +76,7 @@ class RequettesUtilisateur
 
 
     /**
-     * Met à jour le pseudo du memebre.
+     * Met à jour le pseudo du membre.
      *
      * @param int     $id         L'id du membre.
      * @param string  $newPseudo  Le nouveau pseudo.
@@ -100,7 +100,7 @@ class RequettesUtilisateur
 
 
     /**
-     * Met à jour le mail du memebre.
+     * Met à jour le mail du membre.
      *
      * @param int     $id         L'id du membre.
      * @param string  $newMail    Le nouveau mail.

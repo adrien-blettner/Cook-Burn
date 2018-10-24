@@ -18,7 +18,7 @@ class ControllerAccueil extends Controller
 
     protected function render ()
     {
-        # On créer des variable avec une 'scope' lié a la fonction pour éviter d'écrrie $this-> partout dans la vue de l'accueil (syntax sugar un peu)
+        # On créer des variable avec une 'scope' lié a la fonction pour éviter d'écrire $this-> partout dans la vue de l'accueil (syntax sugar un peu)
         $recetteDuMoment = $this->recetteDuMoment;
         $lastRecettes = $this->lastRecettes;
 
