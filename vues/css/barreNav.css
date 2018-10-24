@@ -64,7 +64,7 @@ body {
 }
 
 #rechercheChamp {
-    margin-top: 14px;
+    margin-top: 11px;
     float : left;
     height: 29px;
 }
@@ -124,32 +124,54 @@ body {
 
 @media only screen and (max-width: 1024px) {
     #BarreHorizontale {
-        padding: 0;
-        height: 200px;
-        font-size : 170%
+        height: 5%;
     }
 
-    #Recette, #Description {
+    .sideNav {
+        height: 5%;
+    }
+
+    #Recette, #Creation, #Description {
         display : none;
+    }
+
+    #C\&B {
+        width: 50%;
+        padding : 3% 0 0 0;
+
+    }
+
+    .sideNav a {
+        padding : 1% 0 auto 3%;
+        font-size : 250%;
     }
 
     #rechercheLi {
         float:right;
-        width : 40%;
+        width : 35%;
     }
 
     #rechercheChamp {
-        width : 80%;
+        width : 70%;
+        padding : 5% 0 5% 0;
+        margin : 015% 0 0 0;
+        font-size: 100%;
     }
 
     #rechercheBouton {
+        float : right;
+        width : 15%;
+        height: auto;
+        padding : 15% 0 15% 3%;
+    }
 
+    #iconeLi {
+        width : 15%;
     }
 
     #iconeImage {
-        width : auto;
-        padding-left: 5px;
-        padding-right: 5px;
+        width : 100%;
+        height: auto;
+        padding : 5% 0 1% 0;
     }
-
 }
