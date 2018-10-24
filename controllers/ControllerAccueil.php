@@ -13,7 +13,6 @@ class ControllerAccueil extends Controller
         $this->lastRecettes = RequettesRecette::getLastRecettes();
         if (ISSET($_POST['action']) && $_POST['action'] = 'Déconnexion') {
             Session::disconnect();
-            echo 'OUI';
         }
     }
 

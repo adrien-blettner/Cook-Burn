@@ -121,3 +121,22 @@ body {
 .sous-menu #deconnexionBouton:hover {
     background-color: #E70739;
 }
+
+@media only screen and (max-width: 1024px) {
+    #Recette, #Description {
+        display : none;
+    }
+
+    #rechercheLi {
+        float:left;
+        width : 40%;
+    }
+
+    #rechercheChamp {
+        width : 100%;
+    }
+
+    #rechercheBouton {
+
+    }
+}
