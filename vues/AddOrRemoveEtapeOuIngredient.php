@@ -1,5 +1,24 @@
+<?php
+    $cpt = $_GET['cpt'];
+    echo '<div id="' . $cpt . '" class="selectingr">
+        <select id="ingr' .$cpt . '" name="ingr' . $cpt . '">
+            <option value="0">Ingrédient ' . $cpt . '</option>';
+            $BDingredient = new BD_Ingredients();
+            foreach ($BDingredient->findAll($dbLink) as $ing) {
+            echo '<option value="' . $ing->getId() . '">' . $ing->getNomIngredients() . '</option>';
+            }
+            echo '</select>
+        <select class="unit" name="unit' . $cpt . '">
+            <option value="0">Unité</option>
+            <option value="1">Masse(en gramme)</option>
+            <option value="2">Volume(en cl)</option>
+        </select>
+        <input type="text" placeholder="Quantité" name="quantite' . $cpt . '"/>
+        <button type="button" id="' . $cpt . '" class="btn_remove_ingr">REM</button></div>';
+?>
 
- <div id="dynamic_ingr">
+
+<div id="dynamic_ingr">
 
         <div id="1" class="selectingr">
     <select id="ingr1" name="ingr1">
