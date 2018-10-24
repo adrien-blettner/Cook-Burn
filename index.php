@@ -7,8 +7,6 @@ AutoLoader::register();
 
 # Partie initialisation de session (commune pour toute les pages du coup)
 Session::initSession();
-# TODO Delete
-var_dump($_SESSION);
 
 try {
     $routeur = new Routeur ();
