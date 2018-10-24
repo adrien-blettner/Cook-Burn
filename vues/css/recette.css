@@ -16,6 +16,7 @@ h1{
 
 
 #container {
+    clear : both;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
