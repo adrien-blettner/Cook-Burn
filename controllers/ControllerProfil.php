@@ -7,6 +7,8 @@ class ControllerProfil extends Controller
     {
         if (!$_SESSION['isConnected']);
             # TODO GOTO CONNEXION
+
+        $_SESSION['id'];
     }
 
     public function render ()
