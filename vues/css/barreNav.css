@@ -47,18 +47,21 @@ body {
     padding-right: 5px;
 }
 
-#BarreRecherche {
-    padding: 0 15px 0 15px;
-    float : left;
+#rechercheLi {
+    float:right;
 }
 
-#champRecherche {
+#rechercheForm {
+    padding: 0 15px 0 15px;
+}
+
+#rechercheChamp {
     margin-top: 14px;
     float : left;
     height: 29px;
 }
 
-#boutonRecherche {
+#rechercheBouton {
     margin-top: 12px;
     padding-left: 8px;
     width : auto;
@@ -71,7 +74,6 @@ body {
     top : 60px;
     position: absolute;
     padding-left: 0;
-    /*background-color: #b7b5b6;*/
     background-color: #F5F5F5;
     border: 1px solid #555;
     list-style-type: none;

@@ -8,11 +8,11 @@
             </ul>
         </li>
         <li> <a href="/">Cook & Burn</a></li>
-        <li> <a href="/vues/vueRecette.php">Recette</a></li>
+        <li> <a href="#conteneurRecettes">Recette</a></li>
         <li> <a href="#">Description</a></li>
-        <li>
-            <form action="" id="BarreRecherche">
-                <input id="champRecherche" type="text" placeholder="Recherche..."/><input id="boutonRecherche" type="image" src="/vues/images/look.png" />
+        <li id="rechercheLi">
+            <form action="" id="rechercheForm">
+                <input id="rechercheChamp" type="text" placeholder="Recherche..."/><input id="rechercheBouton" type="image" src="/vues/images/look.png" />
             </form>
         </li>
     </ul>

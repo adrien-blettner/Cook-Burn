@@ -3,13 +3,6 @@ require 'formatPage.inc.php';
 
 start_page('accueil', array('accueil.css'));
 ?>
-
-    <div class="topnav">
-        <a href="index.php" id="cookBurn">Cook&Burn</a>
-        <a href="#recette">Recette</a>
-        <a href="#description">Description</a>
-    </div>
-
     <div class="banniereImg"></div>
     <div class="description">
         <h1>Présentation du service</h1>
