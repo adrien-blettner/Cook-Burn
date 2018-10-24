@@ -13,12 +13,11 @@ class ControllerRecette extends Controller
         if ($id === null or $this->recette == Recette::$recetteVide)
             header('location: /recette');
 
-        /*if ($this->recette->getBurn() < 10 and $_POST['role'] == 'visiteur')
+        if ($this->recette->getBurn() < 10 and $_SESSION['role'] == 'visiteur')
         {
-            xhttp.open("POST", "demo_post2.asp", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("fname=Henry&lname=Ford");
-        }*/
+            $url = '/recette/' . $id;
+            Tools::redirectToConnexion($url, 'Vous devez être connecté pour voir cette recette !');
+        }
 
         $this->id = $id;
     }

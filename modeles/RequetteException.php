@@ -5,4 +5,6 @@
  *
  * Class RequetteException
  */
-class RequetteException extends Exception {}
+class RequetteException extends Exception
+{
+}

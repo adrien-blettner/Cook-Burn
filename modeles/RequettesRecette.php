@@ -80,20 +80,20 @@ class RequettesRecette
     /**
      * Ajoute une nouvelle recette à la bdd
      *
-     * @param $idCreateur           L'id du créateur de la recette
-     * @param $nomRecette           Le nom de la nouvelle recette
-     * @param $nbConvives           Le nombre de convives de la recette
-     * @param $descriptionCourte    Une description de quelques caracteres
-     * @param $descriptionLongue    Une description plus longue
-     * @param $ingredients          La liste des ingrédients
-     * @param $etapes               Les étapes pour realiser la recette
-     * @param $image                Une image et/ou photo de la recette
-     * @return bool|mysqli_result   Retourne vrai si la recette a correctement été créée
-     * @throws RequetteException    Exception générique des requêtes sur la BD.
+     * @param int $idCreateur              L'id du créateur de la recette.
+     * @param string $nomRecette           Le nom de la nouvelle recette.
+     * @param int $nbConvives              Le nombre de convives de la recette.
+     * @param string $descriptionCourte    Une description de quelques caracteres.
+     * @param string $descriptionLongue    Une description plus longue.
+     * @param string $ingredients          La liste des ingrédients.
+     * @param string $etapes               Les étapes pour realiser la recette.
+     * @param string $image                Une image et/ou photo de la recette.
+     * @return bool|mysqli_result          Retourne vrai si la recette a correctement été créée.
+     * @throws RequetteException           Exception générique des requêtes sur la BD.
      */
     static function setNewRecette ($idCreateur, $nomRecette, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $etapes, $image)
     {
-        $req = 'INSERT INTO RECETTE (ID_CREATEUR, NOM, NB_CONVIVES, DESCRIPTION_COURTE, DESCRIPTION_LONGUE, INGREDIENTS, ETAPES, BURN, IMAGE_URL, LAST_BURN_UPDATE) VALUES (?,?,?,?,?,?,?,0,?,0)';
+        $req = 'INSERT INTO RECETTE (ID_CREATEUR, NOM, NB_CONVIVES, DESCRIPTION_COURTE, DESCRIPTION_LONGUE, INGREDIENTS, ETAPES, BURN, IMAGE_URL, LAST_BURN_UPDATE) VALUES (?,?,?,?,?,?,?,0,?,0/0/0)';
         $types = 'isisssss';
         $values = [$idCreateur, $nomRecette, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $etapes, $image];
 

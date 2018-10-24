@@ -37,7 +37,7 @@ class Requetes
     private static function getConnectionLecture()
     {
         # Si la connection n'est pas initialisée, le faire
-        if (!isset(self::$connectionLecture))
+        if (!isset(self::$connectionLecture) or self::$connectionLecture === null)
         {
             self::$connectionLecture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_read', 'L@s88WQJUXJq4Xk0E');
             mysqli_select_db(self::$connectionLecture, 'projetwebcookburn_maindatabase');
@@ -116,7 +116,6 @@ class Requetes
         }
 
         $stmt->close();
-        $connection->close();
 
         return $resultat;
     }
@@ -135,9 +134,6 @@ class Requetes
         $connection = self::getConnection($ecriture);
 
         $result = mysqli_query($connection, $requete);
-
-        # TODO NULLL
-        #$connection->close();
 
         return $result;
     }

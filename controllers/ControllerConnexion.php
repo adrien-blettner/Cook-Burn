@@ -2,17 +2,20 @@
 
 class ControllerConnexion extends Controller
 {
-    private $pageSuivante;
     private $messageErreur;
+    private $pageSuivante;
 
+    /**
+     * @param $args
+     * @throws RequetteException
+     */
     protected function init ($args)
     {
         Session::disconnect();
 
         # Prépare la page suivante
-        if (!isset($_POST['pageSuivante']))
-            $this->pageSuivante = '/profil';
-        else
+        $this->pageSuivante = '/profil';
+        if (isset($_POST['pageSuivante']))
             $this->pageSuivante = $_POST['pageSuivante'];
 
         # Si la personne est déjà connecté, rallonge la session (car action prouve activité) et redrige immédiatement
@@ -22,7 +25,7 @@ class ControllerConnexion extends Controller
             header('location: ' . $this->pageSuivante);
         }
 
-        # Check s'il y a un message erreur à afficher
+        # Vérifie s'il y a un message erreur à afficher
         if (!isset($_POST['messageErreur']))
             $this->messageErreur = null;
         else
@@ -38,32 +41,19 @@ class ControllerConnexion extends Controller
             # Vérification que tout les champs sont remplie
             if (!isset($_POST['Pseudo'], $_POST['Mot_de_passe']) or $_POST['Pseudo'] == "" or $_POST['Mot_de_passe'] == "")
             {
-                echo
-                 '<form id="test" action="/connexion" method="post">
-                 <input type="hidden" name="pageSuivante" value="' . $this->pageSuivante . '"> 
-                 <input type="hidden" name="messageErreur" value="Veuillez remplir tout les champs.">
-                 </form>
-                 <script type="text/javascript">document.getElementById("test").submit()</script>
-                ';
+                Tools::redirectToConnexion($this->pageSuivante, 'Veuillez remplir tout les champs.');
             }
 
             # Tente la connection de l'utilisateur
             $utilisateur = RequettesUtilisateur::connect($_POST['Pseudo'],$_POST['Mot_de_passe']);
 
             # Verification que la connection a réussie
-            if ($utilisateur === False)
+            if ($utilisateur === False or $utilisateur == Utilisateur::$utilisateurNull)
             {
-                echo
-                '<form id="test" action="/connexion" method="post">
-                 <input type="hidden" name="pageSuivante" value="' . $this->pageSuivante . '"> 
-                 <input type="hidden" name="messageErreur" value="Pseudo ou email et/ou mot de passe invalide.">
-                 </form>
-                 <script type="text/javascript">document.getElementById("test").submit()</script>
-                ';
+                Tools::redirectToConnexion($this->pageSuivante, 'Pseudo ou email et/ou mot de passe invalide.');
             }
 
             # Assigne les nouvelle variable de session
-            # TODO Passer un objet utilisateur
             Session::connect($utilisateur);
 
             # Redirige vers la page suivante
@@ -78,6 +68,8 @@ class ControllerConnexion extends Controller
 
     protected function render ()
     {
+        $messageErreur = $this->messageErreur;
+        $pageSuivante = $this->pageSuivante;
         require 'vues/vueConnexion.php';
     }
 }

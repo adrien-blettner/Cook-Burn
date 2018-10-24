@@ -11,7 +11,7 @@ start_page ($recette->getNOM(), array ('recette.css'));
     </div>
 
     <div id="rightPanel">
-        <p id="titreRecette"><?php echo $recette->getNom();?></p>
+        <h1 id="titreRecette"><?php echo $recette->getNom();?></h1>
         <p class="inline"><?php echo 'Créateur: ' . $recette->getCreateur();?></p>
         <p class="inline"><?php echo 'Burns: ' . $recette->getBurn();?></p>
         <p> <?php $recette->getDescriptionLongue();?> </p>
