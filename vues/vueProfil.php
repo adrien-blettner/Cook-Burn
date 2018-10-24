@@ -1,7 +1,7 @@
 <?php
 require_once 'formatPage.inc.php';
 
-start_page ('Profile', array ('profil.css','rolesUtilisateur.css'));
+start_page ('Profil', array ('profil.css','rolesUtilisateur.css'));
 ?>
         <div class="presentation">
             <div class="presentation_membre">
