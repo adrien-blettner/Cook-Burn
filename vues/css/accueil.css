@@ -9,7 +9,7 @@ body {
 /* Configuration de l'animation */
 .banniereImg{
     margin: 70px auto 0;
-    width: 1920px;
+    width: 100%;
     height: 520px;
     border: solid black 2px;
     background-image: url("../images/test4Banniere.jpg");
@@ -89,20 +89,6 @@ body {
     border : 2px white solid;
 }
 
-/* FLEXBOX pour les recettes (DEBUT) */
-#conteneurRecettes{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.recetteContenue{
-    width: 50%;
-}
-
-/* FLEXBOX pour les recettes (FIN) */
-
 .recettes{
     text-align: center;
     font-size: 15px;
@@ -119,4 +105,39 @@ body {
     height: 250px;
     border-radius: 50px;
     border : 2px white solid;
+}
+
+/* FLEXBOX pour les recettes (DEBUT) */
+#conteneurRecettes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.recetteContenue{
+    width: 50%;
+}
+
+.recetteContenue p{
+    margin : 2% 25%;
+}
+
+/* FLEXBOX pour les recettes (FIN) */
+
+@media screen and (max-width: 835px) {
+    /* responsive design (affichage en col au lieu de row, éviter que le texte se chevauche) */
+    #conteneurRecettes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .recetteContenue {
+        height: 50%;
+        width: 70%;
+    }
+
+    .recetteContenue img {
+        width: 80%;
+    }
 }
