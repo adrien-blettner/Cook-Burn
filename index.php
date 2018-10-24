@@ -57,9 +57,8 @@ try {
     });
 
     # Ajout de la route vers /creationRecette -> page avec le formulaire de création de recette
-    $routeur->ajouterRoute ('/creationRecette', 'GET', function () {
+    $routeur->ajouterRoute ('/creationRecette', ['GET','POST'], function () {
         new ControllerCreationRecette(null);
-
     });
 
     # Lance le routeur
