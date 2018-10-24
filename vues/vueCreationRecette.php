@@ -5,7 +5,7 @@ start_page('creation', array('creationRecette.css'));
 ?>
     <h1>Création de recette</h1>
     <div class="creationRecette">
-        <form action="/recette/1" method="post" class="creationRecetteForm"><br>
+        <form action="/recette/1" method="post" class="creationRecetteForm" enctype="multipart/form-data"><br>
             <fieldset>
                 <!--<label for="nomRecette">Nom</label>-->
                 <input type="text" name="nomRecette" placeholder="Nom recette" required/></br>

@@ -30,12 +30,16 @@ class Tools
         <?php
     }
 
-
+    /**
+     * Alias de redirectWithPostMethod qui redirige vers la connexion, si on souhaite avoir un utilisateur connecté.
+     *
+     * @param  string  $pageSuivante  La page où on sera redirigé.
+     * @param  string  $message       Le message d'erreur.
+     */
     public static function redirectToConnexion ($pageSuivante, $message)
     {
-        $url = '/connexion';
         $data = ['pageSuivante'=> $pageSuivante, 'messageErreur'=>$message];
-        self::redirectWithPostMethod($url, $data);
+        self::redirectWithPostMethod('/connexion', $data);
     }
 
 
