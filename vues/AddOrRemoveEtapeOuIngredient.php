@@ -25,13 +25,15 @@
             if (!Number.isInteger(cpt)){
                 cpt = 1;
             }
-            $.post('')
-        })
+            $.post('addViewEtape.php?cpt=' + cpt, function (data) {
+                $('#dynamic_etape').append(data);
 
-    })
+            });
+        });
+        $(document).on('click','.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#dynamic_etape#' + button_id).remove();
 
-
-
-
-
+        });
+    });
 </script>
