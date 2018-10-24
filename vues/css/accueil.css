@@ -14,6 +14,7 @@ h1{
 /* Création d'une banniere dynamique avec photos */
 /* Configuration de l'animation */
 .banniereImg{
+    clear : both;
     margin: 0 auto 0;
     height: 520px;
     border: solid black 2px;
@@ -96,8 +97,9 @@ h1{
 .description{
     text-align: center;
     padding: 1% 0;
-    color: white;
-    background-color: #4f5051;
+    color: #e5e5e5;
+    background-color: #404040;
+    font: bold corbel;
 }
 
 .description p{
@@ -107,9 +109,11 @@ h1{
 .topRecette{
     text-align: center;
     padding: 1% 0;
-    color: white;
-    background-color: #313233;
-    font-size: 0;
+    color: #e5e5e5;
+    background-color: #474849;
+    font: bold 40px Arial;
+    border-bottom : 4px #d26c35 solid;
+    border-top : 4px #d26c35 solid;
 }
 
 .topRecette p{
@@ -120,7 +124,7 @@ h1{
     width: 650px;
     height: 450px;
     border-radius: 50px;
-    border : 2px white solid;
+    border : 2px #d34836 solid;
 }
 
 .recettes{
@@ -128,30 +132,41 @@ h1{
     text-align: center;
     font-size: 15px;
     color: white;
-    background-color: #313233;
+    background-color: #404040;
+
 }
 
 .recettes img{
     width: 400px;
     height: 250px;
     border-radius: 50px;
-    border : 2px white solid;
+    border : 2px black solid;
 }
 
 /* FLEXBOX pour les recettes (DEBUT) */
 #conteneurRecettes{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
+
 }
 
 .recetteContenue{
-    width: 50%;
+    width: 36%;
+    border : 3px #d34836 solid;
+    border-radius: 150px;
+    margin:0 50px 75px 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #353535;
+
+
 }
 
 .recetteContenue p{
     margin : 10px 25%;
+
 }
 
 /* FLEXBOX pour les recettes (FIN) */
@@ -161,6 +176,7 @@ h1{
     #conteneurRecettes {
         flex-direction: column;
         align-items: center;
+
     }
 
     .recetteContenue img {
@@ -172,5 +188,6 @@ h1{
 
     .recetteContenue p{
         margin : 10px 10%;
+
     }
 }

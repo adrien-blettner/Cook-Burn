@@ -33,8 +33,8 @@ start_page('accueil', array('accueil.css'));
                 {
                     if ($recettes->getBurn() < 10 and $_SESSION['role'] == 'visiteur') /* ne pas afficher les recettes de moins de 10 burn aux visiteurs */
                         continue;
-                    echo '<div class="recetteContenue">' , '<a href="/recette/' , $recettes->getId() ,'"><img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecettes"/></a>' ,
-                    '<p>' , $recettes->getNom() , '</p>' , '<p>' , 'Burns : ' ,$recettes->getBurn() , '</p>' , '<p>' , $recettes->getDescriptionCourte() , '</p>' , '</div>' , PHP_EOL;
+                    echo '<div class="recetteContenue">' ,'<p>' , $recettes->getNom() , '</p>' , '<a href="/recette/' , $recettes->getId() ,'"><img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecettes"/></a>' ,
+                    '<p>' , 'Burns : ' ,$recettes->getBurn() , '</p>' , '<p>' , $recettes->getDescriptionCourte() , '</p>' , '</div>' , PHP_EOL;
                 }
                 ?>
         </div>

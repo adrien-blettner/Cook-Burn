@@ -26,16 +26,6 @@ body {
     font-family: Corbel;
 }
 
-.image_groupe {
-    width: 100%;
-    height: 100%;
-    max-width: 250px;
-    max-height: 315px;
-    border-radius: 15px;
-    border: 2px solid black;
-
-}
-
 .titre {
     color: #d34836;
     font:bold 40px Arial;

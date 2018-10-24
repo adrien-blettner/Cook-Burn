@@ -7,7 +7,6 @@ start_page ('Profil', array ('profil.css','rolesUtilisateur.css'));
             <div class="presentation_membre">
                 <div class="titre">PROFIL</div>
                 <p></p>
-                <img class="image_groupe" src="/vues/images/bart.jpg" alt="Photo de "/>
                 <p>Pseudo: </p>
                 <p>Age: </p>
                 <p>Email: </p>
