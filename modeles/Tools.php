@@ -31,7 +31,7 @@ class Tools
     }
 
 
-    public static function redirectToConnection ($pageSuivante, $message)
+    public static function redirectToConnexion ($pageSuivante, $message)
     {
         $url = '/connexion';
         $data = ['pageSuivante'=> $pageSuivante, 'messageErreur'=>$message];

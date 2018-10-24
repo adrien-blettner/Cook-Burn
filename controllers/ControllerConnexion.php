@@ -2,8 +2,8 @@
 
 class ControllerConnexion extends Controller
 {
-    private $pageSuivante;
     private $messageErreur;
+    private $pageSuivante;
 
     /**
      * @param $args
@@ -14,9 +14,8 @@ class ControllerConnexion extends Controller
         Session::disconnect();
 
         # Prépare la page suivante
-        if (!isset($_POST['pageSuivante']))
-            $this->pageSuivante = '/profil';
-        else
+        $this->pageSuivante = '/profil';
+        if (isset($_POST['pageSuivante']))
             $this->pageSuivante = $_POST['pageSuivante'];
 
         # Si la personne est déjà connecté, rallonge la session (car action prouve activité) et redrige immédiatement
@@ -26,7 +25,7 @@ class ControllerConnexion extends Controller
             header('location: ' . $this->pageSuivante);
         }
 
-        # Check s'il y a un message erreur à afficher
+        # Vérifie s'il y a un message erreur à afficher
         if (!isset($_POST['messageErreur']))
             $this->messageErreur = null;
         else
@@ -42,9 +41,7 @@ class ControllerConnexion extends Controller
             # Vérification que tout les champs sont remplie
             if (!isset($_POST['Pseudo'], $_POST['Mot_de_passe']) or $_POST['Pseudo'] == "" or $_POST['Mot_de_passe'] == "")
             {
-                $url = '/connexion';
-                $data = ['pageSuivante'=> $this->pageSuivante, 'messageErreur'=>'Veuillez remplir tout les champs.'];
-                Tools::redirectWithPostMethod($url, $data);
+                Tools::redirectToConnexion($this->pageSuivante, 'Veuillez remplir tout les champs.');
             }
 
             # Tente la connection de l'utilisateur
@@ -53,13 +50,10 @@ class ControllerConnexion extends Controller
             # Verification que la connection a réussie
             if ($utilisateur === False or $utilisateur == Utilisateur::$utilisateurNull)
             {
-                $url = '/connexion';
-                $data = ['pageSuivante'=> $this->pageSuivante, 'messageErreur'=>'Pseudo ou email et/ou mot de passe invalide.'];
-                Tools::redirectWithPostMethod($url, $data);
+                Tools::redirectToConnexion($this->pageSuivante, 'Pseudo ou email et/ou mot de passe invalide.');
             }
 
             # Assigne les nouvelle variable de session
-            # TODO Passer un objet utilisateur
             Session::connect($utilisateur);
 
             # Redirige vers la page suivante
@@ -75,6 +69,7 @@ class ControllerConnexion extends Controller
     protected function render ()
     {
         $messageErreur = $this->messageErreur;
+        $pageSuivante = $this->pageSuivante;
         require 'vues/vueConnexion.php';
     }
 }

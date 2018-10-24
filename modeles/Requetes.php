@@ -84,8 +84,6 @@ class Requetes
         $connection = self::getConnection($ecriture);
         $stmt = $connection->prepare($requete);
 
-        Tools::betterDump($stmt);
-
         if ($stmt === false)
             throw new RequetteException('Preparation of statement failed.');
 
