@@ -2,14 +2,19 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    font-family: Andale Mono, monospace;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 300;
+}
+
+h1{
+    font-size: 35px;
 }
 
 /* Création d'une banniere dynamique avec photos */
 /* Configuration de l'animation */
 .banniereImg{
-    margin:0 auto 0;
-    width: 100%;
+    margin: 0 auto 0;
     height: 520px;
     border: solid black 2px;
     background-image: url("../images/test4Banniere.jpg");
@@ -35,7 +40,7 @@ body {
 }
 
 /* Images utilisées dans l'animation avec ordre de passage */
-@-webkit-keyframes banniere1 {
+/*@-webkit-keyframes banniere1 {
     0%{background-image: url("../images/test4Banniere.jpg");}
     33%{background-image: url("../images/test5Banniere.jpg");}
     66%{background-image: url("../images/test6Banniere.jpg");}
@@ -51,17 +56,47 @@ body {
     0%{background-image: url("../images/test4Banniere.jpg");}
     33%{background-image: url("../images/test5Banniere.jpg");}
     66%{background-image: url("../images/test6Banniere.jpg");}
+}*/
+
+@-webkit-keyframes banniere1 {
+    0%{background-position: 0px 0px;}
+    2%{background-position: 0px 0px;}
+    31%{background-position: -33% 0px;}
+    35%{background-position: -33% 0px;}
+    64%{background-position: -66% 0px;}
+    68%{background-position: -66% 0px;}
+    98%{background-position: -99% 0px;}
+    100%{background-position: -99% 0px;}
 }
+
+@-moz-keyframes banniere1 {
+    0%{background-position: 0px 0px;}
+    2%{background-position: 0px 0px;}
+    31%{background-position: -33% 0px;}
+    35%{background-position: -33% 0px;}
+    64%{background-position: -66% 0px;}
+    68%{background-position: -66% 0px;}
+    98%{background-position: -99% 0px;}
+    100%{background-position: -99% 0px;}
+}
+
+@keyframes banniere1 {
+    0%{background-position: 0px 0px;}
+    2%{background-position: 0px 0px;}
+    31%{background-position: -33% 0px;}
+    35%{background-position: -33% 0px;}
+    64%{background-position: -66% 0px;}
+    68%{background-position: -66% 0px;}
+    98%{background-position: -99% 0px;}
+    100%{background-position: -99% 0px;}
+}
+
 
 .description{
     text-align: center;
     padding: 1% 0;
     color: white;
     background-color: #4f5051;
-}
-
-.description h1{
-    font-size: 35px;
 }
 
 .description p{
@@ -74,10 +109,6 @@ body {
     color: white;
     background-color: #313233;
     font-size: 0;
-}
-
-.topRecette h1{
-    font-size: 35px;
 }
 
 .topRecette p{
@@ -99,10 +130,6 @@ body {
     background-color: #313233;
 }
 
-.recettes h1{
-    font-size: 35px;
-}
-
 .recettes img{
     width: 400px;
     height: 250px;
@@ -114,7 +141,7 @@ body {
 #conteneurRecettes{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -123,24 +150,26 @@ body {
 }
 
 .recetteContenue p{
-    margin : 2% 25%;
+    margin : 10px 25%;
 }
 
 /* FLEXBOX pour les recettes (FIN) */
 
-@media screen and (max-width: 835px) {
+@media screen and (max-width: 1250px) {
     /* responsive design (affichage en col au lieu de row, éviter que le texte se chevauche) */
     #conteneurRecettes {
         flex-direction: column;
         align-items: center;
     }
 
-    .recetteContenue {
-        height: 50%;
-        width: 70%;
+    .recetteContenue img {
+        width: 100%;
+        height: 100%;
+        max-width: 400px;
+        max-height: 250px;
     }
 
-    .recetteContenue img {
-        width: 80%;
+    .recetteContenue p{
+        margin : 10px 10%;
     }
 }

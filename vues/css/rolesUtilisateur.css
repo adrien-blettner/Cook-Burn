@@ -1,12 +1,15 @@
+body {
+    color: #F5F5F5;
+    background-color: #404040;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 300;
+}
+
 h1 {
     font-size: 40px;
     color: #d26c35;
     text-align: center;
-}
-
-body {
-    color: #F5F5F5;
-    background-color: #404040;
 }
 
 .Titre {
