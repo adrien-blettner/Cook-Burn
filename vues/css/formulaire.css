@@ -7,7 +7,8 @@ body {
 }
 
 #inscriptionTitre, #connexionTitre {
-    margin-top : 50px;
+    clear : both;
+    padding-top : 50px;
     margin-bottom : 1px;
     text-align: center;
 }
