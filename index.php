@@ -17,7 +17,7 @@ try {
     });
 
     # Ajout de la route vers /profil ->  le profil
-    $routeur->ajouterRoute ('/profil', 'GET', function () {
+    $routeur->ajouterRoute ('/profil', ['GET','POST'], function () {
         new ControllerProfil(null);
     });
 

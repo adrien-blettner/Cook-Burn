@@ -12,6 +12,10 @@ class ControllerProfil extends Controller
         if (!$_SESSION['isConnected'] or $_SESSION['isConnected'] === false)
             Tools::redirectToConnexion($_GET['url'], 'Vous devez être connecté pour accéder à votre profil !');
 
+        if (isset($_POST['action']) and $_POST['action'] == 'maj')
+            Tools::betterDump($_POST);
+
+
         $this->idCreateur = $_SESSION['id'];
         $utilisateur = RequettesUtilisateur::getUserByID($this->idCreateur);
         $this->pseudo = $utilisateur->getPseudo();

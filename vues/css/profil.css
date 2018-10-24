@@ -2,35 +2,33 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    font-family: sans-serif;
-    font-style: normal;
-    font-weight: 300;
 }
 
-.presentation {
+#profil {
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 1%;
     margin-bottom: 1%;
-    font-family: Corbel;
-    text-align: center;
 }
 
-.presentation_membre {
+#presentation_membre {
     background-color: #474849;
     padding: 10px 10% 10px 10%;
     margin: 5px 10px 5px 10px;
-    text-align: center;
     border: 3px solid #d34836;
     border-radius: 40px;
     font-family: Corbel;
 }
 
-.titre {
+#titre {
     color: #d34836;
     font:bold 40px Arial;
-    text-align: center;
-
 }
 
+.info {
+    display: inline;
+}
 
+#update {
+    display: none;
+}

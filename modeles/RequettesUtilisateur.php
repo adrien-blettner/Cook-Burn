@@ -80,14 +80,13 @@ class RequettesUtilisateur
      *
      * @param int     $id         L'id du membre.
      * @param string  $newPseudo  Le nouveau pseudo.
-     * @return bool               Echec/succès.
+     * @return string|bool               Echec/succès.
      * @throws RequetteException  Exception générique des requêtes sur la BD.
      */
     public static function updatePseudo ($id, $newPseudo)
     {
         if (!self::pseudoIsAvailable($newPseudo))
-            #TODO send error message mail already used
-            return false;
+            return "Pseudo déjà utilisé par un autre compte !";
 
         $requete = 'UPDATE MEMBRE SET PSEUDO = ? WHERE ID = ?';
         $types = 'si';
@@ -104,14 +103,13 @@ class RequettesUtilisateur
      *
      * @param int     $id         L'id du membre.
      * @param string  $newMail    Le nouveau mail.
-     * @return bool               Echec/succès.
+     * @return string|bool        Echec/succès/Message d'erreur.
      * @throws RequetteException  Exception générique des requêtes sur la BD.
      */
     public static function updateEMail ($id, $newMail)
     {
         if (!self::mailIsAvailable($newMail))
-            #TODO send error message mail already used
-            return false;
+            return "Email déjà utilisé par un autre compte !";
 
         $requete = 'UPDATE MEMBRE SET EMAIL = ? WHERE ID = ?';
         $types = 'si';

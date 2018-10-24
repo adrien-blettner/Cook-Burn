@@ -3,17 +3,27 @@ require_once 'formatPage.inc.php';
 
 start_page ('Profil', array ('profil.css','rolesUtilisateur.css'));
 ?>
-        <div class="presentation">
-            <div class="presentation_membre">
-                <div class="titre">PROFIL</div>
-                <p></p>
-                <p>Pseudo: </p>
-                <p>Age: </p>
-                <p>Email: </p>
-                <label for="DateDeNaissance"><p>Date de naissance</p></label>
-                <input min="1" max="31" class="jour" id="DateDeNaissance" placeholder="Jour" required="" type="number">
-                <input min="1" max="12" class="mois" placeholder="Mois" required="" type="number">
-                <input min="1900" max="2017" class="année" placeholder="Année" required="" type="number">
+        <script>
+            function show() {
+                document.getElementById("update").style.display = "block";
+            }
+        </script>
+        <div id="profil">
+            <div id="presentation_membre">
+                <div>
+                    <h1 id="titre">Bienvenue sur votre profil.</h1>
+                    <p class="info">Pseudo :<? echo $pseudo; ?></p>
+                    <br>
+                    <p class="info" >Mail: <? echo $mail; ?></p>
+                    <br>
+                    <button onclick="show();">edit</button>
+                    <br>
+                </div>
+                <form method="post" action="" id="update">
+                    <input name="pseudo" value="<? echo $pseudo; ?>">
+                    <input name="mail"  value="<? echo $mail; ?>">
+                    <button name="action" value="maj">save</button>
+                </form>
             </div>
         </div>
 <?php
