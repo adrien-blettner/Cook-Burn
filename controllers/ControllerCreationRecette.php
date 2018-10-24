@@ -1,19 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: b17013542
- * Date: 23/10/18
- * Time: 15:26
- */
 
-class ControllerCreationRecette extends controller
+class ControllerCreationRecette extends Controller
 {
-    private $id;
-    private $recette;
-
     public function init ($id)
     {
-
+        if (isset($_POST['action']) && $_POST['action'] == 'Poster recette')
+        {
+            echo '<pre>';
+            var_dump($_POST);
+            echo '</pre>';
+            $idCreateur = $_SESSION['id'];
+            $nomRecette = $_POST['nomRecette'];
+            $nbConvives = $_POST['nbConvives'];
+            $descriptionCourte = $_POST['descriptionCourte'];
+            $descriptionLongue = $_POST['descriptionLongue'];
+            $ingredients = $_POST['ingredients'];
+            $etapes = $_POST['etapes'];
+            $image = $_POST['image'];
+        }
     }
 
     function render ()
