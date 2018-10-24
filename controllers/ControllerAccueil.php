@@ -11,7 +11,10 @@ class ControllerAccueil extends Controller
         $this->recetteDuMoment = RequettesRecette::getRecetteDuMoment();
         # Récupère la liste de recettes
         $this->lastRecettes = RequettesRecette::getLastRecettes();
-
+        if (ISSET($_POST['action']) && $_POST['action'] = 'Déconnexion') {
+            Session::disconnect();
+            echo 'OUI';
+        }
     }
 
     protected function render ()
