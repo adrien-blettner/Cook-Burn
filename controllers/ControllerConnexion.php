@@ -7,6 +7,8 @@ class ControllerConnexion extends Controller
 
     protected function init ($args)
     {
+        Session::disconnect();
+
         # Prépare la page suivante
         if (!isset($_POST['pageSuivante']))
             $this->pageSuivante = '/profil';
@@ -62,7 +64,7 @@ class ControllerConnexion extends Controller
 
             # Assigne les nouvelle variable de session
             # TODO Passer un objet utilisateur
-            Session::connect($utilisateur->getPseudo(), intval($utilisateur->getIsAdmin()));
+            Session::connect($utilisateur);
 
             # Redirige vers la page suivante
             header('location: ' . $this->pageSuivante);

@@ -1,11 +1,18 @@
 <?php
 
-# Inspiration:
-# https://blog.teamtreehouse.com/how-to-create-bulletproof-sessions
-
+/**
+ * Classe qui ajoute des fonctions pour gérer la session.
+ *
+ * Inspiration:
+ * https://blog.teamtreehouse.com/how-to-create-bulletproof-sessions
+ *
+ * Class Session  La classe.
+ */
 class Session
 {
-    # Fonction qui démarre la session
+    /**
+     * Fonction qui (re)démarre la session.
+     */
     public static function initSession ()
     {
         # Démarre la session ou récupere la session courrente (test isset car delete appel init)
@@ -29,9 +36,13 @@ class Session
     }
 
 
-    # Fonction qui vérifie que la fonction n'est pas hijackée en :
-    #		- vérifiant que l'ip est toujours la même
-    #		- vérifiant que l'user agent est toujours le même (identifie le navigateur, système exploitation ...)
+    /**
+     * Fonction qui vérifie que la fonction n'est pas hijackée en :
+     *	   - vérifiant que l'ip est toujours la même
+     *	   - vérifiant que l'user agent est toujours le même (identifie le navigateur, système exploitation ...)
+     *
+     * @return bool
+     */
     private static function mightBeenHijacking ()
     {
         if(!isset($_SESSION['adresseIP']) || !isset($_SESSION['userAgent']))
@@ -46,7 +57,12 @@ class Session
         return false;
     }
 
-    # Fonction qui vérifie qu'il n'y pas de valeurs invalide (sauf pseudo ça serait trop génant)
+
+    /**
+     * Fonction qui vérifie qu'il n'y pas de valeurs invalide.
+     *
+     * @return bool Les valeurs sont valides ou non.
+     */
     private static function wrongValues ( )
     {
         if (!isset($_SESSION['isConnected'], $_SESSION['pseudo'], $_SESSION['role']))
@@ -61,7 +77,12 @@ class Session
         return false;
     }
 
-    # Fonction qui verifie que la session n'est pas trop vieille (1 heure)
+
+    /**
+     * Vérifie que la session n'a pas éxpirée.
+     *
+     * @return bool  La session est/n'est pas trop vieille
+     */
     private static function tooOld ()
     {
         if (isset($_SESSION['isConnected']) and $_SESSION['isConnected'] === true)
@@ -71,7 +92,10 @@ class Session
         return false;
     }
 
-    # Fonction qui supprime la session
+
+    /**
+     * Destruction de la session.
+     */
     private static function destroySession ()
     {
         $_SESSION = array();
@@ -80,28 +104,48 @@ class Session
         session_write_close();
     }
 
-    # Met à jour les valeurs de la session lors de la connexion
-    # TODO prendre un objet utilisateur + $_SESSION['id']
-    public static function connect ($pseudo, $isAdmin)
+
+    /**
+     * Met à jour les valeurs de la session lors de la connexion.
+     *
+     * @param Utilisateur  $utilisateur  L'utilisateur qui se connecte.
+     */
+    public static function connect ($utilisateur)
     {
+        $isAdmin = $utilisateur->getIsAdmin();
+        $pseudo = $utilisateur->getPseudo();
+        $id = $utilisateur->getId();
+
+
         $_SESSION['isConnected'] = true;
+
+        $_SESSION['id'] = $id;
+
+        $_SESSION['pseudo'] = $pseudo;
 
         if (!is_bool($isAdmin) or $isAdmin == false)
             $_SESSION['role'] = 'membre';
         else
             $_SESSION['role'] = 'admin';
 
-        $_SESSION['pseudo'] = $pseudo;
         $_SESSION['expiration'] = time() + (60*60);
     }
 
-    # Permet de mettre à jour la pseudo
+
+    /**
+     * Met à jour le pseudo (en cas de changement par exemple).
+     *
+     * @param string  $pseudo  Le nouveau pseudo
+     */
     public static function updatePseudo ($pseudo)
     {
         $_SESSION['pseudo'] = $pseudo;
     }
 
-    # Met à jour les valeurs lors de la déconnection
+
+    /**
+     * Déconnecte l'utilisateur de la session.
+     */
     public static function disconnect ()
     {
         # Approche très simple (comme un cookie souvent) :
@@ -110,7 +154,10 @@ class Session
         self::initSession();
     }
 
-    # Rallonge la session
+
+    /**
+     * Rallonge la session d'une heure.
+     */
     public static function extendSessionLife ()
     {
         $_SESSION['expiration'] = time() + (60*60);

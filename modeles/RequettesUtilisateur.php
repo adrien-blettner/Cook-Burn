@@ -1,54 +1,77 @@
 <?php
 
+/**
+ * Classe qui regroupe les requêtes liées aux actions réalisable par l'utilisateur.
+ *
+ * Class RequettesUtilisateur
+ */
 class RequettesUtilisateur
 {
-    # Renvoie l'utilisateur lié au pseudo/email et mot de passe, sinon renvoi un boolean == false
-    static function connect ($user, $pass)
+    /**
+     * Renvoie l'utilisateur lié au pseudo/email et mot de passe, sinon renvoi un boolean == false
+     *
+     * @param string  $user
+     * @param string  $pass
+     * @return bool|Utilisateur
+     * @throws RequetteException
+     */
+    public static function connect ($user, $pass)
     {
-        $lienBD = ConnectionLectureSeul::getConnection();
-        assert ($lienBD instanceof mysqli, 'Erreur de connection.');
-        $testPseudo   = $lienBD->prepare ('SELECT * FROM MEMBRE WHERE PSEUDO = ?');
-        $testMail = $lienBD->prepare ('SELECT * FROM MEMBRE WHERE EMAIL = ?');
-        $testMail->bind_param('s',$user);
-        $testPseudo->bind_param('s', $user);
-        if ($testPseudo->execute() === False and $testMail->execute() === False)
-            return False;
-
-        $resultMail = $testMail->get_result();
-        if (!is_bool($resultMail))
-            $resultMail = $resultMail->fetch_assoc();
-
-        $resultPseudo = $testPseudo->get_result();
-        if (!is_bool($resultPseudo))
-            $resultPseudo = $resultPseudo->fetch_assoc();
-
-        $testPseudo->close();
-        $testMail->close ();
-
-        if (!password_verify($pass, $resultMail['PASSWORD']) and !password_verify($pass, $resultPseudo['PASSWORD']))
-            return false;
-
+        $requete = 'SELECT * FROM MEMBRE WHERE PSEUDO = ?';
+        $type = 's';
+        $value = [$user];
+        $resultPseudo = Requetes::requeteSecuriseeSurBD($requete, $type, $value);
 
         if (!is_bool($resultPseudo))
+            $resultPseudo = mysqli_fetch_assoc($resultPseudo);
+
+        var_dump(password_verify($pass, $resultPseudo['PASSWORD']));
+
+        if (!password_verify($pass, $resultPseudo['PASSWORD']))
         {
-            $result = Utilisateur::FromDbRow($resultPseudo);
-            # On met le mot de passe à '' car pas besoin et volonté de sécu
-            $result->setPassword('');
-            return $result;
+            $requete = 'SELECT * FROM MEMBRE WHERE EMAIL = ?';
+            $type = 's';
+            $value = [$user];
+            $resultMail = Requetes::requeteSecuriseeSurBD($requete, $type, $value);
+
+            if (!is_bool($resultMail))
+                $resultMail = mysqli_fetch_assoc($resultMail);
+
+            if (!password_verify($pass, $resultMail['PASSWORD']))
+                return false;
+
+            $utilisateur = Utilisateur::FromDbRow($resultMail);
+
+            return $utilisateur;
         }
 
-        if (!is_bool($resultMail))
-        {
-            $result = Utilisateur::FromDbRow($resultMail);
-            # On met le mot de passe à '' car pas besoin et volonté de sécu
-            $result->setPassword('');
-            return $result;
-        }
+        $utilisateur = Utilisateur::FromDbRow($resultPseudo);
 
-         $lienBD->close();
+        return $utilisateur;
+    }
 
-        # Pseudo ou mail invalide
-        return false;
+    /**
+     * Fonction qui renvoie l'utilisateur correspondant à cette ID
+     *
+     * @param int $id             L'id de l'utilisateur recherché.
+     * @return Utilisateur        L'utilisateur correspondant ou un utilisateur vide.
+     * @throws RequetteException
+     */
+    public static function getUserByID ($id)
+    {
+        $requete = 'SELECT * FROM MEMBRE WHERE ID = ?';
+        $type = 'i';
+        $value = [$id];
+        $result = Requetes::requeteSecuriseeSurBD($requete, $type, $value);
+
+        if ($result === false)
+            return Utilisateur::$utilisateurNull;
+
+        $utilisateur = Utilisateur::FromDbRow(mysqli_fetch_assoc($result));
+
+        $result->close();
+
+        return $utilisateur;
     }
 
 
