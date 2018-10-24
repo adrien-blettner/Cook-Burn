@@ -5,6 +5,10 @@ class ControllerConnexion extends Controller
     private $pageSuivante;
     private $messageErreur;
 
+    /**
+     * @param $args
+     * @throws RequetteException
+     */
     protected function init ($args)
     {
         Session::disconnect();
@@ -38,28 +42,20 @@ class ControllerConnexion extends Controller
             # Vérification que tout les champs sont remplie
             if (!isset($_POST['Pseudo'], $_POST['Mot_de_passe']) or $_POST['Pseudo'] == "" or $_POST['Mot_de_passe'] == "")
             {
-                echo
-                 '<form id="test" action="/connexion" method="post">
-                 <input type="hidden" name="pageSuivante" value="' . $this->pageSuivante . '"> 
-                 <input type="hidden" name="messageErreur" value="Veuillez remplir tout les champs.">
-                 </form>
-                 <script type="text/javascript">document.getElementById("test").submit()</script>
-                ';
+                $url = '/connexion';
+                $data = ['pageSuivante'=> $this->pageSuivante, 'messageErreur'=>'Veuillez remplir tout les champs.'];
+                Tools::redirectWithPostMethod($url, $data);
             }
 
             # Tente la connection de l'utilisateur
             $utilisateur = RequettesUtilisateur::connect($_POST['Pseudo'],$_POST['Mot_de_passe']);
 
             # Verification que la connection a réussie
-            if ($utilisateur === False)
+            if ($utilisateur === False or $utilisateur == Utilisateur::$utilisateurNull)
             {
-                echo
-                '<form id="test" action="/connexion" method="post">
-                 <input type="hidden" name="pageSuivante" value="' . $this->pageSuivante . '"> 
-                 <input type="hidden" name="messageErreur" value="Pseudo ou email et/ou mot de passe invalide.">
-                 </form>
-                 <script type="text/javascript">document.getElementById("test").submit()</script>
-                ';
+                $url = '/connexion';
+                $data = ['pageSuivante'=> $this->pageSuivante, 'messageErreur'=>'Pseudo ou email et/ou mot de passe invalide.'];
+                Tools::redirectWithPostMethod($url, $data);
             }
 
             # Assigne les nouvelle variable de session
@@ -78,6 +74,7 @@ class ControllerConnexion extends Controller
 
     protected function render ()
     {
+        $messageErreur = $this->messageErreur;
         require 'vues/vueConnexion.php';
     }
 }

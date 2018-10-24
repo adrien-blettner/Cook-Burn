@@ -30,6 +30,16 @@ class Tools
         <?php
     }
 
+
+    public static function redirectToConnection ($pageSuivante, $message)
+    {
+        $url = '/connexion';
+        $data = ['pageSuivante'=> $pageSuivante, 'messageErreur'=>$message];
+        self::redirectWithPostMethod($url, $data);
+    }
+
+
+
     # Fonction qui génère un mot de passe aléatoire d'una taille donnée (8 par défaut)  (fonction utile pour l'admin pour ajouter un nouveau compte)
     public static function randomPassword ($lenght = 8)
     {
@@ -92,5 +102,13 @@ class Tools
         </html>';
 
         return mail($mail, $subject, $message);
+    }
+
+    # TODO delete
+    public static function betterDump($var)
+    {
+        echo '<pre>';
+        print_r($var);
+        echo '</pre>';
     }
 }

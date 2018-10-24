@@ -31,6 +31,8 @@ start_page('accueil', array('accueil.css'));
         <div id="conteneurRecettes">
                 <?php foreach ($lastRecettes as $recettes)
                 {
+                    if ($recettes->getBurn() <10 and $_SESSION['role'] == 'visiteur')
+                        continue;
                     echo '<div class="recetteContenue">' , '<a href="/recette/' , $recettes->getId() ,'"><img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecettes"/></a>' ,
                     '<p>' , $recettes->getNom() , '</p>' , '<p>' , 'Burns : ' ,$recettes->getBurn() , '</p>' , '<p>' , $recettes->getDescriptionCourte() , '</p>' , '</div>' , PHP_EOL;
                 }

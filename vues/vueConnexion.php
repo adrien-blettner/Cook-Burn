@@ -7,6 +7,13 @@ start_page ('Connexion', array ('formulaire.css'));
 ?>
 
     <h2 id="connexionTitre">Connexion</h2>
+<?php
+if ($messageErreur !== null) {
+    echo '<pre>';
+    print_r($messageErreur);
+    echo '</pre>';
+}
+?>
     <div class="inscriptionConnexionDiv">
         <form action="/connexion" method="post" class="inscriptionConnexionForm"><br>
             <fieldset class="inscriptionConnexionFieldset">
