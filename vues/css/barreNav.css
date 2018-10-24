@@ -28,7 +28,7 @@ body {
     background-color: #F5F5F5;
 }
 
-.sous-menu li:hover {
+.sous-menu li:hover{
     background-color: #E70739;
 }
 
@@ -51,8 +51,16 @@ body {
     float:right;
 }
 
+#rechercheLi:hover{
+    background-color: #E70739;
+}
+
 #rechercheForm {
-    padding: 0 15px 0 15px;
+    padding: 0 15px 4px 15px;
+}
+
+#rechercheChamp:hover{
+    background-color: #F5F5F5;
 }
 
 #rechercheChamp {
@@ -92,4 +100,24 @@ body {
 
 #iconeLi:hover .sous-menu {
     display : block;
+}
+
+.sous-menu #deconnexionBouton {
+    margin : 0;
+    background-color: #F5F5F5;
+    width : 300px;
+    float : none;
+    border: none;
+    border-radius: 0;
+    font-size :110%;
+    color : black;
+    text-align: left;
+    padding: 0 0 0 17px;
+    display:inline-block;
+    height: 60px;
+    cursor : pointer;
+}
+
+.sous-menu #deconnexionBouton:hover {
+    background-color: #E70739;
 }

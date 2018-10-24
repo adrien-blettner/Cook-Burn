@@ -11,6 +11,7 @@ class ControllerAccueil extends Controller
         $this->recetteDuMoment = RequettesRecette::getRecetteDuMoment();
         # Récupère la liste de recettes
         $this->lastRecettes = RequettesRecette::getLastRecettes();
+
     }
 
     protected function render ()
