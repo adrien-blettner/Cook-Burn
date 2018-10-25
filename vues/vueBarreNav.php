@@ -2,13 +2,18 @@
     <ul class="sideNav">
         <li id="iconeLi"><img alt="Icone de menu déroulant" src="/vues/images/iconeMenuDeroulant.png" id="iconeImage">
             <ul class="sous-menu">
-                <li><a href="/vues/vueProfil.php">Profil</a></li>
-                <li><a href="/vues/vueConnexion.php">Connexion</a></li>
+                <li><a href="/profil">Profil</a></li>
+                <?php
+                if (!isset($_SESSION['isConnected']) or $_SESSION['isConnected'] === false)
+                    echo "\t\t\t\t" . '<li><a href="/connexion">Connexion</a></li>';
+                else
+                    echo '
                 <li>
                     <form action="/" id="deconnexionForm" method="post" >
                         <input id="deconnexionBouton" type="submit" name="action" value="Déconnexion"/>
                     </form>
-                </li>
+                </li>';
+                ?>
             </ul>
         </li>
         <li id="C&B"> <a href="/">Cook & Burn</a></li>
