@@ -60,3 +60,12 @@ fieldset {
         padding: 14px 16px;
     }
 }
+
+.ingredient {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.LIIngredient {
+    list-style: none;
+}

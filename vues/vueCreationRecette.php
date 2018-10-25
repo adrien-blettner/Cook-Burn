@@ -8,33 +8,52 @@ start_page('creation', array('creationRecette.css'));
 
         function move ()
         {
-            var id = "ingredient" + count.toString();
+            var name = "ingredient" + count.toString();
+            var nameList = name + "List";
+            name += "[]";
             count += 1;
 
             var ligne = document.createElement("li");
+            ligne.setAttribute("class", "LIIngredient");
+            ligne.setAttribute("id", nameList);
 
-            var p1 = document.createElement("p");
-            p1.setAttribute("id", id);
-            p1.setAttribute("class", "ingredient");
-            var text1 = document.createTextNode(document.getElementById("quantite").value);
-            p1.appendChild(text1);
+            var input1 = document.createElement("input");
+            input1.setAttribute("name", name);
+            input1.setAttribute("class", "ingredient");
+            input1.setAttribute("value",document.getElementById("quantite").value);
+            input1.readOnly = true;
 
-            var p2 = document.createElement("p");
-            p2.setAttribute("id", id);
-            p2.setAttribute("class", "ingredient");
-            var text2 = document.createTextNode(document.getElementById("ingredient").value);
-            p2.appendChild(text2);
+            var input2 = document.createElement("input");
+            input2.setAttribute("name", name);
+            input2.setAttribute("class", "ingredient");
+            input2.setAttribute("value",document.getElementById("ingredient").value);
+            input2.readOnly = true;
 
-            ligne.appendChild(p1);
-            ligne.appendChild(p2);
+            var remove = document.createElement("button");
+            remove.appendChild(document.createTextNode("x"));
+            remove.setAttribute("type", "button");
+            remove.setAttribute("onclick", "remove(\"" + nameList + "\");");
+            remove.setAttribute("name", name);
+
+            ligne.appendChild(input1);
+            ligne.appendChild(input2);
+            ligne.appendChild(remove);
             document.getElementById("listeIngredients").appendChild(ligne);
 
-            document.getElementById("ingredientsNumber").value = count;
         }
 
-        function remove()
+        function remove($name)
         {
 
+            var li = document.getElementById($name);
+            li.parentNode.removeChild(li);
+        }
+
+        function supp() {
+            var a = document.getElementById("quantite");
+            a.parentNode.removeChild(a);
+            a = document.getElementById("ingredient");
+            a.parentNode.removeChild(a);
         }
     </script>
     <h1>Création de recette</h1>
@@ -55,12 +74,10 @@ start_page('creation', array('creationRecette.css'));
 
                 <!--<label for="ingredient">Ingrédients</label>-->
                 <input type="text" id="quantite" name="quantite"/>
-                <input type="text" id="ingredient" name="ingredient" placeholder="Ingrédient" required/></br>
+                <input type="text" id="ingredient" name="ingredient" placeholder="Ingrédient"/></br>
                 <button type="button" onclick="move();">+</button>
 
-                <ul id="listeIngredients">
-
-                </ul>
+                <ul id="listeIngredients"></ul>
 
                 <!--<label for="etapes">Étapes</label>-->
                 <input type="text" name="etapes" placeholder="Etape 1" required/></br>
@@ -68,8 +85,7 @@ start_page('creation', array('creationRecette.css'));
                 <!--<label for="image">Photo de la recette</label>-->
                 <input type="file" name="image" placeholder="Image" required/></br>
 
-                <input type="submit" class="submitButton" name="action" value="Poster recette"/>
-                <input type="hidden" id="ingredientsNumber" name="ingredientsNumber" value=0>
+                <input type="submit" class="submitButton" name="action" value="Poster recette" onclick="supp();"/>
             </fieldset>
         </form>
     </div>
