@@ -150,7 +150,7 @@ class RequettesUtilisateur
      */
     public static function mailIsAvailable ($mailToTest)
     {
-        $test = Requetes::requeteSecuriseeSurBD('SELECT ID FROM MEMBER WHERE EMAIL = ?', 's', $mailToTest);
+        $test = Requetes::requeteSecuriseeSurBD('SELECT ID FROM MEMBRE WHERE EMAIL = ?', 's', $mailToTest);
 
         if ($test->num_rows !=0)
             return false;
