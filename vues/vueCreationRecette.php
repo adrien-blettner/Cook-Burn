@@ -6,7 +6,7 @@ start_page('creation', array('creationRecette.css'));
     <script>
         var count = 0;
 
-        function move ()
+        function moveIngredient ()
         {
             var name = "ingredient" + count.toString();
             var nameList = name + "List";
@@ -39,21 +39,16 @@ start_page('creation', array('creationRecette.css'));
             ligne.appendChild(input2);
             ligne.appendChild(remove);
             document.getElementById("listeIngredients").appendChild(ligne);
+        }
+
+        function moveEtape() {
 
         }
 
         function remove($name)
         {
-
             var li = document.getElementById($name);
             li.parentNode.removeChild(li);
-        }
-
-        function supp() {
-            var a = document.getElementById("quantite");
-            a.parentNode.removeChild(a);
-            a = document.getElementById("ingredient");
-            a.parentNode.removeChild(a);
         }
     </script>
     <h1>Création de recette</h1>
@@ -73,19 +68,22 @@ start_page('creation', array('creationRecette.css'));
                 <textarea name="descriptionLongue" rows="5" cols="50" placeholder = "Une description bien plus détaillée" required></textarea></br>
 
                 <!--<label for="ingredient">Ingrédients</label>-->
-                <input type="text" id="quantite" name="quantite"/>
-                <input type="text" id="ingredient" name="ingredient" placeholder="Ingrédient"/></br>
-                <button type="button" onclick="move();">+</button>
+                <input type="text" id="quantite"/>
+                <input type="text" id="ingredient" placeholder="Ingrédient"/></br>
+                <button type="button" onclick="moveIngredient();">+</button>
 
                 <ul id="listeIngredients"></ul>
 
                 <!--<label for="etapes">Étapes</label>-->
                 <input type="text" name="etapes" placeholder="Etape 1" required/></br>
+                <button type="button" onclick="moveEtape();">+</button>
+
+                <ul id="listeEtapes"></ul>
 
                 <!--<label for="image">Photo de la recette</label>-->
                 <input type="file" name="image" placeholder="Image" required/></br>
 
-                <input type="submit" class="submitButton" name="action" value="Poster recette" onclick="supp();"/>
+                <input type="submit" class="submitButton" name="action" value="Poster recette" />
             </fieldset>
         </form>
     </div>

@@ -7,9 +7,24 @@ class ControllerCreationRecette extends Controller
         if (!isset($_SESSION['isConnected']) or $_SESSION['isConnected'] === false)
             Tools::redirectToConnexion($_GET['url'], 'Vous devez être connecté pour accéder à votre profil.');
 
-        /*if (isset($_POST['action']) && $_POST['action'] == 'Poster recette')
+        Tools::betterDump($_POST);
+
+
+        if (isset($_POST['action']) && $_POST['action'] == 'Poster recette')
         {
-            $client_id = 'a95e8c78490ed17';
+            $result = [];
+            foreach ($_POST as $key => $value) {
+                if (strpos($key, 'ingredient') === 0) {
+                    $result[] = str_replace('|','',$value);
+                }
+            }
+            $ingredients = "";
+            foreach ($result as $arr) {
+                $ingredients .= $arr[0] . "Δ" . $arr[1] . "|";
+            }
+            $ingredients = substr($ingredients, 0, -1);
+            
+            /*$client_id = 'a95e8c78490ed17';
             if ($_FILES['image']['error'] !== 0 || $_FILES['image']['size'] > 200000000000) {
                 exit;
             }
@@ -43,10 +58,9 @@ class ControllerCreationRecette extends Controller
             $descriptionCourte = htmlspecialchars($_POST['descriptionCourte'], ENT_QUOTES, 'UTF-8');
             $descriptionLongue = htmlspecialchars($_POST['descriptionLongue'], ENT_QUOTES, 'UTF-8');
             $ingredients = htmlspecialchars($_POST['ingredients'], ENT_QUOTES, 'UTF-8');
-            $etapes = htmlspecialchars($_POST['etapes'], ENT_QUOTES, 'UTF-8');
-        }*/
-
-        Tools::betterDump($_POST);
+            $etapes = htmlspecialchars($_POST['etapes'], ENT_QUOTES, 'UTF-8');*/
+            
+        }
     }
 
     function render ()
