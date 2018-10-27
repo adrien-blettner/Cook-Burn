@@ -25,10 +25,10 @@ class ControllerAccueil extends Controller
         }
 
         # Récupère la recette du moment.
-        $this->recetteDuMoment = RequettesRecette::getRecetteDuMoment();
+        $this->recetteDuMoment = RequetesRecette::getRecetteDuMoment();
 
         # Récupère la liste de recettes.
-        $this->lastRecettes = RequettesRecette::getLastRecettes();
+        $this->lastRecettes = RequetesRecette::getLastRecettes();
 
         # Si l'utilisateur n'est pas connecté, on chache les recettes de moins de 10 burns.
         if (!Session::isConnected())

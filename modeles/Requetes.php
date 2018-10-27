@@ -78,7 +78,7 @@ class Requetes
      * @param   null                $valeurs    Les valeurs à "bind" à la requete.
      * @param   bool                $ecriture   Spécification du besoin du mode écriture (pour un insert par exemple).
      * @return  bool|mysqli_result              Le résultat de la requête ou vrai si MàJ ou faux si échec.
-     * @throws  RequetteException               Exception générique des requêtes sur la BD.
+     * @throws  RequeteException               Exception générique des requêtes sur la BD.
      */
     public static function requeteSecuriseeSurBD ($requete, $types = null, $valeurs = null, $ecriture = false)
     {
@@ -92,25 +92,24 @@ class Requetes
                 $ecriture = true;
 
         $connection = self::getConnection($ecriture);
-        $stmt = $connection->prepare($requete);
 
-        if ($stmt === false)
-            throw new RequetteException('Preparation of statement failed.');
+        if (false === $stmt = $connection->prepare($requete))
+            throw new RequeteException('Preparation of statement failed.');
 
         if (!is_array($valeurs))
             $valeurs = array($valeurs);
 
         # ... -> argument unpacking
         if ($stmt->bind_param($types, ...$valeurs) === false)
-            throw new RequetteException('Binding params failed.');
+            throw new RequeteException('Binding params failed.');
 
 
         if ($stmt->execute() === false)
-            throw new RequetteException('Execution of request failed.');
+            throw new RequeteException('Execution of request failed.');
 
         $resultat = false;
 
-        # On test si la requêtte est une MàJ (update,insert..) qui à réussi.
+        # On test si la requête est une MàJ (update,insert..) qui à réussi.
         # un MàJ peut ne pas échouer mais avoir un WHERE qui ne correspond à personne et donc affected_rows == 0
         if ($stmt->affected_rows > 0)
         {
@@ -119,10 +118,8 @@ class Requetes
         # Partie si on a un select réussi.
         else
         {
-            $resultat = $stmt->get_result();
-
-            if ($resultat === false)
-                throw new RequetteException('Getting result failed.');
+            if (false === $resultat = $stmt->get_result())
+                throw new RequeteException('Getting result failed.');
         }
 
         $stmt->close();

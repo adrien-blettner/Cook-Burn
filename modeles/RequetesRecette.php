@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Classes qui contient les requêttes liés aux recettes.
+ * Classes qui contient les requêtes liés aux recettes.
  *
- * Class RequettesRecette
+ * Class RequetesRecette
  */
-class RequettesRecette
+class RequetesRecette
 {
     /**
      * Renvoie une recette correspondant à l'id passer en paramètre.
      *
      * @param  int                $id  L'id de la recette souhaitée.
      * @return bool|Recette            La recette demandé ou false si non trouvée.
-     * @throws RequetteException       Exception générique des requêtes sur la BD.
+     * @throws RequeteException       Exception générique des requêtes sur la BD.
      */
     static function getRecetteById ($id)
     {
@@ -31,6 +31,7 @@ class RequettesRecette
      * Renvoie la liste des recettes de la plus récente à la plus ancienne.
      *
      * @return bool|array  La liste des recettes ou false.
+     * @throws RequeteException
      */
     static function getLastRecettes ()
     {
@@ -55,6 +56,7 @@ class RequettesRecette
      * Renvoie la recette du moment (dernière recette à avoir atteint 15 burn ou sinon recette avec + de 15 burn est liké le plus réccement.
      *
      * @return bool|Recette  La recette du moment ou false.
+     * @throws RequeteException
      */
     static function getRecetteDuMoment ()
     {
@@ -89,7 +91,7 @@ class RequettesRecette
      * @param string $etapes               Les étapes pour realiser la recette.
      * @param string $image                Une image et/ou photo de la recette.
      * @return bool|mysqli_result          Retourne vrai si la recette a correctement été créée.
-     * @throws RequetteException           Exception générique des requêtes sur la BD.
+     * @throws RequeteException           Exception générique des requêtes sur la BD.
      */
     static function setNewRecette ($idCreateur, $nomRecette, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $etapes, $image)
     {

@@ -3,9 +3,9 @@
 /**
  * Classe qui regroupe les fonctions de requêtes liées à l'admin (création, suppresion d'utilisateur ...)
  *
- * Class RequettesAdmin
+ * Class RequetesAdmin
  */
-class RequettesAdmin
+class RequetesAdmin
 {
     /**
      * Ajoute un utilisateur à la BD et lui envoie un mail pour le prévenir de son nouveau compte et mdp.
@@ -14,17 +14,17 @@ class RequettesAdmin
      * @param string  $email       Le mail de l'utilisateur.
      * @param int     $isAdmin     Valeur pour déterminer si l'utilisateur est admin.
      * @return bool|mysqli_result  Echec/Succès.
-     * @throws RequetteException
+     * @throws RequeteException
      */
     public static function addUser ($pseudo, $email, $isAdmin = 0)
     {
         # Verification que le pseudo n'est pas déjà pris
-        if (!RequettesUtilisateur::pseudoIsAvailable($pseudo))
+        if (!RequetesUtilisateur::pseudoIsAvailable($pseudo))
             # TODO return message erreur
             return false;
 
         # Verification que le mail n'est pas déjà pris
-        if (!RequettesUtilisateur::mailIsAvailable($email))
+        if (!RequetesUtilisateur::mailIsAvailable($email))
             # TODO return message erreur
             return false;
 
@@ -57,7 +57,7 @@ class RequettesAdmin
      * @param string  $email      Le mail de l'utilisateur.
      * @param string  $raison     Raison de la suppression du compte.
      * @return bool               Echec/succès.
-     * @throws RequetteException  Exception générique des requêtes sur la BD.
+     * @throws RequeteException  Exception générique des requêtes sur la BD.
      */
     public static function deleteUser ($pseudo, $email, $raison)
     {

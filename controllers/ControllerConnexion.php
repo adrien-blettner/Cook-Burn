@@ -19,7 +19,7 @@ class ControllerConnexion extends Controller
 
     /**
      * @param $args
-     * @throws RequetteException
+     * @throws RequeteException
      */
     protected function init ($args)
     {
@@ -57,7 +57,7 @@ class ControllerConnexion extends Controller
             }
 
             # Tente la connection de l'utilisateur
-            $utilisateur = RequettesUtilisateur::connect($_POST['Pseudo'],$_POST['Mot_de_passe']);
+            $utilisateur = RequetesUtilisateur::connect($_POST['Pseudo'],$_POST['Mot_de_passe']);
 
             # Verification que la connection a réussie
             if ($utilisateur === False or $utilisateur == Utilisateur::$utilisateurNull)

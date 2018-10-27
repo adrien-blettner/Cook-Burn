@@ -64,7 +64,7 @@ class Tools
         return $pass;
     }
 
-    # TODO fix mdp en hash + html header
+
     /**
      * Fonction qui envoie un mail de type "création de compte".
      *
@@ -79,18 +79,17 @@ class Tools
         $message = '
         <html>
         <head>
-        <title>Création de votre compte</title>
         <style>
-        h1 { text-align: center; }
+        .tab { margin-left: 40px; }
         </style>
         </head>
         <body>
-        <hi>Félicitations et bienvenue chez cook and burn !</hi>
+        <h1>Félicitations et bienvenue chez cook and burn !</h1>
         <br>
         <p>Bravo vous possédez maintenant un compte chez Cook and Burn.</p>
         <p>Vous pouvez mainteant vous connecter avec:</p>
-        <p> - votre pseudo ( '. $pseudo .' ) ou email.</p>
-        <p> - votre mot de passe temporaire ( '. $password .' )</p>
+        <p class="tab">- votre pseudo ( '. $pseudo .' ) ou email.</p>
+        <p class="tab">- votre mot de passe temporaire ( '. $password .' )</p>
         <br>
         <b>Nous vous conseillons de changer votre mot de passe !</b>
         <br>
@@ -98,10 +97,12 @@ class Tools
         </body>
         </html>';
 
-        return mail($mail, $subject, $message);
+        $header = "Content-Type: text/html; charset=UTF-8\r\n";
+
+        return mail($mail, $subject, $message, $header);
     }
 
-    # TODO header html
+
     /**
      * Fonction qui envoie un mail de type "supression de compte".
      *
@@ -115,27 +116,29 @@ class Tools
         $message = '
         <html>
         <head>
-        <title>Création de votre compte</title>
         <style>
-        h1 { text-align: center; }
+        .tab { margin-left: 40px; }
         </style>
         </head>
         <body>
-        <hi>Votre compte à été suprimé !</hi>
+        <h1>Votre compte chez Cook and Burn à été suprimé !</h1>
         <br>
-        <p>Raison:</p>';
+        <b>Raison:</b>
+        <p class="tab">';
 
-        $message .= wordwrap($raison, 70, "<br />\n") . '
+        $message .= wordwrap($raison, 140, "</p>\n<p class=\"tab\">") . '</p>
         </body>
         </html>';
 
-        return mail($mail, $subject, $message);
+        $header = "Content-Type: text/html; charset=UTF-8\r\n";
+
+        return mail($mail, $subject, $message, $header);
     }
 
     /**
      * Fonction de développement pour afficher de manière "jolie" le contenu d'une variable pour test/vérif/débug.
      *
-     * TODO delete
+     * TODO en dernier : delete la fonction
      *
      * @param $var
      */

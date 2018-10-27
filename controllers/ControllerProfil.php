@@ -33,7 +33,7 @@ class ControllerProfil extends Controller
 
 
         $this->idMembre = $_SESSION['id'];
-        $utilisateur = RequettesUtilisateur::getUserByID($this->idMembre);
+        $utilisateur = RequetesUtilisateur::getUserByID($this->idMembre);
         $this->pseudo = $utilisateur->getPseudo();
         $this->mail = $utilisateur->getEmail();
     }

@@ -4,32 +4,32 @@ require 'formatPage.inc.php';
 start_page('creation', array('creationRecette.css'));
 ?>
     <script>
-        var count = 0;
+        let count = 0;
 
         function moveIngredient ()
         {
-            var name = "ingredient" + count.toString();
-            var nameList = name + "List";
+            let name = "ingredient" + count.toString();
+            let nameList = name + "List";
             name += "[]";
             count += 1;
 
-            var ligne = document.createElement("li");
+            let ligne = document.createElement("li");
             ligne.setAttribute("class", "LIIngredient");
             ligne.setAttribute("id", nameList);
 
-            var input1 = document.createElement("input");
+            let input1 = document.createElement("input");
             input1.setAttribute("name", name);
             input1.setAttribute("class", "ingredient");
             input1.setAttribute("value",document.getElementById("quantite").value);
             input1.readOnly = true;
 
-            var input2 = document.createElement("input");
+            let input2 = document.createElement("input");
             input2.setAttribute("name", name);
             input2.setAttribute("class", "ingredient");
             input2.setAttribute("value",document.getElementById("ingredient").value);
             input2.readOnly = true;
 
-            var remove = document.createElement("button");
+            let remove = document.createElement("button");
             remove.appendChild(document.createTextNode("x"));
             remove.setAttribute("type", "button");
             remove.setAttribute("onclick", "remove(\"" + nameList + "\");");
@@ -47,7 +47,7 @@ start_page('creation', array('creationRecette.css'));
 
         function remove($name)
         {
-            var li = document.getElementById($name);
+            let li = document.getElementById($name);
             li.parentNode.removeChild(li);
         }
     </script>

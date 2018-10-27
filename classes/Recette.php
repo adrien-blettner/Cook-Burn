@@ -1,7 +1,5 @@
 <?php
 
-# TODO WTF pk la description longue marche pas ??
-
 /**
  * Classe qui permet de créer un objet recette contenant tout les attibuts d'une recette.
  *
@@ -23,7 +21,7 @@ class Recette
 
     /**
      * Le nom du createur de la recette.
-     * @var int
+     * @var string
      */
     private $createur;
 
@@ -75,7 +73,7 @@ class Recette
      * Le constructeur de la classe.
      *
      * @param  int     $id                  L'id de la recette.
-     * @param  int     $createur            L'id du créateur de cette recette.
+     * @param  int     $idCreateur            L'id du créateur de cette recette.
      * @param  string  $nom                 Son nom.
      * @param  int     $nbConvives          Le nombre de convives.
      * @param  string  $descriptionCourte   La description courte de la recette.
@@ -84,12 +82,16 @@ class Recette
      * @param  string  $imageURL            L'url de l'image.
      * @param  string  $etapes              La liste des étapes sous forme d'une chaîne.
      * @param  int     $burn                Le nombre de burns
+     * @throws RequeteException
      */
-    function __construct ($id, $createur, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn)
+    function __construct ($id, $idCreateur, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn)
     {
         $this->id          = $id;
-        # TODO getNOM du créateur plutôt que l'id !
-        $this->createur    = $createur;
+        # On obtient le nom de l'utilisateur par son id.
+        if ($idCreateur === null)
+            $this->createur = null;
+        else
+            $this->createur    = RequetesUtilisateur::getUserByID($idCreateur)->getPseudo();
         $this->nom         = $nom;
         $this->nbConvives  = $nbConvives;
         $this->descriptionCourte = $descriptionCourte;
@@ -105,14 +107,14 @@ class Recette
      *
      * @param  array    $dbRow  L'array extrait d'un résultat d'une requête sur la table RECETTE.
      * @return Recette
+     * @throws RequeteException
      */
     static function FromDBRow ($dbRow)
     {
         if ($dbRow == null)
             return Recette::$recetteVide;
         $id          = $dbRow ['ID'];
-        // TODO getUserByID
-        $createut    = $dbRow ['ID_CREATEUR'];
+        $idCreateur    = $dbRow ['ID_CREATEUR'];
         $nom         = $dbRow ['NOM'];
         $nbConvives  = $dbRow ['NB_CONIVES'];
         $descriptionCourte = $dbRow ['DESCRIPTION_COURTE'];
@@ -121,7 +123,7 @@ class Recette
         $imageURL    = $dbRow ['IMAGE_URL'];
         $etapes      = $dbRow ['ETAPES'];
         $burn        = $dbRow ['BURN'];
-        return new Recette ($id, $createut, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn);
+        return new Recette ($id, $idCreateur, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn);
     }
 
     /**

@@ -3,8 +3,8 @@
 /**
  * Cette classe ne rajoute rien à Exception mais permet une meilleur gestion et affichage des exceptions.
  *
- * Class RequetteException
+ * Class RequeteException
  */
-class RequetteException extends Exception
+class RequeteException extends Exception
 {
 }

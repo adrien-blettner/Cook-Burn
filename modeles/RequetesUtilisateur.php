@@ -3,9 +3,9 @@
 /**
  * Classe qui regroupe les requêtes liées aux actions réalisable par l'utilisateur.
  *
- * Class RequettesUtilisateur
+ * Class RequetesUtilisateur
  */
-class RequettesUtilisateur
+class RequetesUtilisateur
 {
     /**
      * Renvoie l'utilisateur lié au pseudo/email et mot de passe, sinon renvoi un boolean == false
@@ -13,7 +13,7 @@ class RequettesUtilisateur
      * @param string  $user
      * @param string  $pass
      * @return bool|Utilisateur
-     * @throws RequetteException
+     * @throws RequeteException
      */
     public static function connect ($user, $pass)
     {
@@ -55,7 +55,7 @@ class RequettesUtilisateur
      *
      * @param int $id             L'id de l'utilisateur recherché.
      * @return Utilisateur        L'utilisateur correspondant ou un utilisateur vide.
-     * @throws RequetteException
+     * @throws RequeteException
      */
     public static function getUserByID ($id)
     {
@@ -81,7 +81,7 @@ class RequettesUtilisateur
      * @param int     $id         L'id du membre.
      * @param string  $newPseudo  Le nouveau pseudo.
      * @return string|bool               Echec/succès.
-     * @throws RequetteException  Exception générique des requêtes sur la BD.
+     * @throws RequeteException  Exception générique des requêtes sur la BD.
      */
     public static function updatePseudo ($id, $newPseudo)
     {
@@ -104,7 +104,7 @@ class RequettesUtilisateur
      * @param int     $id         L'id du membre.
      * @param string  $newMail    Le nouveau mail.
      * @return string|bool        Echec/succès/Message d'erreur.
-     * @throws RequetteException  Exception générique des requêtes sur la BD.
+     * @throws RequeteException  Exception générique des requêtes sur la BD.
      */
     public static function updateEMail ($id, $newMail)
     {
@@ -127,7 +127,7 @@ class RequettesUtilisateur
      * @param int     $id           L'id du membre.
      * @param string  $newPassword  Le nouveau mot de passe.
      * @return bool                 Echec/succès.
-     * @throws RequetteException    Exception générique des requêtes sur la BD.
+     * @throws RequeteException    Exception générique des requêtes sur la BD.
      */
     public static function updatePassword ($id, $newPassword)
     {
@@ -146,7 +146,7 @@ class RequettesUtilisateur
      *
      * @param string $mailToTest    Le pseudo à test.
      * @return bool                 Résultat.
-     * @throws RequetteException    Exception générique des requêtes sur la BD.
+     * @throws RequeteException    Exception générique des requêtes sur la BD.
      */
     public static function mailIsAvailable ($mailToTest)
     {
@@ -166,7 +166,7 @@ class RequettesUtilisateur
      *
      * @param string $pseudoToTest  Le pseudo à test.
      * @return bool                 Résultat.
-     * @throws RequetteException    Exception générique des requêtes sur la BD.
+     * @throws RequeteException    Exception générique des requêtes sur la BD.
      */
     public static function pseudoIsAvailable ($pseudoToTest)
     {

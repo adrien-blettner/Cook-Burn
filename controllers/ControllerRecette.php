@@ -19,7 +19,7 @@ class ControllerRecette extends Controller
 
     public function init ($id)
     {
-        $this->recette = RequettesRecette::getRecetteById($id);
+        $this->recette = RequetesRecette::getRecetteById($id);
 
         # Si la recette demandée n'est pas valide / existante, on redirige vers la liste des recettes.
         if ($id === null or $this->recette == Recette::$recetteVide)
