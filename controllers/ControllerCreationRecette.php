@@ -7,11 +7,11 @@ class ControllerCreationRecette extends Controller
 {
     public function init ($id)
     {
-        if (!isset($_SESSION['isConnected']) or $_SESSION['isConnected'] === false)
+        if (!Session::isConnected())
             Tools::redirectToConnexion($_GET['url'], 'Vous devez être connecté pour accéder à votre profil.');
 
-        Tools::betterDump($_POST);
-
+        # TODO modif pour créer ET modifier recette
+        # TODO si modif recette vérifier l'id ou si il est admin
 
         if (isset($_POST['action']) && $_POST['action'] == 'Poster recette')
         {

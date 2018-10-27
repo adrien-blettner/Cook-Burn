@@ -25,13 +25,13 @@ class ControllerConnexion extends Controller
     {
         Session::disconnect();
 
-        # Prépare la page suivante
-        $this->pageSuivante = '/profil';
+        # Prépare la page suivante (par défaut renvoie à l'accueil).
+        $this->pageSuivante = '/';
         if (isset($_POST['pageSuivante']))
             $this->pageSuivante = $_POST['pageSuivante'];
 
         # Si la personne est déjà connecté, rallonge la session (car action prouve activité) et redrige immédiatement
-        if ($_SESSION['isConnected'] == true)
+        if (Session::isConnected())
         {
             Session::extendSessionLife();
             header('location: ' . $this->pageSuivante);

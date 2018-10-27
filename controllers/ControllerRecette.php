@@ -25,7 +25,7 @@ class ControllerRecette extends Controller
         if ($id === null or $this->recette == Recette::$recetteVide)
             header('location: /#conteneurRecettes');
 
-        if ($this->recette->getBurn() < 10 and $_SESSION['role'] == 'visiteur')
+        if ($this->recette->getBurn() < 10 and !Session::isConnected())
         {
             $url = '/recette/' . $id;
             Tools::redirectToConnexion($url, 'Vous devez être connecté pour voir cette recette !');

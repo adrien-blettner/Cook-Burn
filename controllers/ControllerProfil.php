@@ -25,7 +25,7 @@ class ControllerProfil extends Controller
 
     public function init ($args)
     {
-        if (!$_SESSION['isConnected'] or $_SESSION['isConnected'] === false)
+        if (!Session::isConnected())
             Tools::redirectToConnexion($_GET['url'], 'Vous devez être connecté pour accéder à votre profil !');
 
         if (isset($_POST['action']) and $_POST['action'] == 'maj')

@@ -5,7 +5,7 @@
                 <li><a href="/profil">Profil</a></li>
                 <li id="CreationReponsive"><a href="/creationRecette">Créer une recette</a></li>
                 <?php
-                if (!isset($_SESSION['isConnected']) or $_SESSION['isConnected'] === false)
+                if (!Session::isConnected())
                     echo "\t\t\t\t" . '<li><a href="/connexion">Connexion</a></li>';
                 else
                     echo '<li>

@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Classe qui ajoute des fonctions pour gérer la session.
+ * Classe wrapper qui ajoute des fonctions pour gérer la session.
+ * Ce n'est pas un wrapper réutilisable dans un autre projet, les variables créer sont spécifique à notre projet (id, role ...).
  *
  * Inspiration:
  * https://blog.teamtreehouse.com/how-to-create-bulletproof-sessions
@@ -169,5 +170,23 @@ class Session
     public static function extendSessionLife ()
     {
         $_SESSION['expiration'] = time() + (60*60);
+    }
+
+    /**
+     * Test si l'utilisateur est connecté avec un compte.
+     * @return  bool  Vrai si l'utilisateur est connecté, faux sinon.
+     */
+    public static function isConnected ()
+    {
+        return (isset($_SESSION['isConnected']) and $_SESSION['isConnected'] === true);
+    }
+
+    /**
+     * Test si l'utilisateur est connecté et admin.
+     * @return  bool  Vrai si l'utilisateur est connecté et admin.
+     */
+    public static function isAdmin ()
+    {
+        return (self::isConnected() and $_SESSION['role'] == 'admin');
     }
 }

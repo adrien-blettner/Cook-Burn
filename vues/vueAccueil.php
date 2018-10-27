@@ -29,12 +29,10 @@ start_page('accueil', array('accueil.css'));
     <div class="recettes">
         <h1>Liste des recettes</h1>
         <div id="conteneurRecettes">
-                <?php foreach ($lastRecettes as $recettes)
+                <?php foreach ($lastRecettes as $recette)
                 {
-                    if ($recettes->getBurn() < 10 and $_SESSION['role'] == 'visiteur') /* ne pas afficher les recettes de moins de 10 burn aux visiteurs */
-                        continue;
-                    echo '<div class="recetteContenue">' ,'<p>' , $recettes->getNom() , '</p>' , '<a href="/recette/' , $recettes->getId() ,'"><img src="' , $recettes->getImageUrl() , '" alt="bug_imgRecettes"/></a>' ,
-                    '<p>' , 'Burns : ' ,$recettes->getBurn() , '</p>' , '<p>' , $recettes->getDescriptionCourte() , '</p>' , '</div>' , PHP_EOL;
+                    echo '<div class="recetteContenue">' ,'<p>' , $recette->getNom() , '</p>' , '<a href="/recette/' , $recette->getId() ,'"><img src="' , $recette->getImageUrl() , '" alt="bug_imgRecettes"/></a>' ,
+                    '<p>' , 'Burns : ' ,$recette->getBurn() , '</p>' , '<p>' , $recette->getDescriptionCourte() , '</p>' , '</div>' , PHP_EOL;
                 }
                 ?>
         </div>

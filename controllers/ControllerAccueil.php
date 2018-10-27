@@ -19,13 +19,22 @@ class ControllerAccueil extends Controller
 
     protected function init ($args)
     {
-        # Récupère la recette du moment.
-        $this->recetteDuMoment = RequettesRecette::getRecetteDuMoment();
-        # Récupère la liste de recettes.
-        $this->lastRecettes = RequettesRecette::getLastRecettes();
+        # Si on a cliquer sur le bouton "Déconnexion", on déconnecte la session.
         if (ISSET($_POST['action']) && $_POST['action'] = 'Déconnexion') {
             Session::disconnect();
         }
+
+        # Récupère la recette du moment.
+        $this->recetteDuMoment = RequettesRecette::getRecetteDuMoment();
+
+        # Récupère la liste de recettes.
+        $this->lastRecettes = RequettesRecette::getLastRecettes();
+
+        # Si l'utilisateur n'est pas connecté, on chache les recettes de moins de 10 burns.
+        if (!Session::isConnected())
+            foreach ($this->lastRecettes as $recette)
+                if ($recette->getBurn() < 10)
+                    unset ($this->lastRecettes[array_search($recette, $this->lastRecettes)]);
     }
 
     protected function render ()
