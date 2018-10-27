@@ -1,7 +1,7 @@
 <?php
 
 /**
- * # TODO
+ * Classe qui regroupe les fonctions de requêtes liées à l'admin (création, suppresion d'utilisateur ...)
  *
  * Class RequettesAdmin
  */
@@ -10,9 +10,9 @@ class RequettesAdmin
     /**
      * Ajoute un utilisateur à la BD et lui envoie un mail pour le prévenir de son nouveau compte et mdp.
      *
-     * @param string  $pseudo           # TODO
-     * @param string  $email        # TODO
-     * @param int     $isAdmin     # TODO
+     * @param string  $pseudo      Le pseudo du nouvelle utilisateur
+     * @param string  $email       Le mail de l'utilisateur.
+     * @param int     $isAdmin     Valeur pour déterminer si l'utilisateur est admin.
      * @return bool|mysqli_result  Echec/Succès.
      * @throws RequetteException
      */
@@ -36,11 +36,11 @@ class RequettesAdmin
 
         # Créer le mot de passe aléatoire -> même l'admin ne le connait pas
         $password = Tools::randomPassword(12);
-        $password = password_hash($password, PASSWORD_BCRYPT);
+        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
         $requete = 'INSERT INTO MEMBRE (PSEUDO, EMAIL, PASSWORD, IS_ADMIN) VALUES (?,?,?,?)';
         $types = 'sssi';
-        $values = [$pseudo, $email, $password, $isAdmin];
+        $values = [$pseudo, $email, $passwordHash, $isAdmin];
 
         $succes = Requetes::requeteSecuriseeSurBD($requete, $types, $values, true);
 

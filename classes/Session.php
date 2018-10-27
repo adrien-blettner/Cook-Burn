@@ -6,6 +6,14 @@
  * Inspiration:
  * https://blog.teamtreehouse.com/how-to-create-bulletproof-sessions
  *
+ * Rappel de nos variables de session :
+ *  - isConnected :  bool    Vrai si connecté faux sinon;
+ *  - id :           int     L'id de l'utilisateur, -1 si pas connecté.
+ *  - pseudo :       string  Le peseudo de l'utilisateur
+ *  - role :         string  Le role de l'utilisateur : 'visiteur' (pas connecté), simple 'membre' ou 'admin'.
+ *  - adresseIP      string  Adresse ip de l'utilisateur (combinée à l'user agent pour vérifier identité).
+ *  - userAgent      string  La "plaque d'immtriculation" de l'utilisateur (navigateur, système d'exploitation ...).
+ *
  * Class Session  La classe.
  */
 class Session

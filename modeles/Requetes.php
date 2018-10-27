@@ -7,7 +7,16 @@
  */
 class Requetes
 {
+    /**
+     * Connection avec droit d'écriture et de lecture sur la BD.
+     * @var mysqli
+     */
     private static $connectionEcriture;
+
+    /**
+     * Connection avec seulement les droits d'écriture sur la BD.
+     * @var mysqli
+     */
     private static $connectionLecture;
     # TODO voir si on stock les prepared statement dans un cache pour + de vitesse ?
 
@@ -73,6 +82,7 @@ class Requetes
      */
     public static function requeteSecuriseeSurBD ($requete, $types = null, $valeurs = null, $ecriture = false)
     {
+        # TODO vérif si c'est une bonne idée
         # Petite vérif qui va regarder si la requête commence par UPDATE, DELETE ou INSERT
         # Si c'est vrai alors on force la virable écriture à vrai car on a besoin de modifier des données dans la BD
         # Note: c'est une faible sécurité qui ne doit pas remplacer une bonne écriture du code ni penser à demandé le droit d'écriture si besoin.

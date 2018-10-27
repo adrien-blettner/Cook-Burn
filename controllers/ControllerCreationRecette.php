@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Class ControllerCreationRecette
+ */
 class ControllerCreationRecette extends Controller
 {
     public function init ($id)

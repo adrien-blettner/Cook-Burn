@@ -1,62 +1,56 @@
 <?php
 
+/**
+ * La page index.php sert de "page de redirection": elle va charger la page demander à l'aide du routeur.
+ * Toutesles requêtes sont redirigées vers index.php par le fichier .htaccess
+ */
+
+
 require_once 'classes/AutoLoader.php';
 
-# On charge l'autoloader
+# On charge l'autoloader, qui va se charger de requireles classes quand ont en a besoin (plus besoin de spécifier les require sauf pour les vues).
 AutoLoader::register();
 
-# Partie initialisation de session (commune pour toute les pages du coup)
+# Partie initialisation de session (commune pour toute les pages du coup).
 Session::initSession();
 
 try {
+    # On créer un nouveau routeur.
     $routeur = new Routeur ();
 
-    # Ajout de la route vers '/' ou ' ' -> acceuil
+    # Route vers la page d'accueil.
     $routeur->ajouterRoute ('/', ['GET', 'POST'], function (){
-        new ControllerAccueil(null);
+        new ControllerAccueil();
     });
 
-    # Ajout de la route vers /profil ->  le profil
+    # La page de profil.
     $routeur->ajouterRoute ('/profil', ['GET','POST'], function () {
-        new ControllerProfil(null);
+        new ControllerProfil();
     });
 
-    # TODO remove this temp
-    $routeur->ajouterRoute('process_formulaire', 'POST', function () {
-       require_once 'modeles/process_formulaire.php';
-    });
-
+    # Page de connxion.
     $routeur->ajouterRoute ('/connexion', ['GET','POST'], function () {
-        new ControllerConnexion (null);
+        new ControllerConnexion ();
     });
 
+    # Route versla partie admin TODO faire la page admin
     $routeur->ajouterRoute ('/admin', 'GET', function () {
-       echo 'admin !';
-       #TODO page admin
+       new ControllerAdmin();
     });
 
-    # Ajout de la route vers /recettes -> page avec toutes les recettes
-    $routeur->ajouterRoute ('/recette', 'GET', function () {
-        new ControllerRecette(null);
-    });
-
-    # Ajoute la route vers /recettes/(id de recette) -> page de recette
+    # Page de recette liée à l'id demandé.
     $routeur->ajouterRoute ('/recette/:id', 'GET', function ($id) {
         new ControllerRecette($id);
     });
 
+    # Route vers la page d'inscription TODO modif en page d'ajout de membre par admin
     $routeur->ajouterRoute ('/inscription', 'GET', function (){
-        new ControllerInscription(null);
+        new ControllerInscription();
     });
 
-    # TODO remove this temp
-    $routeur->ajouterRoute('/modeles/process_formulaire','POST', function (){
-        require 'modeles/process_formulaire.php';
-    });
-
-    # Ajout de la route vers /creationRecette -> page avec le formulaire de création de recette
+    # Page de création de requête
     $routeur->ajouterRoute ('/creationRecette', ['GET','POST'], function () {
-        new ControllerCreationRecette(null);
+        new ControllerCreationRecette();
     });
 
     # Lance le routeur

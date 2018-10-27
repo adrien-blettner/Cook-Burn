@@ -1,17 +1,29 @@
 <?php
 
+/**
+ * Class ControllerRecette
+ */
 class ControllerRecette extends Controller
 {
+    /**
+     * L'id de la recette.
+     * @var int
+     */
     private $id;
+
+    /**
+     * La recette demandée.
+     * @var Recette
+     */
     private $recette;
 
     public function init ($id)
     {
         $this->recette = RequettesRecette::getRecetteById($id);
 
-        # Si la recette demandée n'est pas valide / existante, on redirige vers la liste des recettes
+        # Si la recette demandée n'est pas valide / existante, on redirige vers la liste des recettes.
         if ($id === null or $this->recette == Recette::$recetteVide)
-            header('location: /recette');
+            header('location: /#conteneurRecettes');
 
         if ($this->recette->getBurn() < 10 and $_SESSION['role'] == 'visiteur')
         {

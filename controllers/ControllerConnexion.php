@@ -1,8 +1,20 @@
 <?php
 
+/**
+ * Class ControllerConnexion
+ */
 class ControllerConnexion extends Controller
 {
+    /**
+     * Le message d'erreur à afficher (si il existe).
+     * @var string
+     */
     private $messageErreur;
+
+    /**
+     * L'url où l'on redirige l'utilisateur après connexion.
+     * @var string
+     */
     private $pageSuivante;
 
     /**
@@ -57,6 +69,7 @@ class ControllerConnexion extends Controller
             Session::connect($utilisateur);
 
             # Redirige vers la page suivante
+
             header('location: ' . $this->pageSuivante);
 
         }

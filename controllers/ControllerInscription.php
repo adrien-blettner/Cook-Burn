@@ -1,6 +1,8 @@
 <?php
 
-# Controller de la page d'inscription
+/**
+ * Class ControllerInscription
+ */
 class ControllerInscription extends  Controller
 {
     protected function init ($args)

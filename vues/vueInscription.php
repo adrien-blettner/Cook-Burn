@@ -8,7 +8,8 @@ start_page ('Inscription', array ('formulaire.css'))
 
     <h2 id="inscriptionTitre">Inscription</h2>
     <div class="inscriptionConnexionDiv">
-        <form action="/modeles/process_formulaire.php" method="post" class="inscriptionConnexionForm"><br>
+        <!-- todo action et modif en creation compte par admin-->
+        <form action="" method="post" class="inscriptionConnexionForm"><br>
             <fieldset class="inscriptionConnexionFieldset">
                 <input type="text" name="Pseudo" placeholder="Pseudo"/></br>
 
