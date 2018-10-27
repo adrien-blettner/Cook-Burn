@@ -34,6 +34,7 @@ class Tools
         </body>
         </html>
         <?php
+        exit();
     }
 
     /**

@@ -23,7 +23,10 @@ class ControllerRecette extends Controller
 
         # Si la recette demandée n'est pas valide / existante, on redirige vers la liste des recettes.
         if ($id === null or $this->recette == Recette::$recetteVide)
+        {
             header('location: /#conteneurRecettes');
+            exit();
+        }
 
         if ($this->recette->getBurn() < 10 and !Session::isConnected())
         {
