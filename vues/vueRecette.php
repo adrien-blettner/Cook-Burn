@@ -16,20 +16,31 @@ start_page ($recette->getNOM(), array ('recette.css'));
         <p class="inline"><?php echo 'Burns: ' . $recette->getBurn();?></p>
         <p> <?php echo $recette->getDescriptionLongue();?> </p>
         <p>Ingrédients:</p>
-        <ol >
+        <ul>
             <?php
-            foreach ($recette->getIngredients() as $ingredient)
-                echo "\t\t\t\t". '<li>' . $ingredient . '</li>' . PHP_EOL;
+            foreach (explode('|', $recette->getIngredients()) as $ingredient)
+            {
+                $ingredient = explode('Δ', $ingredient);
+                echo "\t\t\t\t". '<li>' . $ingredient[1] . ' : ' . $ingredient[0] . '</li>' . PHP_EOL;
+            }
             ?>
-        </ol>
+        </ul>
         <p>Étapes:</p>
         <ol>
             <?php
-            foreach ($recette->getEtapes() as $etapes)
+            foreach (explode('|', $recette->getEtapes()) as $etapes)
                 echo "\t\t\t\t". '<li>' . $etapes . '</li>' . PHP_EOL;
             ?>
         </ol>
     </div>
+    <?php
+        if (Session::isAdmin() or Session::getID() == $recette->getIDCreateur())
+        {
+            echo '<form method="post" action="/editeur-de-recette/editer">';
+            echo '<button name="idEditer" value="'.$recette->getId().'">éditer la recette</button>';
+            echo '</form>';
+        }
+    ?>
 </div>
 
 <?php

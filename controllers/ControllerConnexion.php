@@ -25,51 +25,56 @@ class ControllerConnexion extends Controller
     {
         Session::disconnect();
 
-        # Prépare la page suivante (par défaut renvoie à l'accueil).
+        // Prépare la page suivante (par défaut renvoie à l'accueil).
         $this->pageSuivante = '/';
         if (isset($_POST['pageSuivante']))
             $this->pageSuivante = $_POST['pageSuivante'];
 
-        # Si la personne est déjà connecté, rallonge la session (car action prouve activité) et redrige immédiatement
+        // Récupère le message d'erreur à afficher s'il y en à un.
+        if (!isset($_POST['messageErreur']))
+            $this->messageErreur = null;
+        else
+            $this->messageErreur = $_POST['messageErreur'];
+
+        // Si l'utilisateur est connecté mais qu'il à été redirigé vers la page de connection avec un message d'erreur, on le déconnecte.
+        // Par exemple si l'utilisateur (en manipulant une requête post) tente d'éditer une recette qui ne lui appartient pas il sera redirigé ici et donc déconnecté pour se connecté avec un compte adéquat.
+        if (Session::isConnected() and $this->messageErreur !== null)
+            Session::disconnect();
+
+        // Si la personne est déjà connecté, rallonge la session (car action prouve activité) et redrige immédiatement
         if (Session::isConnected()) {
             Session::extendSessionLife();
             header('location: ' . $this->pageSuivante);
             exit();
         }
 
-        # Vérifie s'il y a un message erreur à afficher
-        if (!isset($_POST['messageErreur']))
-            $this->messageErreur = null;
-        else
-            $this->messageErreur = $_POST['messageErreur'];
-
-        # Si il n'y a rien à faire on quitte
+        // Si il n'y a rien à faire on quitte
         if (!isset($_POST['action']))
             return;
 
-        # Traitement de la connection
+        // Traitement de la connection
         if ($_POST['action'] == 'connexion') {
-            # Vérification que tout les champs sont remplie
+            // Vérification que tout les champs sont remplie
             if (!isset($_POST['Pseudo'], $_POST['Mot_de_passe']) or $_POST['Pseudo'] == "" or $_POST['Mot_de_passe'] == "") {
                 Tools::redirectToConnexion($this->pageSuivante, 'Veuillez remplir tout les champs.');
             }
 
-            # Tente la connection de l'utilisateur
+            // Tente la connection de l'utilisateur
             $utilisateur = RequetesUtilisateur::connect($_POST['Pseudo'], $_POST['Mot_de_passe']);
 
-            # Verification que la connection a réussie
+            // Verification que la connection a réussie
             if ($utilisateur === False or $utilisateur == Utilisateur::$utilisateurNull) {
                 Tools::redirectToConnexion($this->pageSuivante, 'Pseudo ou email et/ou mot de passe invalide.');
             }
 
-            # Assigne les nouvelle variable de session
+            // Assigne les nouvelle variable de session
             Session::connect($utilisateur);
 
-            # Redirige vers la page suivante
+            // Redirige vers la page suivante
 
             header('location: ' . $this->pageSuivante);
             exit();
-        } # Retour à l'accueil
+        } // Retour à l'accueil
         elseif ($_POST['action'] == 'Retour')
         {
             header('location: /');

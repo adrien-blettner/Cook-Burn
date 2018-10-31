@@ -18,8 +18,6 @@ class Requetes
      * @var mysqli
      */
     private static $connectionLecture;
-    # TODO voir si on stock les prepared statement dans un cache pour + de vitesse ?
-
 
     /**
      * Renvoie la connection avec droit d'écriture
@@ -80,16 +78,17 @@ class Requetes
      * @return  bool|mysqli_result              Le résultat de la requête ou vrai si MàJ ou faux si échec.
      * @throws  RequeteException               Exception générique des requêtes sur la BD.
      */
-    public static function requeteSecuriseeSurBD ($requete, $types = null, $valeurs = null, $ecriture = false)
+    public static function requeteSecuriseeSurBD ($requete, $types = null, $valeurs = null, $ecriture = false, &$returnID = null)
     {
-        # TODO vérif si c'est une bonne idée
-        # Petite vérif qui va regarder si la requête commence par UPDATE, DELETE ou INSERT
-        # Si c'est vrai alors on force la virable écriture à vrai car on a besoin de modifier des données dans la BD
-        # Note: c'est une faible sécurité qui ne doit pas remplacer une bonne écriture du code ni penser à demandé le droit d'écriture si besoin.
-        #       de plus si il y a un espace ça ne marche pas
-        foreach (['UPDATE, INSERT, DELETE'] as $needle)
-            if (strpos(strtoupper($requete), $needle) === 0)
-                $ecriture = true;
+        /* Vérification que le droit d'écriture est bien demandé si on à un requête qui modifie des données.
+         *
+         * Note 1 : cette fonction ne doit pas remplacer un appel correct de la fonction avec le droit d'écriture correspondant à la requête.
+         * note 2 : De plus la vérification est sensible à la casse: si la requête commence par un espace ça ne marchera pas
+         */
+        if ($ecriture == false)
+            foreach (['UPDATE, INSERT, DELETE'] as $needle)
+                if (strpos(strtoupper($requete), $needle) === 0)
+                    $ecriture = true;
 
         $connection = self::getConnection($ecriture);
 
@@ -114,6 +113,8 @@ class Requetes
         if ($stmt->affected_rows > 0)
         {
             $resultat = true;
+            if ($returnID !== null)
+                $returnID = mysqli_insert_id($connection);
         }
         # Partie si on a un select réussi.
         else

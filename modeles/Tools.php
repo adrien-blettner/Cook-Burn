@@ -50,6 +50,15 @@ class Tools
     }
 
     /**
+     * Fonction qui redirige vers l'accueil.
+     */
+    public static function redirectToHome ()
+    {
+        header('location: /');
+        exit();
+    }
+
+    /**
      * Fonction qui génère un mot de passe aléatoire d'una taille donnée (8 par défaut)  (fonction utile pour l'admin pour ajouter un nouveau compte).
      *
      * @param int $lenght
@@ -148,5 +157,21 @@ class Tools
         echo '<pre>';
         print_r($var);
         echo '</pre>';
+    }
+
+    /**
+     * TODO en dernier : delete la fonction
+     */
+    public static function activerModeParano () {
+        function errHandle($errNo, $errStr, $errFile, $errLine) {
+            $msg = "$errStr in $errFile on line $errLine";
+            if ($errNo == E_NOTICE || $errNo == E_WARNING) {
+                throw new ErrorException($msg, $errNo);
+            } else {
+                echo $msg;
+            }
+        }
+
+        set_error_handler('errHandle');
     }
 }

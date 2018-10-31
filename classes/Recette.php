@@ -26,6 +26,12 @@ class Recette
     private $createur;
 
     /**
+     * L'id du createur de la recette.
+     * @var int
+     */
+    private $idCreateur;
+
+    /**
      * Le nombre de convives prévus.
      * @var int
      */
@@ -44,8 +50,8 @@ class Recette
     private $descriptionLongue;
 
     /**
-     * La liste des ingrédients nécessaires.
-     * @var array
+     * La liste des ingrédients nécessaires sous forme de chaîne.
+     * @var string
      */
     private $ingredients;
 
@@ -56,8 +62,8 @@ class Recette
     private $imageURL;
 
     /**
-     * La liste des étapes nécessaires.
-     * @var array
+     * La liste des étapes nécessaires sous forme de chaîne.
+     * @var string
      */
     private $etapes;
 
@@ -86,20 +92,33 @@ class Recette
      */
     function __construct ($id, $idCreateur, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn)
     {
-        $this->id          = $id;
+        $this->id = $id;
         # On obtient le nom de l'utilisateur par son id.
-        if ($idCreateur === null)
+        if ($idCreateur === null) {
             $this->createur = null;
-        else
-            $this->createur    = RequetesUtilisateur::getUserByID($idCreateur)->getPseudo();
+            $this->idCreateur = null;
+        } else
+        {
+            $this->createur = RequetesUtilisateur::getUserByID($idCreateur)->getPseudo();
+            $this->idCreateur = $idCreateur;
+        }
         $this->nom         = $nom;
         $this->nbConvives  = $nbConvives;
         $this->descriptionCourte = $descriptionCourte;
         $this->descriptionLongue = $descriptionLongue;
-        $this->ingredients = explode ('↨', $ingredients);
+
+        if (!is_string($ingredients))
+            $this->ingredients = $this->formatIngredientsToString($ingredients);
+        else
+            $this->ingredients = $ingredients;
+
+        if (!is_string($etapes))
+            $this->etapes = $this->formatEtapeToString($etapes);
+        else
+            $this->etapes = $etapes;
+
         $this->imageURL    = $imageURL;
-        $this->etapes      = explode ('↨', $etapes);
-        $this->burn        = $burn;
+        $this->burn = $burn;
     }
 
     /**
@@ -116,7 +135,7 @@ class Recette
         $id          = $dbRow ['ID'];
         $idCreateur    = $dbRow ['ID_CREATEUR'];
         $nom         = $dbRow ['NOM'];
-        $nbConvives  = $dbRow ['NB_CONIVES'];
+        $nbConvives  = $dbRow ['NB_CONVIVES'];
         $descriptionCourte = $dbRow ['DESCRIPTION_COURTE'];
         $descriptionLongue = $dbRow ['DESCRIPTION_LONGUE'];
         $ingredients = $dbRow ['INGREDIENTS'];
@@ -124,6 +143,50 @@ class Recette
         $etapes      = $dbRow ['ETAPES'];
         $burn        = $dbRow ['BURN'];
         return new Recette ($id, $idCreateur, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn);
+    }
+
+    /**
+     * Fonction qui prend une liste d'étapes issue d'un formulaire de creation/édition de recette et le format en string.
+     *
+     * @param   null|array  $etapes  La liste des ingredients.
+     * @return  bool|null|string          La chaine formatée (FALSE si une erreur survient ou une chaine vide, ou null si $ingredients null)
+     */
+    private function formatEtapeToString ($etapes)
+    {
+        if ($etapes === null)
+            return null;
+
+        $result = "";
+        foreach ($etapes as $etape) {
+            $etape = htmlspecialchars($etape, ENT_QUOTES, 'UTF-8');
+            $etape = str_replace('|', '', $etape);
+            $result .= $etape . '|';
+        }
+        return substr($result, 0, -1);
+    }
+
+    /**
+     * Fonction qui prend une liste d'ingrédients issue d'un formulaire de creation/édition de recette et le format en string.
+     *
+     * @param   null|array  $ingredients  La liste des ingredients.
+     * @return  bool|null|string          La chaine formatée (FALSE si une erreur survient ou une chaine vide, ou null si $ingredients null)
+     */
+    private function formatIngredientsToString ($ingredients)
+    {
+        if ($ingredients === null)
+            return null;
+
+        $result = "";
+        foreach ($ingredients as $arr) {
+            $arr[0] = htmlspecialchars($arr[0], ENT_QUOTES, 'UTF-8');
+            $arr[1] = htmlspecialchars($arr[1], ENT_QUOTES, 'UTF-8');
+            $arr[0] = str_replace('|', '', $arr[0]);
+            $arr[0] = str_replace('Δ', '', $arr[0]);
+            $arr[1] = str_replace('|', '', $arr[1]);
+            $arr[1] = str_replace('Δ', '', $arr[1]);
+            $result .= $arr[0] . 'Δ' . $arr[1] . '|';
+        }
+        return substr($result, 0, -1);
     }
 
     /**
@@ -190,7 +253,7 @@ class Recette
     /**
      * Renvoie la liste des ingrédients nécessaires.
      *
-     * @return  array
+     * @return  string
      */
     public function getIngredients()
     {
@@ -200,7 +263,7 @@ class Recette
     /**
      * Renvoie les étapes pour réaliser cette recette.
      *
-     * @return  array
+     * @return  string
      */
     public function getEtapes()
     {
@@ -236,6 +299,17 @@ class Recette
     {
         return $this->createur;
     }
+
+    /**
+     * Renvoie l'id du créateur.
+     *
+     * @return  string
+     */
+    public function getIDCreateur()
+    {
+        return $this->idCreateur;
+    }
 }
-// Initialise la recette static vide
+// Initialise la recette static vide.
+// On ignore l'exception car on passe des variables null et on sait que la requette ne sera pas éxécutée.
 Recette::$recetteVide = new Recette(null, null, null,null,null,null,null,null,null,null);

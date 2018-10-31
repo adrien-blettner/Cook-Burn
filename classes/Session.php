@@ -166,6 +166,7 @@ class Session
 
     /**
      * Rallonge la session d'une heure.
+     * TODO revoir son fonctionnement et quand doit elle être appelée
      */
     public static function extendSessionLife ()
     {
@@ -188,5 +189,10 @@ class Session
     public static function isAdmin ()
     {
         return (self::isConnected() and $_SESSION['role'] == 'admin');
+    }
+
+    public static function getID ()
+    {
+        return $_SESSION['id'];
     }
 }

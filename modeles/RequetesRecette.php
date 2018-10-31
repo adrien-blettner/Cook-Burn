@@ -14,7 +14,7 @@ class RequetesRecette
      * @return bool|Recette            La recette demandé ou false si non trouvée.
      * @throws RequeteException       Exception générique des requêtes sur la BD.
      */
-    static function getRecetteById ($id)
+    public static function getRecetteById ($id)
     {
         $result = Requetes::requeteSecuriseeSurBD('SELECT * FROM RECETTE WHERE ID = ?', 'i', $id);
 
@@ -33,7 +33,7 @@ class RequetesRecette
      * @return bool|array  La liste des recettes ou false.
      * @throws RequeteException
      */
-    static function getLastRecettes ()
+    public static function getLastRecettes ()
     {
         $result = Requetes::requeteSimpleSurBD('SELECT * FROM RECETTE ORDER BY LAST_BURN_UPDATE DESC');
 
@@ -58,7 +58,7 @@ class RequetesRecette
      * @return bool|Recette  La recette du moment ou false.
      * @throws RequeteException
      */
-    static function getRecetteDuMoment ()
+    public static function getRecetteDuMoment ()
     {
         $result = Requetes::requeteSimpleSurBD('SELECT * FROM RECETTE WHERE BURN = 15 ORDER BY LAST_BURN_UPDATE DESC');
         $recette = Recette::FromDbRow (mysqli_fetch_assoc($result));
@@ -82,25 +82,62 @@ class RequetesRecette
     /**
      * Ajoute une nouvelle recette à la bdd
      *
-     * @param int $idCreateur              L'id du créateur de la recette.
-     * @param string $nomRecette           Le nom de la nouvelle recette.
-     * @param int $nbConvives              Le nombre de convives de la recette.
-     * @param string $descriptionCourte    Une description de quelques caracteres.
-     * @param string $descriptionLongue    Une description plus longue.
-     * @param string $ingredients          La liste des ingrédients.
-     * @param string $etapes               Les étapes pour realiser la recette.
-     * @param string $image                Une image et/ou photo de la recette.
-     * @return bool|mysqli_result          Retourne vrai si la recette a correctement été créée.
-     * @throws RequeteException           Exception générique des requêtes sur la BD.
+     * @param Recette $recette
+     * @return array                       Retourne vrai si la recette a correctement été créée avec son id, faux et -1 sinon.
+     * @throws RequeteException            Exception générique des requêtes sur la BD.
      */
-    static function setNewRecette ($idCreateur, $nomRecette, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $etapes, $image)
+    public static function addRecette ($recette)
     {
-        $req = 'INSERT INTO RECETTE (ID_CREATEUR, NOM, NB_CONVIVES, DESCRIPTION_COURTE, DESCRIPTION_LONGUE, INGREDIENTS, ETAPES, BURN, IMAGE_URL, LAST_BURN_UPDATE) VALUES (?,?,?,?,?,?,?,0,?,0/0/0)';
-        $types = 'isisssss';
-        $values = [$idCreateur, $nomRecette, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $etapes, $image];
+        $req = 'INSERT INTO RECETTE (ID_CREATEUR, NOM, NB_CONVIVES, DESCRIPTION_COURTE, DESCRIPTION_LONGUE, INGREDIENTS, ETAPES, BURN, IMAGE_URL, LAST_BURN_UPDATE) VALUES (?,?,?,?,?,?,?,?,?,?)';
+        $types = 'isissssiss';
+        $values = [
+            $recette->getIDCreateur(),
+            $recette->getNom(),
+            $recette->getNbConvives(),
+            $recette->getDescriptionCourte(),
+            $recette->getDescriptionLongue(),
+            $recette->getIngredients(),
+            $recette->getEtapes(),
+            0,
+            $recette->getImageURL(),
+            '0000-00-00'
+        ];
 
-        $succes = Requetes::requeteSecuriseeSurBD($req, $types, $values, true);
+        $id = -1;
 
-        return $succes;
+        $succes = Requetes::requeteSecuriseeSurBD($req, $types, $values, true, $id);
+
+        return [$succes, $id];
+    }
+
+    /**
+     * Met à jour une recette
+     *
+     * @param Recette $recette
+     * @throws RequeteException
+     */
+    public static function updateRecette ($recette)
+    {
+        $requete = 'UPDATE RECETTE SET NOM=?,NB_CONVIVES=?,DESCRIPTION_COURTE=?,DESCRIPTION_LONGUE=?,INGREDIENTS=?,ETAPES=?';
+        $types = 'sissss';
+        $value = [
+            $recette->getNom(),
+            $recette->getNbConvives(),
+            $recette->getDescriptionCourte(),
+            $recette->getDescriptionLongue(),
+            $recette->getIngredients(),
+            $recette->getEtapes()
+        ];
+        if ($recette->getImageURL() !== null)
+        {
+            $requete .= ',IMAGE_URL=?';
+            $types .= 's';
+            array_push($value, $recette->getImageURL());
+        }
+        $requete .= ' WHERE ID=?';
+        $types .= 'i';
+        array_push($value, $recette->getId());
+
+        Requetes::requeteSecuriseeSurBD($requete, $types, $value, true);
     }
 }

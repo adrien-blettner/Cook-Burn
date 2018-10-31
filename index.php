@@ -8,52 +8,52 @@
 
 require_once 'classes/AutoLoader.php';
 
-# On charge l'autoloader, qui va se charger de requireles classes quand ont en a besoin (plus besoin de spécifier les require sauf pour les vues).
+// On charge l'autoloader, qui va se charger de requireles classes quand ont en a besoin (plus besoin de spécifier les require sauf pour les vues).
 AutoLoader::register();
 
-# Partie initialisation de session (commune pour toute les pages du coup).
+// Partie initialisation de session (commune pour toute les pages du coup).
 Session::initSession();
 
 try {
-    # On créer un nouveau routeur.
+    // On créer un nouveau routeur.
     $routeur = new Routeur ();
 
-    # Route vers la page d'accueil.
+    // Route vers la page d'accueil.
     $routeur->ajouterRoute ('/', ['GET', 'POST'], function (){
         new ControllerAccueil();
     });
 
-    # La page de profil.
+    // La page de profil.
     $routeur->ajouterRoute ('/profil', ['GET','POST'], function () {
         new ControllerProfil();
     });
 
-    # Page de connxion.
+    // Page de connxion.
     $routeur->ajouterRoute ('/connexion', ['GET','POST'], function () {
         new ControllerConnexion ();
     });
 
-    # Route versla partie admin TODO faire la page admin
+    // Route versla partie admin TODO faire la page admin
     $routeur->ajouterRoute ('/admin', 'GET', function () {
        new ControllerAdmin();
     });
 
-    # Page de recette liée à l'id demandé.
+    // Page de recette liée à l'id demandé.
     $routeur->ajouterRoute ('/recette/:id', 'GET', function ($id) {
         new ControllerRecette($id);
     });
 
-    # Route vers la page d'inscription TODO modif en page d'ajout de membre par admin
+    // Router vers la page qui va gérer l'édition et la cration de recette.
+    $routeur->ajouterRoute('/editeur-de-recette/:action', ['GET','POST'], function ($action) {
+       new ControllerModificationRecette($action);
+    });
+
+    // Route vers la page d'inscription TODO modif en page d'ajout de membre par admin
     $routeur->ajouterRoute ('/inscription', 'GET', function (){
         new ControllerInscription();
     });
 
-    # Page de création de requête
-    $routeur->ajouterRoute ('/creationRecette', ['GET','POST'], function () {
-        new ControllerCreationRecette();
-    });
-
-    # Lance le routeur
+    // Lance le routeur
     $routeur->run();
 
 } catch (RouteurException $r) {

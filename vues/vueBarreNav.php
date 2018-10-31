@@ -18,7 +18,7 @@
         </li>
         <li id="C&B"> <a href="/">Cook & Burn</a></li>
         <li id="Recette"> <a href="/#conteneurRecettes">Recettes</a></li>
-        <li id="Creation"> <a href="/creationRecette">Créer une recette</a></li>
+        <li id="Creation"> <a href="/editeur-de-recette/creer">Créer une recette</a></li>
         <li id="rechercheLi">
             <form action="" id="rechercheForm" >
                 <label for="rechercheBouton"><input id="rechercheChamp" type="text" placeholder="Recherche..."/></label><input id="rechercheBouton" type="image" src="/vues/images/look.png" />
