@@ -2,6 +2,7 @@
 require 'formatPage.inc.php';
 
 start_page('accueil', array('accueil.css'));
+//TODO modif la class recettes en id et la redirection dans la barre de nav
 ?>
     <div class="banniereImg"></div>
     <div class="description">

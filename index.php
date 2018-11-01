@@ -46,6 +46,10 @@ try {
        new ControllerAdmin(2);
     });
 
+    $routeur->ajouterRoute('/recherche/:str', 'GET', function ($str) {
+       new ControllerRecherche($str);
+    });
+
     // Page de recette liée à l'id demandé.
     $routeur->ajouterRoute ('/recette/:id', 'GET', function ($id) {
         new ControllerRecette($id);

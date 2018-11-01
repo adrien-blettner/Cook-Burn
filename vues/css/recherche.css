@@ -1,0 +1,44 @@
+body {
+    background-color: #404040;
+}
+
+h1 {
+    font-size: x-large;
+}
+
+#container{
+    padding: 1% 0;
+    text-align: center;
+    font-size: 15px;
+    color: white;
+    background-color: #404040;
+}
+
+#container img{
+    width: 400px;
+    height: 250px;
+    border-radius: 50px;
+    border : 2px black solid;
+}
+
+/* FLEXBOX pour les recettes (DEBUT) */
+#recettes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.recetteContenue{
+    width: 36%;
+    border : 3px #d34836 solid;
+    border-radius: 150px;
+    margin:0 50px 75px 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #353535;
+}
+
+.recetteContenue p{
+    margin : 10px 25%;
+}

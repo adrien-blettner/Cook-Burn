@@ -30,7 +30,7 @@ class RequetesRecette
     /**
      * Renvoie la liste des recettes de la plus récente à la plus ancienne.
      *
-     * @return bool|array  La liste des recettes ou false.
+     * @return Recette[]  La liste des recettes ou false.
      * @throws RequeteException
      */
     public static function getLastRecettes ()
