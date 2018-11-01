@@ -3,11 +3,6 @@ require_once 'formatPage.inc.php';
 
 start_page ('Profil', array ('profil.css','rolesUtilisateur.css'));
 ?>
-        <script>
-            function show() {
-                document.getElementById("update").style.display = "block";
-            }
-        </script>
         <div id="profil">
             <div id="presentation_membre">
                 <div>
@@ -16,15 +11,14 @@ start_page ('Profil', array ('profil.css','rolesUtilisateur.css'));
                     <br>
                     <p class="info" >Mail: <? echo $mail; ?></p>
                     <br>
-                    <button onclick="show();">edit</button>
+                    <form method="post" action="/profil">
+                        <input name="id" value="<? echo $id; ?>" hidden>
+                        <button name="action" value="askUpdate">save</button>
+                    </form>
                     <br>
                 </div>
-                <form method="post" action="" id="update">
-                    <input name="pseudo" value="<? echo $pseudo; ?>">
-                    <input name="mail"  value="<? echo $mail; ?>">
-                    <button name="action" value="maj">save</button>
-                </form>
             </div>
+            <?php if (Session::isAdmin()) echo '<form action="/admin"><button>Partie administrateur</button></form>'?>
         </div>
 <?php
 end_page ();

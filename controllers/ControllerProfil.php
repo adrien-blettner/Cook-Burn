@@ -23,16 +23,33 @@ class ControllerProfil extends Controller
      */
     private $mail;
 
+    private $update = false;
+
+    private $askedID;
+
     public function init ($args)
     {
         if (!Session::isConnected())
             Tools::redirectToConnexion($_GET['url'], 'Vous devez être connecté pour accéder à votre profil !');
 
-        if (isset($_POST['action']) and $_POST['action'] == 'maj')
-            Tools::betterDump($_POST);
+        if (isset($_POST['action']))
+        {
+            if ($_POST['action'] == 'update')
+            {
+                if (isset($_POST['pseudo']) and strlen($_POST['pseudo']) > 1)
+                    RequetesUtilisateur::updatePseudo(Session::getID(), $_POST['pseudo']);
 
+                if (isset($_POST['email']) and strlen($_POST['email']) > 1)
+                    echo RequetesUtilisateur::updateEMail(Session::getID(), $_POST['mail']);
+            }
+            elseif ($_POST['action'] == 'askUpdate' and isset($_POST['id']))
+            {
+                $this->askedID = $_POST['id'];
+                $this->update = true;
+            }
+        }
 
-        $this->idMembre = $_SESSION['id'];
+        $this->idMembre = Session::getID();
         $utilisateur = RequetesUtilisateur::getUserByID($this->idMembre);
         $this->pseudo = $utilisateur->getPseudo();
         $this->mail = $utilisateur->getEmail();
@@ -40,9 +57,17 @@ class ControllerProfil extends Controller
 
     public function render ()
     {
-        $idCreateur = $this->idMembre;
-        $pseudo = $this->pseudo;
-        $mail = $this->mail;
-        require 'vues/vueProfil.php';
+        if ($this->update)
+        {
+            $askedID = $this->askedID;
+            require 'vues/vueEditerProfil.php';
+        }
+        else
+        {
+            $id = $this->idMembre;
+            $pseudo = $this->pseudo;
+            $mail = $this->mail;
+            require 'vues/vueProfil.php';
+        }
     }
 }

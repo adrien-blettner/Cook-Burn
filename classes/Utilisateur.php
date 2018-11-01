@@ -1,7 +1,5 @@
 <?php
 
-# TODO stockage de isAdmin en bool dans tout le projet sauf BD
-
 /**
  * Classe qui permet de créer un objet utilisateur contenant tout les attibuts d'une utilisateur.
  *
@@ -31,7 +29,7 @@ class Utilisateur
 
     /**
      * Bool qui determine le statut admin ou non de l'utilisateur.
-     * @var int
+     * @var bool
      */
     private $isAdmin;
 
@@ -54,7 +52,15 @@ class Utilisateur
         $this->id = $id;
         $this->pseudo = $pseudo;
         $this->email = $email;
-        $this->isAdmin = $isAdmin;
+
+        if ($isAdmin === null)
+            $this->isAdmin = null;
+        else {
+            if (is_bool($isAdmin))
+                $this->isAdmin = $isAdmin;
+            else
+                $this->isAdmin = boolval($isAdmin);
+        }
     }
 
     /**

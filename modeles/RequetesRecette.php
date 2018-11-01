@@ -140,4 +140,20 @@ class RequetesRecette
 
         Requetes::requeteSecuriseeSurBD($requete, $types, $value, true);
     }
+
+    /**
+     * Supprime la recette correspondant à l'id.
+     *
+     * @param  int      $id      L'id de la recette
+     * @return bool              succès ou non.
+     * @throws RequeteException
+     */
+    public static function deleteRecette ($id)
+    {
+        $requete = 'DELETE FROM RECETTE WHERE ID = ?';
+        $type = 'i';
+        $value = [$id];
+
+        return Requetes::requeteSecuriseeSurBD($requete, $type, $value, true);
+    }
 }

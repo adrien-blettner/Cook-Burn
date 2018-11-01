@@ -35,7 +35,15 @@ try {
 
     // Route versla partie admin TODO faire la page admin
     $routeur->ajouterRoute ('/admin', 'GET', function () {
-       new ControllerAdmin();
+       new ControllerAdmin(0);
+    });
+
+    $routeur->ajouterRoute('/admin/supprimer-compte', 'POST', function () {
+       new ControllerAdmin(1);
+    });
+
+    $routeur->ajouterRoute('/admin/supprimer-recette', 'POST', function () {
+       new ControllerAdmin(2);
     });
 
     // Page de recette liée à l'id demandé.

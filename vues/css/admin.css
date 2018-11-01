@@ -1,0 +1,17 @@
+html {
+    overflow-y:scroll;
+}
+
+#container {
+    text-align: center;
+    margin: 2%;
+}
+
+.alligner {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.noStyle {
+    list-style: none;
+}

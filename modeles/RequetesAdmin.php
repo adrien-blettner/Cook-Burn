@@ -59,16 +59,53 @@ class RequetesAdmin
      * @return bool               Echec/succès.
      * @throws RequeteException  Exception générique des requêtes sur la BD.
      */
-    public static function deleteUser ($pseudo, $email, $raison)
+    public static function deleteUser ($pseudo, $email)
     {
-        $requete = 'DELETE FROM MEMBER WHERE PSEUDO = ? AND EMAIL = ?';
+        $requete = 'DELETE FROM MEMBRE WHERE PSEUDO = ? AND EMAIL = ?';
         $types = 'ss';
         $values = [$pseudo, $email];
 
         $succes = Requetes::requeteSecuriseeSurBD($requete, $types, $values, true);
 
-        Tools::sendRemovedAccountMail($email, $raison);
-
         return $succes;
+    }
+
+    /**
+     * Renvoie la liste de tout les utilisateur du site.
+     *
+     * @return Utilisateur[]
+     */
+    public static function getAlluser ()
+    {
+        $requete = 'SELECT ID, PSEUDO, EMAIL FROM MEMBRE';
+
+        $result = Requetes::requeteSimpleSurBD($requete);
+
+        $list = [];
+        while ($row = mysqli_fetch_assoc($result))
+            array_push($list, new Utilisateur($row['ID'],$row['PSEUDO'], $row['EMAIL'], null));
+
+        $result->close();
+        return $list;
+    }
+
+    /**
+     * Renvoie la liste de toutes les recettes.
+     *
+     * @return array
+     * @throws RequeteException
+     */
+    public static function getAllRecette ()
+    {
+        $requete = 'SELECT ID, NOM FROM RECETTE';
+
+        $result = Requetes::requeteSimpleSurBD($requete);
+
+        $list = [];
+        while ($row = mysqli_fetch_assoc($result))
+            array_push($list, new Recette($row['ID'], null, $row['NOM'], null, null, null, null, null, null, null));
+
+        $result->close();
+        return $list;
     }
 }
