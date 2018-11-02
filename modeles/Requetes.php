@@ -26,7 +26,7 @@ class Requetes
      */
     private static function getConnectionEcriture()
     {
-        # Si la connection n'est pas initialisée, le faire
+        // Si la connection n'est pas initialisée, le faire
         if (!isset(self::$connectionEcriture))
         {
             self::$connectionEcriture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_write', 'aAmZCw*hR!Mv9WkbB');
@@ -43,7 +43,7 @@ class Requetes
      */
     private static function getConnectionLecture()
     {
-        # Si la connection n'est pas initialisée, le faire
+        // Si la connection n'est pas initialisée, le faire
         if (!isset(self::$connectionLecture) or self::$connectionLecture === null)
         {
             self::$connectionLecture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_read', 'L@s88WQJUXJq4Xk0E');
@@ -98,7 +98,7 @@ class Requetes
         if (!is_array($valeurs))
             $valeurs = array($valeurs);
 
-        # ... -> argument unpacking
+        // ... -> argument unpacking
         if ($stmt->bind_param($types, ...$valeurs) === false)
             throw new RequeteException('Binding params failed.');
 
@@ -108,15 +108,15 @@ class Requetes
 
         $resultat = false;
 
-        # On test si la requête est une MàJ (update,insert..) qui à réussi.
-        # un MàJ peut ne pas échouer mais avoir un WHERE qui ne correspond à personne et donc affected_rows == 0
+        // On test si la requête est une MàJ (update,insert..) qui à réussi.
+        // un MàJ peut ne pas échouer mais avoir un WHERE qui ne correspond à personne et donc affected_rows == 0
         if ($stmt->affected_rows > 0)
         {
             $resultat = true;
             if ($returnID !== null)
                 $returnID = mysqli_insert_id($connection);
         }
-        # Partie si on a un select réussi.
+        // Partie si on a un select réussi.
         else
         {
             if (false === $resultat = $stmt->get_result())

@@ -26,13 +26,13 @@ class AutoLoader
      */
     public static function customAutoload ($class)
     {
-        # Dossiers où l'on peux trouver le fichier de cette classe.
+        // Dossiers où l'on peux trouver le fichier de cette classe.
         $correctDirectories = array('classes/', 'controllers/', 'modeles/', 'Routeur/');
 
         foreach ($correctDirectories as $dir)
         {
             $file = $dir . $class . '.php';
-            # Si la classe existe on la "require" et on quitte.
+            // Si la classe existe on la "require" et on quitte.
             if (file_exists($file))
             {
                 require_once $file;
@@ -40,7 +40,7 @@ class AutoLoader
             }
         }
 
-        # En théorie cette fonction n'est jamais appelé sauf si quelqu'un se trompe dans le nom lors de la création d'une classe.
+        // En théorie cette fonction n'est jamais appelé sauf si quelqu'un se trompe dans le nom lors de la création d'une classe.
         throw new Error('autoloading class failed');
     }
 }

@@ -7,6 +7,8 @@ function start_page($title = 'default', $additionalParams = array())
     echo "\t\t" . '<link rel="stylesheet" type="text/css" href="/vues/css/barreNav.css">' . PHP_EOL;
 
     echo "\t\t" . '<meta charset="UTF-8">'    . PHP_EOL;
+    // Change les "mixed content" (les requêtes non sécurisée) de http à https.
+    echo "\t\t" . '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">' . PHP_EOL;
     echo "\t\t" . '<title>'.$title.'</title>' . PHP_EOL;
 
     foreach ($additionalParams as $param)

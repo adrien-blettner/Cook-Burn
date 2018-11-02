@@ -33,19 +33,27 @@ try {
         new ControllerConnexion ();
     });
 
-    // Route versla partie admin TODO faire la page admin
-    $routeur->ajouterRoute ('/admin', 'GET', function () {
+    // Route vers la partie admin.
+    $routeur->ajouterRoute ('/admin', ['GET','POST'], function () {
        new ControllerAdmin(0);
     });
 
+    // Route vers la page de suppression de compte.
     $routeur->ajouterRoute('/admin/supprimer-compte', 'POST', function () {
        new ControllerAdmin(1);
     });
 
+    // Route vers la page pour supprimer une recette.
     $routeur->ajouterRoute('/admin/supprimer-recette', 'POST', function () {
        new ControllerAdmin(2);
     });
 
+    // Route vers la page d'édition de profil.
+    $routeur->ajouterRoute('/editeur-profil', 'POST', function () {
+       new ControllerEditeurProfil();
+    });
+
+    // Route vers la page de recherche.
     $routeur->ajouterRoute('/recherche/:str', 'GET', function ($str) {
        new ControllerRecherche($str);
     });

@@ -11,14 +11,14 @@ start_page ('Profil', array ('profil.css','rolesUtilisateur.css'));
                     <br>
                     <p class="info" >Mail: <? echo $mail; ?></p>
                     <br>
-                    <form method="post" action="/profil">
+                    <form method="post" action="/editeur-profil">
                         <input name="id" value="<? echo $id; ?>" hidden>
-                        <button name="action" value="askUpdate">save</button>
+                        <button>editer le profil</button>
                     </form>
                     <br>
                 </div>
             </div>
-            <?php if (Session::isAdmin()) echo '<form action="/admin"><button>Partie administrateur</button></form>'?>
+            <?php if (Session::isAdmin()) echo '<form action="/admin" method="post"><button>Partie administrateur</button></form>'?>
         </div>
         <div id="favoris">
             <?php

@@ -93,7 +93,7 @@ class Recette
     function __construct ($id, $idCreateur, $nom, $nbConvives, $descriptionCourte, $descriptionLongue, $ingredients, $imageURL, $etapes, $burn)
     {
         $this->id = $id;
-        # On obtient le nom de l'utilisateur par son id.
+        // On obtient le nom de l'utilisateur par son id.
         if ($idCreateur === null) {
             $this->createur = null;
             $this->idCreateur = null;

@@ -24,16 +24,16 @@ class Session
      */
     public static function initSession ()
     {
-        # Démarre la session ou récupere la session courrente (test isset car delete appel init)
+        // Démarre la session ou récupere la session courrente (test isset car delete appel init)
         if (!isset($_SESSION)) {
             session_start();
         }
 
-        # Vérifie que la session est secure
+        // Vérifie que la session est secure
         if (self::mightBeenHijacking() or self::wrongValues() or self::tooOld())
         {
             self::destroySession();
-            # On rappelle session_start car la fonction précdéente supprime la session, il faut la redémarrer
+            // On rappelle session_start car la fonction précdéente supprime la session, il faut la redémarrer
             session_start();
             $_SESSION['isConnected'] = false;
             $_SESSION['id'] = -1;
@@ -157,8 +157,8 @@ class Session
      */
     public static function disconnect ()
     {
-        # Approche très simple (comme un cookie souvent) :
-        # mettre la date d'expiration dans le passé (5 min avant maintenant)
+        // Approche très simple (comme un cookie souvent) :
+        // mettre la date d'expiration dans le passé (5 min avant maintenant)
         $_SESSION['expiration'] = time() - (5*60);
         self::initSession();
     }

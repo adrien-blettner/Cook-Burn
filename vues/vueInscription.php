@@ -3,7 +3,7 @@ require_once 'formatPage.inc.php';
 require_once 'MenuDeroulant.php';
 
 start_page ('Inscription', array ('formulaire.css'))
-# TODO verif formulaire car lien changé
+// TODO verif formulaire car lien changé
 ?>
 
     <h2 id="inscriptionTitre">Inscription</h2>

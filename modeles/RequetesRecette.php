@@ -21,8 +21,6 @@ class RequetesRecette
         if ($result === false)
             return false;
 
-        # TODO  deplacer après utilisation
-        #$result->close();
         return Recette::FromDBRow (mysqli_fetch_assoc($result));
     }
 
@@ -45,9 +43,6 @@ class RequetesRecette
         while ($row = mysqli_fetch_assoc($result))
             $listLastRecettes[] = Recette::FromDBRow ($row);
 
-        # TODO Why null ?
-        #$result->close();
-
         return $listLastRecettes;
     }
 
@@ -64,11 +59,11 @@ class RequetesRecette
         $recette = Recette::FromDbRow (mysqli_fetch_assoc($result));
         $result->close();
 
-        # Si la recette n'est pas vide on la renvoie
+        // Si la recette n'est pas vide on la renvoie
         if (!$recette->isEmpty())
             return $recette;
 
-        # Si la requête précédente ne renvoie rien on tente d'obtenir la recette qui à été liké le plus réccement et avec + de 15 burns
+        // Si la requête précédente ne renvoie rien on tente d'obtenir la recette qui à été liké le plus réccement et avec + de 15 burns
         $result = Requetes::requeteSimpleSurBD( 'SELECT * FROM RECETTE WHERE BURN > 15 ORDER BY LAST_BURN_UPDATE DESC');
         $recette = Recette::FromDbRow (mysqli_fetch_assoc($result));
         $result->close();
@@ -190,15 +185,14 @@ class RequetesRecette
      */
     public static function addLike ($idRecette, $idUser)
     {
-        $requete1 = 'UPDATE RECETTE SET BURN = BURN+1 WHERE ID=?';
+        $requete1 = 'UPDATE RECETTE SET BURN = BURN+1, LAST_BURN_UPDATE="'.date ("Y-m-d").'" WHERE ID=?';
         $type1 = 'i';
         $value1 = [$idRecette];
 
         $requete2 = 'INSERT INTO BURN (ID_RECETTE, ID_MEMBRE) VALUES (?,?)';
         $type2 = 'ii';
         $value2 = [$idRecette, $idUser];
-
-        $success1 = Requetes::requeteSecuriseeSurBD($requete1, $type1, $value1, true);
-        $success2 = Requetes::requeteSecuriseeSurBD($requete2, $type2, $value2, true);
+        Requetes::requeteSecuriseeSurBD($requete1, $type1, $value1, true);
+        Requetes::requeteSecuriseeSurBD($requete2, $type2, $value2, true);
     }
 }

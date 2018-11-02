@@ -121,5 +121,5 @@ class Utilisateur
         return $this->isAdmin;
     }
 }
-# Initialise l'utilisateur static vide
+// Initialise l'utilisateur static vide
 Utilisateur::$utilisateurNull = new Utilisateur (null, null, null, null);

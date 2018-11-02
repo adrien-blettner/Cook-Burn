@@ -25,9 +25,10 @@ class ControllerRecette extends Controller
 
     public function init ($id)
     {
+        // Récupéraiton de la recette.
         $this->recette = RequetesRecette::getRecetteById($id);
 
-        # Si la recette demandée n'est pas valide / existante, on redirige vers la liste des recettes.
+        // Si la recette demandée n'est pas valide / existante, on redirige vers la liste des recettes.
         if ($id === null or $this->recette == Recette::$recetteVide)
         {
             header('location: /#conteneurRecettes');
@@ -47,7 +48,9 @@ class ControllerRecette extends Controller
         // Détermine si l'utilisateur à ajouté la recette à ses favoris et stocke le résultat.
         $this->alreadyFavorie = RequetesFavoris::isFavorie($id, Session::getID());
 
+        // Si on a des actions à effectuées on les exécutes.
         if (isset($_POST['action']))
+        {
             if ($_POST['action'] == 'like' and !$this->alreadyLiked)
             {
                 $this->alreadyLiked = true;
@@ -58,6 +61,7 @@ class ControllerRecette extends Controller
                 $this->alreadyFavorie = true;
                 RequetesFavoris::addTofavorite($id, Session::getID());
             }
+        }
     }
 
     function render ()
@@ -66,7 +70,7 @@ class ControllerRecette extends Controller
         $alreadyLiked = $this->alreadyLiked;
         $alreadyFavorie = $this->alreadyFavorie;
 
-        # Affichage de la recette valide
+        // Affichage de la recette valide
         require 'vues/vueRecette.php';
     }
 }

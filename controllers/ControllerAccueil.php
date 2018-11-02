@@ -19,18 +19,18 @@ class ControllerAccueil extends Controller
 
     protected function init ($args)
     {
-        # Si on a cliquer sur le bouton "Déconnexion", on déconnecte la session.
+        // Si on a cliquer sur le bouton "Déconnexion", on déconnecte la session.
         if (ISSET($_POST['action']) && $_POST['action'] = 'Déconnexion') {
             Session::disconnect();
         }
 
-        # Récupère la recette du moment.
+        // Récupère la recette du moment.
         $this->recetteDuMoment = RequetesRecette::getRecetteDuMoment();
 
-        # Récupère la liste de recettes.
+        // Récupère la liste de recettes.
         $this->lastRecettes = RequetesRecette::getLastRecettes();
 
-        # Si l'utilisateur n'est pas connecté, on chache les recettes de moins de 10 burns.
+        // Si l'utilisateur n'est pas connecté, on chache les recettes de moins de 10 burns.
         if (!Session::isConnected())
             foreach ($this->lastRecettes as $recette)
                 if ($recette->getBurn() < 10)
@@ -39,7 +39,7 @@ class ControllerAccueil extends Controller
 
     protected function render ()
     {
-        # On créer des variable avec une 'scope' lié a la fonction pour éviter d'écrire $this-> partout dans la vue de l'accueil (syntax sugar un peu).
+        // On créer des variable avec une 'scope' lié a la fonction pour éviter d'écrire $this-> partout dans la vue de l'accueil (syntax sugar un peu).
         $recetteDuMoment = $this->recetteDuMoment;
         $lastRecettes = $this->lastRecettes;
 

@@ -41,11 +41,11 @@ class Routeur
         if (self::$nbInstance > 1)
             throw new RouteurException('Un routeur existe déjà !');
 
-        # On me le nombre d'instance à 1.
+        // On me le nombre d'instance à 1.
         self::$nbInstance = 1;
-        # L'url demander.
+        // L'url demander.
         $this->url = $_GET['url'];
-        # La méthode utilisée pour demander l'url.
+        // La méthode utilisée pour demander l'url.
         $this->methodeAcceptee = ['GET','POST'];
     }
 
@@ -59,7 +59,7 @@ class Routeur
      */
     public function ajouterRoute ($chemin, $methode, callable $fonction)
     {
-        # Si on a une list de méthode on ajoute les routes une à une
+        // Si on a une list de méthode on ajoute les routes une à une
         if (is_array($methode))
         {
             foreach ($methode as $meth)
@@ -67,11 +67,11 @@ class Routeur
             return;
         }
 
-        # Créer une 'route' qui fait correspondre un chemin et une fonction
+        // Créer une 'route' qui fait correspondre un chemin et une fonction
         $route = new Route ($chemin, $fonction);
 
-        # Ajoute la route dans le tableau de routes,
-        # dans le sous tableau correspondant à la méthode de requête (GET, POST...)
+        // Ajoute la route dans le tableau de routes,
+        // dans le sous tableau correspondant à la méthode de requête (GET, POST...)
         if (!in_array($methode, $this->methodeAcceptee))
             throw new RouteurException ('Méthode de requête ' . $methode . 'non accepte.');
 
@@ -86,12 +86,12 @@ class Routeur
      */
     public function run ()
     {
-        # On vérifie que la méthode requête existe et est acceptée
+        // On vérifie que la méthode requête existe et est acceptée
         $methode = $_SERVER['REQUEST_METHOD'];
         if (!isset($this->routes[$methode]) or !in_array($methode, $this->methodeAcceptee))
             throw new RouteurException ('Méthode de requête ' . $methode . 'non accepte.');
 
-        # On tente de trouver la route correspondante
+        // On tente de trouver la route correspondante
         foreach ($this->routes[$methode] as $route)
         {
             if ($route->match ($this->url))
@@ -100,8 +100,8 @@ class Routeur
             }
         }
 
-        # Traitement des mauvaises requêtes (page 404)
-        # TODO créer vrai route et page
+        // Traitement des mauvaises requêtes (page 404)
+        // TODO créer vrai route et page
         if (!isset($this->routes['404']))
             $this->routes['404'] = function () { echo 'Erreur page non trouvée.';};
 

@@ -89,7 +89,7 @@ start_page('administration', array('admin.css'));
                         echo '<p class="aligner"><span class="identite">'. $utilisateur->getPseudo() .'</span></p>';
                         echo '<p class="aligner">'. $utilisateur->getEmail().'</p>';
                         echo '<button class="aligner" onclick="deleteUser('.$utilisateur->getId().')">x</button>';
-                        echo '<form class="aligner" action="/profil" method="post"><button name="action" value="askUpdate" class="aligner">editer</button><input name="id" value="'.$utilisateur->getId().'" hidden></form>';
+                        echo '<form class="aligner" action="/editeur-profil" method="post"><button class="aligner">editer</button><input name="id" value="'.$utilisateur->getId().'" hidden></form>';
                         echo '</li>' . PHP_EOL;
                     }
                 ?>

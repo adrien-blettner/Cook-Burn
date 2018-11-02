@@ -18,23 +18,23 @@ class RequetesAdmin
      */
     public static function addUser ($pseudo, $email, $isAdmin = 0)
     {
-        # Verification que le pseudo n'est pas déjà pris
+        // Verification que le pseudo n'est pas déjà pris
         if (!RequetesUtilisateur::pseudoIsAvailable($pseudo))
-            # TODO return message erreur
+            // TODO return message erreur
             return false;
 
-        # Verification que le mail n'est pas déjà pris
+        // Verification que le mail n'est pas déjà pris
         if (!RequetesUtilisateur::mailIsAvailable($email))
-            # TODO return message erreur
+            // TODO return message erreur
             return false;
 
-        # Vérifie que la variable isAdmin est bien un int valide
+        // Vérifie que la variable isAdmin est bien un int valide
         if (is_bool($isAdmin))
             $isAdmin = intval($isAdmin);
         if (!is_int($isAdmin) or !in_array($isAdmin, [0,1]))
             $isAdmin = 0;
 
-        # Créer le mot de passe aléatoire -> même l'admin ne le connait pas
+        // Créer le mot de passe aléatoire -> même l'admin ne le connait pas
         $password = Tools::randomPassword(12);
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
 
