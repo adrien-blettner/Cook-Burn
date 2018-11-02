@@ -2,14 +2,44 @@ html {
     overflow-y:scroll;
 }
 
-#container {
-    text-align: center;
-    margin: 2%;
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    background-color: #666666;
 }
 
-.alligner {
+#container {
+    margin: 2%;
+    padding: 1%;
+    text-align: center;
+}
+
+#membres, #recettes {
+    text-align: left;
+}
+
+#container li{
+    background-color: white;
+    border: 1px black solid;
+}
+
+#container li p {
+    margin-left : 0;
+    padding: 5px;
+}
+
+.aligner {
     display: inline-block;
     margin-left: 10px;
+}
+
+.identite{
+    background-color: orange;
+    padding: 5px;
 }
 
 .noStyle {

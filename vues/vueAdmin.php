@@ -86,10 +86,10 @@ start_page('administration', array('admin.css'));
                     foreach ($listeUtilisateurs as $utilisateur)
                     {
                         echo '<li class="noStyle">';
-                        echo '<p class="alligner">'. $utilisateur->getPseudo() .'</p>';
-                        echo '<p class="alligner">'. $utilisateur->getEmail().'</p>';
-                        echo '<button class="alligner" onclick="deleteUser('.$utilisateur->getId().')">x</button>';
-                        echo '<form class="alligner" action="/profil" method="post"><button name="action" value="askUpdate" class="alligner">editer</button><input name="id" value="'.$utilisateur->getId().'" hidden></form>';
+                        echo '<p class="aligner"><span class="identite">'. $utilisateur->getPseudo() .'</span></p>';
+                        echo '<p class="aligner">'. $utilisateur->getEmail().'</p>';
+                        echo '<button class="aligner" onclick="deleteUser('.$utilisateur->getId().')">x</button>';
+                        echo '<form class="aligner" action="/profil" method="post"><button name="action" value="askUpdate" class="aligner">editer</button><input name="id" value="'.$utilisateur->getId().'" hidden></form>';
                         echo '</li>' . PHP_EOL;
                     }
                 ?>
@@ -102,11 +102,11 @@ start_page('administration', array('admin.css'));
                 foreach ($listeRecettes as $recette)
                 {
                     echo '<li class="noStyle">';
-                    echo '<p class="alligner">id : '. $recette->getId() .'</p>';
-                    echo '<p class="alligner">'. $recette->getNom().'</p>';
-                    echo '<button class="alligner" onclick="deleteRecette('.$recette->getId().')">supprimer</button>';
-                    echo '<form class="alligner" method="post" action="/editeur-de-recette/editer"><button class="alligner" name="idEditer" value="'.$recette->getId().'">éditer la recette</button></form>';
-                    echo '<form class="alligner" action="/recette/'.$recette->getId().'"><button class="alligner">voir la recette</button></form>';
+                    echo '<p class="aligner"><span class="identite">id : '. $recette->getId() .'</span></p>';
+                    echo '<p class="aligner">'. $recette->getNom().'</p>';
+                    echo '<button class="aligner" onclick="deleteRecette('.$recette->getId().')">supprimer</button>';
+                    echo '<form class="aligner" method="post" action="/editeur-de-recette/editer"><button class="aligner" name="idEditer" value="'.$recette->getId().'">éditer la recette</button></form>';
+                    echo '<form class="aligner" action="/recette/'.$recette->getId().'"><button class="aligner">voir la recette</button></form>';
                     echo '</li>' . PHP_EOL;
                 }
                 ?>
