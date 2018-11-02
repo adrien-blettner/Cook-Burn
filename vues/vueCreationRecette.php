@@ -122,7 +122,6 @@ start_page('creation', array('creationRecette.css'));
                     ?>
                 </ul>
 
-
                 <input type="text" id="etape" placeholder="Ajoutez une étape"/></br>
                 <button type="button" onclick="moveEtape();">+</button>
 

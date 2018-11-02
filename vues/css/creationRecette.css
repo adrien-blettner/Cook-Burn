@@ -9,11 +9,24 @@ body {
     font-weight: 300;
 }
 
+ul{
+    list-style: none;
+}
 
 h1{
     margin-top : 50px;
     margin-bottom : 1px;
     text-align: center;
+}
+
+#listeIngredients{
+    text-align: left;
+    margin-left: 20%;
+}
+
+#listeEtapes{
+    text-align: left;
+    margin-left: 20%;
 }
 
 .creationRecette{
