@@ -27,6 +27,12 @@ class ControllerProfil extends Controller
 
     private $askedID;
 
+    /**
+     * Liste des recettes favorites de l'utilisateur.
+     * @var Recette[]
+     */
+    private $listeFavoris;
+
     public function init ($args)
     {
         if (!Session::isConnected())
@@ -47,12 +53,18 @@ class ControllerProfil extends Controller
                 $this->askedID = $_POST['id'];
                 $this->update = true;
             }
+            elseif ($_POST['action'] == 'supprimerFavori' and isset($_POST['id']))
+            {
+                RequetesFavoris::removeFromFavorite($_POST['id'], Session::getID());
+            }
         }
 
         $this->idMembre = Session::getID();
         $utilisateur = RequetesUtilisateur::getUserByID($this->idMembre);
         $this->pseudo = $utilisateur->getPseudo();
         $this->mail = $utilisateur->getEmail();
+
+        $this->listeFavoris = RequetesFavoris::getAllRecetteFavorie(Session::getID());
     }
 
     public function render ()
@@ -67,6 +79,7 @@ class ControllerProfil extends Controller
             $id = $this->idMembre;
             $pseudo = $this->pseudo;
             $mail = $this->mail;
+            $listeFavoris = $this->listeFavoris;
             require 'vues/vueProfil.php';
         }
     }

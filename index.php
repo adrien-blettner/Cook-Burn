@@ -51,7 +51,7 @@ try {
     });
 
     // Page de recette liée à l'id demandé.
-    $routeur->ajouterRoute ('/recette/:id', 'GET', function ($id) {
+    $routeur->ajouterRoute ('/recette/:id', ['GET','POST'], function ($id) {
         new ControllerRecette($id);
     });
 

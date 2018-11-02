@@ -156,4 +156,49 @@ class RequetesRecette
 
         return Requetes::requeteSecuriseeSurBD($requete, $type, $value, true);
     }
+
+    /**
+     * Fonction qui détermine si l'utilisateur à déjà like la recette ou non.
+     *
+     * @param  int  $idRecette  L'id de la recette.
+     * @param  int  $idUser     L'id de l'utilisateur.
+     * @return bool
+     * @throws RequeteException
+     */
+    public static function haveLiked ($idRecette, $idUser)
+    {
+        $requete = 'SELECT * FROM BURN WHERE ID_RECETTE=? AND ID_MEMBRE=?';
+        $types = 'ii';
+        $values = [$idRecette, $idUser];
+
+        $result = Requetes::requeteSecuriseeSurBD($requete, $types, $values);
+
+        if ($result->num_rows == 0)
+            return false;
+        elseif (!is_bool($result))
+           return true;
+        else
+            throw new RequeteException('erreur lors de la requette \'haveliked\'');
+    }
+
+    /**
+     * Fonction qui ajoute un like sur une recette par un utilisateur donné.
+     *
+     * @param  int  $idRecette  L'id de la recette.
+     * @param  int  $idUser     L'id de l'utilisateur.
+     * @throws RequeteException
+     */
+    public static function addLike ($idRecette, $idUser)
+    {
+        $requete1 = 'UPDATE RECETTE SET BURN = BURN+1 WHERE ID=?';
+        $type1 = 'i';
+        $value1 = [$idRecette];
+
+        $requete2 = 'INSERT INTO BURN (ID_RECETTE, ID_MEMBRE) VALUES (?,?)';
+        $type2 = 'ii';
+        $value2 = [$idRecette, $idUser];
+
+        $success1 = Requetes::requeteSecuriseeSurBD($requete1, $type1, $value1, true);
+        $success2 = Requetes::requeteSecuriseeSurBD($requete2, $type2, $value2, true);
+    }
 }

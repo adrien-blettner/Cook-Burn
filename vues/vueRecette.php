@@ -14,6 +14,13 @@ start_page ($recette->getNOM(), array ('recette.css'));
         <h1 id="titreRecette"><?php echo $recette->getNom();?></h1>
         <p class="inline"><?php echo 'Créateur: ' . $recette->getCreateur();?></p>
         <p class="inline"><?php echo 'Burns: ' . $recette->getBurn();?></p>
+        <?php
+            if (!$alreadyLiked and Session::isConnected())
+                echo '<form method="post" action="/recette/'.$recette->getId().'"><button name="action" value="like">like</button></form>' . PHP_EOL;
+
+            if (!$alreadyFavorie and Session::isConnected())
+                echo '<form method="post" action="/recette/'.$recette->getId().'"><button name="action" value="favoris">ajouter aux favoris</button></form>'
+        ?>
         <p> <?php echo $recette->getDescriptionLongue();?> </p>
         <p>Ingrédients:</p>
         <ul>
@@ -33,15 +40,15 @@ start_page ($recette->getNOM(), array ('recette.css'));
             ?>
         </ol>
     </div>
-    <?php
-        if (Session::isAdmin() or Session::getID() == $recette->getIDCreateur())
-        {
-            echo '<form method="post" action="/editeur-de-recette/editer">';
-            echo '<button name="idEditer" value="'.$recette->getId().'">éditer la recette</button>';
-            echo '</form>';
-        }
-    ?>
 </div>
+<?php
+if (Session::isAdmin() or Session::getID() == $recette->getIDCreateur())
+{
+    echo '<form method="post" action="/editeur-de-recette/editer">';
+    echo '<button name="idEditer" value="'.$recette->getId().'">éditer la recette</button>';
+    echo '</form>';
+}
+?>
 
 <?php
 end_page();
