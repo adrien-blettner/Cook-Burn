@@ -5,6 +5,7 @@ body {
     font-family: sans-serif;
     font-style: normal;
     font-weight: 300;
+    font-size: 18px;
 }
 
 h1{
@@ -13,7 +14,7 @@ h1{
 
 /* Création d'une banniere dynamique avec photos */
 /* Configuration de l'animation */
-.banniereImg{
+#banniereImg{
     margin: 0 auto 0;
     height: 520px;
     border: solid black 2px;
@@ -58,40 +59,7 @@ h1{
     66%{background-image: url("../images/test6Banniere.jpg");}
 }
 
-/*
-@-webkit-keyframes banniere1 {
-    0%{background-position: 0px 0px;}
-    2%{background-position: 0px 0px;}
-    31%{background-position: -1920px 0px;}
-    35%{background-position: -1920px 0px;}
-    64%{background-position: -3840px 0px;}
-    68%{background-position: -3840px 0px;}
-    98%{background-position: -5760px 0px;}
-    100%{background-position: -5760px 0px;}
-}
-@-moz-keyframes banniere1 {
-    0%{background-position: 0px 0px;}
-    2%{background-position: 0px 0px;}
-    31%{background-position: -1920px 0px;}
-    35%{background-position: -1920px 0px;}
-    64%{background-position: -3840px 0px;}
-    68%{background-position: -3840px 0px;}
-    98%{background-position: -5760px 0px;}
-    100%{background-position: -5760px 0px;}
-}
-@keyframes banniere1 {
-    0%{background-position: 0px 0px;}
-    2%{background-position: 0px 0px;}
-    31%{background-position: -1920px 0px;}
-    35%{background-position: -1920px 0px;}
-    64%{background-position: -3840px 0px;}
-    68%{background-position: -3840px 0px;}
-    98%{background-position: -5760px 0px;}
-    100%{background-position: -5760px 0px;}
-}*/
-
-
-.description{
+#description{
     text-align: center;
     padding: 1% 0;
     color: white;
@@ -99,41 +67,30 @@ h1{
     background-color: #666666;
 }
 
-.description p{
-    font-size: 15px;
-}
-
-.topRecette{
+#topRecette{
     text-align: center;
     padding: 1% 0;
     color: white;
     border-bottom: solid black 2px;
     background-color: #404040;
-    font-size: 0;
 }
 
-.topRecette p{
-    font-size: 15px;
-}
-
-.topRecette img{
+#topRecette img{
     width: 650px;
     height: 450px;
     border-radius: 50px;
     border : 2px white solid;
 }
 
-.recettes{
+#recettes{
     padding: 1% 0;
     text-align: center;
-    font-size: 15px;
     color: white;
     border-bottom: solid black 2px;
     background-color: #333333;
 }
 
-.recettes img{
-    width: 400px;
+#recettes img{
     height: 250px;
     border-radius: 50px;
 }
@@ -161,10 +118,33 @@ h1{
     padding-right: 5%;
 }
 
+#goBackTop{
+    position: fixed;
+    border: 1px solid black;
+    padding: 1%;
+    margin: 5px;
+    background-color: rgba(255,255,255,0.1);
+    bottom: 0;
+    right: 0;
+}
+
+#goBackTop a{
+    text-decoration: none;
+    color: white;
+}
+
+#goBackTop:hover{
+    background-color: grey;
+}
+
 /* FLEXBOX pour les recettes (FIN) */
 
 @media screen and (max-width: 1250px) {
-    .topRecette img{
+    p{
+        font-size: 20px;
+    }
+
+    #topRecette img{
         width: 100%;
         height: 100%;
         max-width: 400px;
