@@ -148,8 +148,6 @@ class Tools
     /**
      * Fonction de développement pour afficher de manière "jolie" le contenu d'une variable pour test/vérif/débug.
      *
-     * TODO en dernier : delete la fonction
-     *
      * @param $var
      */
     public static function betterDump($var)
@@ -157,21 +155,5 @@ class Tools
         echo '<pre>';
         print_r($var);
         echo '</pre>';
-    }
-
-    /**
-     * TODO en dernier : delete la fonction
-     */
-    public static function activerModeParano () {
-        function errHandle($errNo, $errStr, $errFile, $errLine) {
-            $msg = "$errStr in $errFile on line $errLine";
-            if ($errNo == E_NOTICE || $errNo == E_WARNING) {
-                throw new ErrorException($msg, $errNo);
-            } else {
-                echo $msg;
-            }
-        }
-
-        set_error_handler('errHandle');
     }
 }

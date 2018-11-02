@@ -163,16 +163,6 @@ class Session
         self::initSession();
     }
 
-
-    /**
-     * Rallonge la session d'une heure.
-     * TODO revoir son fonctionnement et quand doit elle être appelée
-     */
-    public static function extendSessionLife ()
-    {
-        $_SESSION['expiration'] = time() + (60*60);
-    }
-
     /**
      * Test si l'utilisateur est connecté avec un compte.
      * @return  bool  Vrai si l'utilisateur est connecté, faux sinon.

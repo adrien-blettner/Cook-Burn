@@ -13,20 +13,18 @@ class RequetesAdmin
      * @param string  $pseudo      Le pseudo du nouvelle utilisateur
      * @param string  $email       Le mail de l'utilisateur.
      * @param int     $isAdmin     Valeur pour déterminer si l'utilisateur est admin.
-     * @return bool|mysqli_result  Echec/Succès.
+     * @return string|bool|mysqli_result  Echec/Succès.
      * @throws RequeteException
      */
     public static function addUser ($pseudo, $email, $isAdmin = 0)
     {
         // Verification que le pseudo n'est pas déjà pris
         if (!RequetesUtilisateur::pseudoIsAvailable($pseudo))
-            // TODO return message erreur
-            return false;
+            return 'Pseudo déjà utilisé.';
 
         // Verification que le mail n'est pas déjà pris
         if (!RequetesUtilisateur::mailIsAvailable($email))
-            // TODO return message erreur
-            return false;
+            return 'Email déjà utilisé.';
 
         // Vérifie que la variable isAdmin est bien un int valide
         if (is_bool($isAdmin))

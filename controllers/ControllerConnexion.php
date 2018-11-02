@@ -43,7 +43,6 @@ class ControllerConnexion extends Controller
 
         // Si la personne est déjà connecté, rallonge la session (car action prouve activité) et redrige immédiatement
         if (Session::isConnected()) {
-            Session::extendSessionLife();
             header('location: ' . $this->pageSuivante);
             exit();
         }

@@ -101,7 +101,6 @@ class Routeur
         }
 
         // Traitement des mauvaises requêtes (page 404)
-        // TODO créer vrai route et page
         if (!isset($this->routes['404']))
             $this->routes['404'] = function () { echo 'Erreur page non trouvée.';};
 

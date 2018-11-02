@@ -83,10 +83,12 @@ start_page('creation', array('creationRecette.css'));
     <div class="creationRecette">
         <form action="" method="post" class="creationRecetteForm" enctype="multipart/form-data"><br>
             <fieldset>
-                <?php
-                if ($messageErreur !== null)
-                    Tools::betterDump($messageErreur);
-                ?>
+                <div class="erreurs">
+                    <?php
+                    if ($messageErreur !== null)
+                        echo '<p>'.$messageErreur.'</p>'
+                    ?>
+                </div>
                 <input type="text" name="nom" placeholder="Nom recette" required <?php if (null !== $nom = $recette->getNom() ) echo 'value="'.$nom.'"'; ?>/></br>
 
                 <input type="number" name="nbConvives" placeholder="Nombre de convives" required <?php if (null !== $nbConvive = $recette->getNbConvives()) echo 'value="'.$nbConvive.'"'; ?>/></br>
@@ -145,8 +147,7 @@ start_page('creation', array('creationRecette.css'));
                     ?>
                 </ul>
 
-                <!-- TODO le remettre à la fin du dev required-->
-                <input type="file" name="photo" placeholder="Image" <?php if (isset($haveImage) and $haveImage === false) echo 'required'?>/></br>
+                <input type="file" name="photo" placeholder="Image" <?php if ($imageUrl === null or $haveImage === false) echo 'required'?>/></br>
 
                 <input type="submit" class="submitButton" name="action" value="Poster recette" />
             </fieldset>

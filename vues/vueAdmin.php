@@ -79,6 +79,8 @@ start_page('administration', array('admin.css'));
     <div id="container">
         <button onclick="hide1();">Liste des recettes</button>
         <button onclick="hide2();">Liste des membres</button>
+        </br>
+        <button onclick="window.location='/admin/ajouter-membre'">Ajouter un utilisateur</button>
 
         <div id="membres" style="display: none;">
             <ul>

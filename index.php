@@ -68,9 +68,9 @@ try {
        new ControllerModificationRecette($action);
     });
 
-    // Route vers la page d'inscription TODO modif en page d'ajout de membre par admin
-    $routeur->ajouterRoute ('/inscription', 'GET', function (){
-        new ControllerInscription();
+    // Route vers la page d'ajout de membre.
+    $routeur->ajouterRoute ('/admin/ajouter-membre', ['GET', 'POST'], function (){
+        new ControllerAjoutMembre();
     });
 
     // Lance le routeur

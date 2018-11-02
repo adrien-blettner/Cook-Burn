@@ -1,13 +1,13 @@
 <?php
 require_once 'formatPage.inc.php';
 
-start_page ('Profil', array ('profil.css','rolesUtilisateur.css'));
+start_page ('Profil', array ('profil.css'));
 ?>
         <div id="profil">
             <div id="presentation_membre">
                 <div>
                     <h1 id="titre">Bienvenue sur votre profil.</h1>
-                    <p class="info">Pseudo :<? echo $pseudo; ?></p>
+                    <p class="info">Pseudo: <? echo $pseudo; ?></p>
                     <br>
                     <p class="info" >Mail: <? echo $mail; ?></p>
                     <br>

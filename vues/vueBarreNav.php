@@ -10,7 +10,10 @@
         <ul class="sideNav">
             <li id="iconeLi"><img alt="Icone de menu déroulant" src="/vues/images/iconeMenuDeroulant.png" id="iconeImage">
                 <ul class="sous-menu">
-                    <li><a href="/profil">Profil</a></li>
+                    <?php
+                        if (Session::isConnected())
+                            echo "\t\t\t\t" . '<li><a href="/profil">Profil</a></li>';
+                    ?>
                     <li id="CreationReponsive"><a href="/creationRecette">Créer une recette</a></li>
                     <?php
                     if (!Session::isConnected())
