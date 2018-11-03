@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    color: #F5F5F5;
+    background-color: #404040;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    text-align: center;
+}
+
+button{
+    border:none;
+    padding:6px;
+    border-radius:8px;
+    background:#d34836;
+    font:bold 13px Arial;
+    color:#fff;
+    outline: none;
+    font-size: 25px;
+}
+
+button:hover{
+    background:black;
+    cursor: pointer;
+}
+
+form{
+    margin-top: 3%;
+}
+
+form input{
+    font-size: 25px;
+}
+
+/* On utilise des divs différents pour faire correctement fonctionner la suppression via JS */
+#separationInputsPseudo{
+    margin-top: 1%;
+    margin-left: 2%;
+}
+
+#separationInputsEmail{
+    margin-top: 1%;
+    margin-left: 2%;
+}
+
+#separationInputsMdp{
+    margin-top: 1%;
+    margin-left: 2%;
+}
+
+#separationInputsUpdate{
+    margin-top: 1%;
+    margin-left: 2%;
+}
