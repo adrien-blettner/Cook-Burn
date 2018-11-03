@@ -3,12 +3,13 @@ body {
     font-family: sans-serif;
     font-style: normal;
     font-weight: 300;
+    font-size: 18px;
 }
 
 #BarreHorizontale {
     padding: 0;
     height: 60px;
-    font-size : 170%;
+    font-size : 35px;
 }
 
 .sideNav{
@@ -152,7 +153,6 @@ body {
     .sideNav a {
         text-align : center;
         padding : 9% 10% 13.8% 10%;
-        font-size : 250%;
     }
 
     #rechercheLi {
@@ -191,7 +191,6 @@ body {
         left: 15%;
         top : 1%;
         width : 60%;
-        font-size : 80%;
         padding : 0;
     }
 
