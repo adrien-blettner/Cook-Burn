@@ -7,6 +7,22 @@ body {
     font-family: sans-serif;
     font-style: normal;
     font-weight: 300;
+    font-size: 20px;
+}
+
+button{
+    border:none;
+    padding:6px;
+    border-radius:8px;
+    background:#d34836;
+    font:bold 13px Arial;
+    color:#fff;
+    outline: none;
+}
+
+button:hover{
+    background:black;
+    cursor: pointer;
 }
 
 h1 {
@@ -16,10 +32,7 @@ h1 {
 }
 
 #profil {
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    margin: 1% 5%;
 }
 
 #presentation_membre {
@@ -42,4 +55,29 @@ h1 {
 
 #update {
     display: none;
+}
+
+.containerFav{
+    margin-left: 10%;
+    margin-right : 1%;
+    margin-top: 1%;
+    text-decoration: none;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 6px;
+    background-color: black;
+    float: left;
+    clear: left;
+    color: white;
+    white-space: nowrap;
+}
+
+.mesFavoris{
+    margin-right : 1%;
+    text-decoration: none;
+    color: white;
+}
+
+.mesFavoris:hover{
+    background-color: #1a1a1a;
 }
