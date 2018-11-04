@@ -44,10 +44,6 @@ start_page('accueil', array('accueil.css'));
                 ?>
         </div>
     </div>
-
-    <div id="goBackTop">
-        <a href="#BarreHorizontale">Haut de page</a>
-    </div>
 <?php
 end_page();
 ?>

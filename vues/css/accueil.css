@@ -118,25 +118,6 @@ h1{
     padding-right: 5%;
 }
 
-#goBackTop{
-    position: fixed;
-    border: 1px solid black;
-    padding: 1%;
-    margin: 5px;
-    background-color: rgba(255,255,255,0.1);
-    bottom: 0;
-    right: 0;
-}
-
-#goBackTop a{
-    text-decoration: none;
-    color: white;
-}
-
-#goBackTop:hover{
-    background-color: grey;
-}
-
 /* FLEXBOX pour les recettes (FIN) */
 
 @media screen and (max-width: 1250px) {
