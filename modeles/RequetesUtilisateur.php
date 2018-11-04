@@ -25,8 +25,6 @@ class RequetesUtilisateur
         if (!is_bool($resultPseudo))
             $resultPseudo = mysqli_fetch_assoc($resultPseudo);
 
-        var_dump(password_verify($pass, $resultPseudo['PASSWORD']));
-
         if (!password_verify($pass, $resultPseudo['PASSWORD']))
         {
             $requete = 'SELECT * FROM MEMBRE WHERE EMAIL = ?';
@@ -176,6 +174,41 @@ class RequetesUtilisateur
             return false;
 
         $test->close();
+
+        return true;
+    }
+
+    /**
+     * Fonction qui créer un nouveau mot de passe et l'envoie par mail.
+     *
+     * @param int $id L'id de l'utilisateur.
+     * @param string $mail Le mail de l'utilisateur.
+     * @return bool Succès de l'opération
+     * @throws RequeteException
+     */
+    public static function lostPassword ($mail)
+    {
+        // Pour vérifier que le mail existe bel et bien, on vérifie ça disponibilité: s'il est disponible (pour créer un compte) alors il n'existe pas et on quitte.
+        if(self::mailIsAvailable($mail))
+            return false;
+
+        // Il faut l'id du compte qui possède ce mail.
+        $requete = 'SELECT ID FROM MEMBRE WHERE EMAIL=?';
+        $type = 's';
+        $valeur = [$mail];
+
+        $result = Requetes::requeteSecuriseeSurBD($requete, $type, $valeur);
+
+        if (is_bool($result) or null === $row = mysqli_fetch_assoc($result))
+            return false;
+
+        $id = $row['ID'];
+        $newPassword = Tools::randomPassword();
+
+        if (!self::updatePassword($id, $newPassword))
+            return false;
+
+        Tools::sendLostPasswordMail($mail, $newPassword);
 
         return true;
     }

@@ -1,8 +1,11 @@
 
     <script>
         function chercher() {
-            // on ne forme pas de requêtes GET ou POST, on redirige.
-            window.location = "/recherche/"+document.getElementById("rechercheChamp").value;
+            let img = document.getElementById("rechercheBouton");
+            let form = document.getElementById("formulaireDeRecherche");
+            let recherche = document.getElementById("rechercheChamp");
+            form.removeChild(img);
+            form.setAttribute("action", "/recherche/" + recherche.value);
         }
     </script>
 
@@ -36,8 +39,10 @@
             ?>
             <li id="rechercheLi">
                 <div id="rechercheForm">
-                    <input id="rechercheChamp" type="text" placeholder="Recherche..."/>
-                    <input onclick="chercher();" id="rechercheBouton" type="image" src="/vues/images/look.png" alt="search"/>
+                    <form onsubmit="chercher();" id="formulaireDeRecherche">
+                        <input id="rechercheChamp" type="text" placeholder="Recherche..."/>
+                        <input id="rechercheBouton" type="image" src="/vues/images/look.png" alt="search"/>
+                    </form>
                 </div>
             </li>
         </ul>

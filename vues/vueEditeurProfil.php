@@ -51,7 +51,7 @@ start_page('administration | supprimer un membre', array ('editeurProfil.css'));
                     }
                 </script>
             ';
-            echo '<div id="separationInputsMdp"><input id="mdp" name="newPassword" placeholder="nouveau mot de passe" required>' . PHP_EOL;
+            echo '<div id="separationInputsMdp"><input type="password" id="mdp" name="newPassword" placeholder="nouveau mot de passe" required>' . PHP_EOL;
             echo '<button type="button" id="mdpButton" onclick="dontChangePassword();">X</button></div>';
         }
         ?>
