@@ -145,6 +145,31 @@ class Tools
         return mail($mail, $subject, $message, $header);
     }
 
+    public static function sendLostPasswordMail ($mail, $newPassword)
+    {
+        $subject = 'Votre mot de passe cook and burn';
+
+        $message = '
+        <html>
+        <head>
+        </head>
+        <body>
+        <h1>Votre mot de passe à été réinitialisé !</h1>
+        <br>
+        <p>Votre mot de passe à été changé, car déclaré perdu.</p>
+        <p >votre mot de passe temporaire ( '. $newPassword .' )</p>
+        <br>
+        <b>Nous vous conseillons de changer votre mot de passe !</b>
+        <br>
+        <a href="https://projetwebcookburn.alwaysdata.net/connexion"></a>
+        </body>
+        </html>';
+
+        $header = "Content-Type: text/html; charset=UTF-8\r\n";
+
+        return mail($mail, $subject, $message, $header);
+    }
+
     /**
      * Fonction de développement pour afficher de manière "jolie" le contenu d'une variable pour test/vérif/débug.
      *

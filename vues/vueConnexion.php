@@ -16,14 +16,20 @@ start_page ('Connexion', array ('formulaire.css'));
                     ?>
                 </div>
 
-                <input type="text" name="Pseudo" placeholder="Pseudo"/></br>
+                <input type="text" name="pseudo" placeholder="Pseudo"/></br>
 
-                <input type="password" name="Mot_de_passe" placeholder="Mot de Passe"/></br>
+                <input type="password" name="mot_de_passe" placeholder="Mot de Passe"/></br>
 
                 <input type="hidden" name="pageSuivante" value="<? echo $pageSuivante; ?>">
 
                 <input type="submit" class="submitButton" name="action" value="connexion"/>
                 <input type="submit" class="submitButton" name="action" value="Retour"/></br>
+
+                <?php
+                    if (in_array($messageErreur, [ControllerConnexion::VERIF_MAIL, ControllerConnexion::OULIE_SAISIR_MAIL, ControllerConnexion::INFOS_INVALIDE]))
+                        echo '<input type="submit" class="submitButton" name="action" value="MDPOublier">';
+                ?>
+
             </fieldset>
         </form>
     </div>

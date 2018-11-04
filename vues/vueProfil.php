@@ -10,8 +10,8 @@ start_page ('Profil', array ('profil.css'));
                     <p class="info">Pseudo: <? echo $pseudo; ?></p>
                     <br/>
                     <p class="info" >Mail: <? echo $mail; ?></p>
-                    <br/>
                     <form method="post" action="/editeur-profil">
+                        <br/>
                         <input name="id" value="<? echo $id; ?>" hidden>
                         <button>Éditer le profil</button>
                     </form>

@@ -17,10 +17,13 @@ class ControllerConnexion extends Controller
      */
     private $pageSuivante;
 
-    /**
-     * @param $args
-     * @throws RequeteException
-     */
+    const INFOS_INVALIDE = 'Pseudo ou email et/ou mot de passe invalide.';
+
+    const OULIE_SAISIR_MAIL = 'Veuillez saisir un email.';
+
+    const VERIF_MAIL = 'L\'action à échouée, vérifier le mail fourni.';
+
+
     protected function init ($args)
     {
         Session::disconnect();
@@ -54,16 +57,16 @@ class ControllerConnexion extends Controller
         // Traitement de la connection
         if ($_POST['action'] == 'connexion') {
             // Vérification que tout les champs sont remplie
-            if (!isset($_POST['Pseudo'], $_POST['Mot_de_passe']) or $_POST['Pseudo'] == "" or $_POST['Mot_de_passe'] == "") {
+            if (!isset($_POST['pseudo'], $_POST['mot_de_passe']) or trim($_POST['pseudo']) == '' or trim($_POST['mot_de_passe']) == '') {
                 Tools::redirectToConnexion($this->pageSuivante, 'Veuillez remplir tout les champs.');
             }
 
             // Tente la connection de l'utilisateur
-            $utilisateur = RequetesUtilisateur::connect($_POST['Pseudo'], $_POST['Mot_de_passe']);
+            $utilisateur = RequetesUtilisateur::connect($_POST['pseudo'], $_POST['mot_de_passe']);
 
             // Verification que la connection a réussie
             if ($utilisateur === False or $utilisateur == Utilisateur::$utilisateurNull) {
-                Tools::redirectToConnexion($this->pageSuivante, 'Pseudo ou email et/ou mot de passe invalide.');
+                Tools::redirectToConnexion($this->pageSuivante, self::INFOS_INVALIDE);
             }
 
             // Assigne les nouvelle variable de session
@@ -73,7 +76,25 @@ class ControllerConnexion extends Controller
 
             header('location: ' . $this->pageSuivante);
             exit();
-        } // Retour à l'accueil
+        }
+
+        // Traitement du mdp oublier
+        elseif ($_POST['action'] == 'MDPOublier')
+        {
+            if (!isset($_POST['pseudo']) or trim($_POST['pseudo']) == '')
+                Tools::redirectToConnexion($this->pageSuivante, self::OULIE_SAISIR_MAIL);
+
+            var_dump($_POST);
+
+            $result = RequetesUtilisateur::lostPassword ($_POST['pseudo']);
+
+            if ($result === false)
+                $this->messageErreur = self::VERIF_MAIL;
+            else
+                $this->messageErreur = 'Nouveau mot de passe envoyé, veuillez lire vos emails (pensez à vérifier les spams.';
+        }
+
+        // Retour à l'accueil
         elseif ($_POST['action'] == 'Retour')
         {
             header('location: /');
