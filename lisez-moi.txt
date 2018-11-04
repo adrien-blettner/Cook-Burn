@@ -1,0 +1,44 @@
+Equipe : (TODO NOM DE LEQUIPE) Groupe 3 A
+    - Baptiste GASSER
+    - Adrien BLETTNER
+    - Damien FONTES
+    - Kelyan DRUEZ-PHILIP
+    - Joan FABRES
+
+
+L'adresse du site: https://projetwebcookburn.alwaysdata.net
+
+
+Configuration logicielle minimale:
+    - PHP 5.x
+    - PhpStorm version x.x.x
+    - TODO ...
+
+
+Configuration logicielle conseillée:
+    - PHP 7.2.11 ou plus récent.
+    - PhpStorm version x.x.x
+    - TODO ...
+
+
+Liste des identifiants:
+    - GitHub: voir si on mais pas public (attention pas BD !! )
+
+    - Base de données:
+        - Adresse de la base de données = 'mysql-projetwebcookburn.alwaysdata.net'
+        - Compte en lecture seule:        identifiant = '167330_read'   |  password = 'L@s88WQJUXJq4Xk0E'
+        - Compte avec droit d'écriture:   identifiant = '167330_write'  |  password = 'aAmZCw*hR!Mv9WkbB'
+
+    - Hébergeur:
+        - nom: https://www.alwaysdata.com  |  Partie admin: https://admin.alwaysdata.com
+        - Identifiant:  TODO
+        - Mot de passe: TODO
+
+    - Compte github:
+        - Adresse du dêpot github: https://github.com/adrien-blettner/Cook-Burn
+        - Identifiant:
+        - Mot de passe:
+        - Note: Suite à une mauvaise organisation en début de projet (nous n'utilisation pas git la 1er semaine),
+                on observe au début des commits uniquemement émis par Adrien BLETTNER,
+                puis quelques commit de transition de modèle pour rattraper cette erreur de non utilisation de git.
+                Par exemple ("réorganisation du dossier") : https://github.com/adrien-blettner/Cook-Burn/commit/1fee87b09b0a5232332e15c6cbd57d7286cfe8da
