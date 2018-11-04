@@ -97,7 +97,7 @@ class Tools
         <h1>Félicitations et bienvenue chez cook and burn !</h1>
         <br>
         <p>Bravo vous possédez maintenant un compte chez Cook and Burn.</p>
-        <p>Vous pouvez mainteant vous connecter avec:</p>
+        <p>Vous pouvez maintenant vous connecter avec:</p>
         <p class="tab">- votre pseudo ( '. $pseudo .' ) ou email.</p>
         <p class="tab">- votre mot de passe temporaire ( '. $password .' )</p>
         <br>
@@ -131,7 +131,7 @@ class Tools
         </style>
         </head>
         <body>
-        <h1>Votre compte chez Cook and Burn à été suprimé !</h1>
+        <h1>Votre compte chez Cook and Burn à été supprimé !</h1>
         <br>
         <b>Raison:</b>
         <p class="tab">';
