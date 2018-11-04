@@ -98,6 +98,11 @@ button {
     outline: none;
 }
 
+button:hover {
+    cursor: pointer;
+    background: #a73425;
+}
+
 @media screen and (max-width: 1250px) {
     .liContainer {
         display: flex;

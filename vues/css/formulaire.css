@@ -48,21 +48,6 @@ body {
     background-color: #ddd;
 }
 
-/*a {
-    padding: 14px 16px;
-    float : left;
-    margin: 10px 48%;
-    border: 2px solid black;
-    border-radius: 5px;
-    background-color : #E70739;
-    text-decoration: none;
-    color: black;
-}
-
-a:hover {
-    background-color: #ddd;
-}*/
-
 @media only screen and (max-width: 1024px) {
     .inscriptionConnexionFieldset {
         margin-left : 5%;
