@@ -79,7 +79,7 @@ start_page('administration', array('admin.css'));
     <div id="container">
         <button onclick="hide1();">Liste des recettes</button>
         <button onclick="hide2();">Liste des membres</button>
-        </br>
+        <br>
         <button onclick="window.location='/admin/ajouter-membre'">Ajouter un utilisateur</button>
 
         <div id="membres" style="display: none;">
@@ -88,10 +88,18 @@ start_page('administration', array('admin.css'));
                     foreach ($listeUtilisateurs as $utilisateur)
                     {
                         echo '<li class="noStyle">';
-                        echo '<p class="aligner"><span class="identite">'. $utilisateur->getPseudo() .'</span></p>';
-                        echo '<p class="aligner">'. $utilisateur->getEmail().'</p>';
-                        echo '<button class="aligner" onclick="deleteUser('.$utilisateur->getId().')">x</button>';
-                        echo '<form class="aligner" action="/editeur-profil" method="post"><button class="aligner">editer</button><input name="id" value="'.$utilisateur->getId().'" hidden></form>';
+                            echo '<div class="liContainer">';
+                                echo '<div class="partMembre1 aligner">';
+                                    echo '<p class="aligner identite">'. $utilisateur->getPseudo() .'</p>';
+                                echo '</div>';
+                                echo '<div class="partMembre2 aligner">';
+                                    echo '<p class="aligner">'. $utilisateur->getEmail().'</p>';
+                                echo '</div>';
+                                echo '<div class="partMembre3 aligner">';
+                                    echo '<button class="aligner" onclick="deleteUser('.$utilisateur->getId().')">x</button>';
+                                    echo '<form class="aligner" action="/editeur-profil" method="post"><button class="aligner">editer</button><input name="id" value="'.$utilisateur->getId().'" hidden></form>';
+                                echo '</div>';
+                            echo '</div>';
                         echo '</li>' . PHP_EOL;
                     }
                 ?>
@@ -104,11 +112,17 @@ start_page('administration', array('admin.css'));
                 foreach ($listeRecettes as $recette)
                 {
                     echo '<li class="noStyle">';
-                    echo '<p class="aligner"><span class="identite">id : '. $recette->getId() .'</span></p>';
-                    echo '<p class="aligner">'. $recette->getNom().'</p>';
-                    echo '<button class="aligner" onclick="deleteRecette('.$recette->getId().')">supprimer</button>';
-                    echo '<form class="aligner" method="post" action="/editeur-de-recette/editer"><button class="aligner" name="idEditer" value="'.$recette->getId().'">éditer la recette</button></form>';
-                    echo '<form class="aligner" action="/recette/'.$recette->getId().'"><button class="aligner">voir la recette</button></form>';
+                    echo '<div class="liContainer">';
+                        echo '<div class="partRecette1 aligner">';
+                        echo '<p class="aligner"><span class="identite">id : '. $recette->getId() .'</span></p>';
+                        echo '<p class="aligner">'. $recette->getNom().'</p>';
+                    echo '</div>';
+                    echo '<div class="partRecette2 aligner">';
+                        echo '<button class="aligner" onclick="deleteRecette('.$recette->getId().')">supprimer</button>';
+                        echo '<form class="aligner" method="post" action="/editeur-de-recette/editer"><button class="aligner" name="idEditer" value="'.$recette->getId().'">éditer la recette</button></form>';
+                        echo '<form class="aligner" action="/recette/'.$recette->getId().'"><button class="aligner">voir la recette</button></form>';
+                        echo '</div>';
+                    echo '</div>';
                     echo '</li>' . PHP_EOL;
                 }
                 ?>

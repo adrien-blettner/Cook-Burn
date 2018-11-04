@@ -14,9 +14,46 @@ body {
 }
 
 #container {
-    margin: 2%;
-    padding: 1%;
+    padding: 2% 2% 2% 1%;
     text-align: center;
+}
+
+.liContainer {
+    display: flex;
+    flex-direction: row;
+}
+.partRecette1 {
+    width: 60%;
+    order: 1;
+}
+
+.partRecette2 {
+    order: 2;
+}
+
+.partRecette2 button {
+    position: relative;
+    top: 20px;
+}
+
+.partMembre1 {
+    order: 1;
+    width: 15%;
+}
+
+.partMembre2 {
+    padding-left: 1%;
+    width: 40%;
+    order: 2;
+}
+
+.partMembre3 {
+    order: 3;
+}
+
+.partMembre3 button {
+    position: relative;
+    top: 20px;
 }
 
 #membres, #recettes {
@@ -39,10 +76,37 @@ body {
 }
 
 .identite{
+    text-align: center;
+    width: 100%;
+    display: inline-block;
     background-color: orange;
     padding: 5px;
 }
 
 .noStyle {
     list-style: none;
+}
+
+button {
+    border: none;
+    padding: 6px;
+    margin-top: 8px;
+    border-radius: 8px;
+    background: #d34836;
+    font: bold 13px Arial;
+    color: #fff;
+    outline: none;
+}
+
+@media screen and (max-width: 1250px) {
+    .liContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .partRecette2 button {
+        position: relative;
+        top: 0;
+        margin-left: 0;
+        margin-bottom: 2%;
+    }
 }
