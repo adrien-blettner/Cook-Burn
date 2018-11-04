@@ -41,6 +41,7 @@ class Session
             $_SESSION['role'] = 'visiteur';
             $_SESSION['adresseIP'] = $_SERVER['REMOTE_ADDR'];
             $_SESSION['userAgent'] = $_SERVER['HTTP_USER_AGENT'];
+            $_SESSION['recetteAEditer'] = null;
         }
     }
 
@@ -77,7 +78,7 @@ class Session
         if (!isset($_SESSION['isConnected'], $_SESSION['pseudo'], $_SESSION['role']))
             return true;
 
-        if ($_SESSION['isConnected'] !== true and $_SESSION['isConnected'] !== false)
+        if (!is_bool($_SESSION['isConnected']))
             return true;
 
         if (!in_array($_SESSION['role'], ['visiteur','membre', 'admin']))
@@ -94,7 +95,7 @@ class Session
      */
     private static function tooOld ()
     {
-        if (isset($_SESSION['isConnected']) and $_SESSION['isConnected'] === true)
+        if (self::isConnected())
             if (!isset($_SESSION['expiration']) or time() >= $_SESSION['expiration'])
                 return true;
 
@@ -181,8 +182,31 @@ class Session
         return (self::isConnected() and $_SESSION['role'] == 'admin');
     }
 
+    /**
+     * Renvoie l'id de l'utilisateur courant (-1 si non connecté).
+     * @return  int|null  L'id.
+     */
     public static function getID ()
     {
         return $_SESSION['id'];
+    }
+
+
+    /**
+     * Retourne l'id de la recette qu'on souhaite éditer actuellement.
+     * @return int|null
+     */
+    public static function getRecetteAEditer ()
+    {
+        return $_SESSION['recetteAEditer'];
+    }
+
+    /**
+     * Fonction qui fix l'id de la recette à éditer dans la session.
+     * @param int $id Le nouvelle id de recette.
+     */
+    public static function setRecetteAEditer ($id)
+    {
+        $_SESSION['recetteAEditer'] = $id;
     }
 }

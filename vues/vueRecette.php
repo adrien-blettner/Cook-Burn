@@ -19,7 +19,9 @@ start_page ($recette->getNOM(), array ('recette.css'));
                 echo '<form method="post" action="/recette/'.$recette->getId().'"><button name="action"  class="like" value="like">Ajouter une burn</button></form>' . PHP_EOL;
 
             if (!$alreadyFavorie and Session::isConnected())
-                echo '<form method="post" action="/recette/'.$recette->getId().'"><button name="action" class="favoris" value="favoris">Ajouter aux favoris</button></form>';
+                echo '<form method="post" action="/recette/'.$recette->getId().'"><button name="action" class="favoris" value="favoris">Ajouter aux favoris</button></form>' . PHP_EOL;
+
+            echo '</br>' . PHP_EOL;
 
             if (Session::isAdmin() or Session::getID() == $recette->getIDCreateur())
             {

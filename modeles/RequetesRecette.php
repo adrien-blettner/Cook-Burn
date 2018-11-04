@@ -195,4 +195,27 @@ class RequetesRecette
         Requetes::requeteSecuriseeSurBD($requete1, $type1, $value1, true);
         Requetes::requeteSecuriseeSurBD($requete2, $type2, $value2, true);
     }
+
+    /**
+     * Renvoie le nombre de burns d'une recette.
+     *
+     * @param  int $id L'id de la recette dont on souhaite obtenir les burns
+     *
+     * @return null|int
+     * @throws RequeteException
+     */
+    public static function getBurnByID ($id)
+    {
+        if ($id === null)
+            return null;
+
+        $requete = 'SELECT BURN FROM RECETTE WHERE ID=?';
+        $type = 'i';
+        $value = [$id];
+
+        $result = Requetes::requeteSecuriseeSurBD($requete, $type, $value);
+
+        if (!is_bool($result) and null !== $row = mysqli_fetch_assoc($result))
+            return $row['BURN'];
+    }
 }

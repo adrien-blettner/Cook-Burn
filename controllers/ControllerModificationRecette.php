@@ -144,7 +144,8 @@ class ControllerModificationRecette extends Controller
 
         try {
             if (isset($_POST['idEditer']))
-                $_SESSION['recetteAEditer'] = $_POST['idEditer'];
+                Session::setRecetteAEditer($_POST['idEditer']);
+
             // Demande la connection de l'utilisateur pour créer une recette.
             if (!Session::isConnected())
                 Tools::redirectToConnexion($_GET['url'], 'Vous devez être connecté pour créer une recette.');
@@ -166,12 +167,12 @@ class ControllerModificationRecette extends Controller
                 if ((isset ($_FILES['photo']) or $_FILES['photo']['size'] == 0) and (null === $this->imageUrl = $this->getImageUrl() or strlen($this->imageUrl) < 5))
                     $this->saveAndQuit(self::IMAGE_ERROR);
 
-                $recette = new Recette($_SESSION['recetteAEditer'], Session::getID(), $_POST['nom'], $_POST['nbConvives'], $_POST['descCourte'], $_POST['descLongue'], $this->formatIngredients(), $this->imageUrl, $this->formatEtapes(), 0);
+                $recette = new Recette(Session::getRecetteAEditer(), Session::getID(), $_POST['nom'], $_POST['nbConvives'], $_POST['descCourte'], $_POST['descLongue'], $this->formatIngredients(), $this->imageUrl, $this->formatEtapes(), 0);
 
                 // Partie mise à jour : on à éditer la recette et souhaite mettre à jour la recette avec les nouveaux paramètres.
-                if ($args === 'editer' and isset($_SESSION['recetteAEditer']) and $_SESSION['recetteAEditer'] !== null) {
-                    $recetteID = $_SESSION['recetteAEditer'];
-                    $_SESSION['recetteAEditer'] = null;
+                if ($args === 'editer' and isset($_SESSION['recetteAEditer']) and Session::getRecetteAEditer() !== null) {
+                    $recetteID =Session::getRecetteAEditer();
+                    Session::setRecetteAEditer(null);
                     RequetesRecette::updateRecette($recette);
                 }
                 // Sinon on créer un recette.
@@ -189,13 +190,13 @@ class ControllerModificationRecette extends Controller
             // Partie appelé si on a pas cliqué sur le bouton pour soumettre le formulaire et qu'on à demandé la page 'editer'.
             else if ($args === 'editer') {
                 // Si la recette à éditer est inexistante ou null, on quitte.
-                if (!isset($_SESSION['recetteAEditer']) or $_SESSION['recetteAEditer'] === null)
+                if (!isset($_SESSION['recetteAEditer']) or Session::getRecetteAEditer() === null)
                     Tools::redirectToHome();
 
                 // Si l'utilisateur n'est ni admin ni propriétaire de la recette, on quitte.
-                $recette = RequetesRecette::getRecetteById($_SESSION['recetteAEditer']);
+                $recette = RequetesRecette::getRecetteById(Session::getRecetteAEditer());
                 if (!Session::isAdmin() and Session::getID() != $recette->getIDCreateur())
-                    Tools::redirectToConnexion('/recette/'.$_SESSION['recetteAEditer'], 'La recette que vous tentez d\'éditer ne vous appartient pas, reconnectez vous avec le compte propriétaire (vous avez été déconnecté)');
+                    Tools::redirectToConnexion('/recette/'.Session::getRecetteAEditer(), 'La recette que vous tentez d\'éditer ne vous appartient pas, reconnectez vous avec le compte propriétaire (vous avez été déconnecté)');
 
                 // On sauvegarde les données récupérées de la recette à éditer
                 $this->currentRecette = $recette;

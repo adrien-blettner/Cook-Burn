@@ -1,0 +1,24 @@
+#goBackTop{
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    border: 2px solid black;
+    padding: 1%;
+    margin: 5px;
+    background-color: transparent;
+    bottom: 0;
+    right: 0;
+}
+
+#goBackTop p{
+    text-decoration: none;
+    color: white;
+}
+
+#goBackTop:hover{
+    background-color: white;
+}
+
+#goBackTop:hover p{
+    color: black;
+}

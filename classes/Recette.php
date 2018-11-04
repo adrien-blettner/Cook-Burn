@@ -99,8 +99,14 @@ class Recette
             $this->idCreateur = null;
         } else
         {
-            $this->createur = RequetesUtilisateur::getUserByID($idCreateur)->getPseudo();
             $this->idCreateur = $idCreateur;
+            $this->createur = RequetesUtilisateur::getUserByID($idCreateur)->getPseudo();
+            // Cas où l'utilisateur n'est pas trouvé (compte suprrimé).
+            if ($this->createur === null)
+            {
+                $this->idCreateur = null;
+                $this->createur = 'Utilisateur inconnu.';
+            }
         }
         $this->nom         = $nom;
         $this->nbConvives  = $nbConvives;
@@ -278,6 +284,16 @@ class Recette
     public function getBurn()
     {
         return $this->burn;
+    }
+
+    /**
+     * Permet la mise à jour du nombre de burn.
+     *
+     * @throws RequeteException
+     */
+    public function updateBurn()
+    {
+        $this->burn = RequetesRecette::getBurnByID($this->id);
     }
 
     /**
