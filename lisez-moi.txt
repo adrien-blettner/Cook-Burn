@@ -12,16 +12,22 @@ Présentation du projet :
 Cook&Burn est un site communautaire permettant à différents utilisateurs de créer, partager et consulter des recettes de cuisine en lien avec le monde du barbecue. Différents rôles sont disponibles (visiteur, inscrit ou super-administrateur), ayant chacun leur permissions, de la plus basique (consulter certaines recettes), allant jusqu'au contrôle total du site (modifier des recettes, comptes, mise en page, etc.) Les utilisateurs possédant un barbecue sont préalablement inscrits par le super-administrateur, et recoivent un détail de leur inscription par mail, avec un mot de passe aléatoire et la possibilité d'en changer directement sur leur profil.
 
 
+Nos choix techniques:
+    - Nous avons respecter le modèle MVC non seulement parsque le sujet l'imposait mais aussi pour avoir une structure plus professionnels et propre.
+    - En plus du modèle MVC, nous avons implémenté un routeur pour renforce l'architecture du projet et obtenir des urls plus propre, ainsi qu'un ajout d'une page plus simple en ajoutant juste une route.
+    - D'un point de de vue sécurité, nous avons fait attention aux injections SQL en utilisant des "prepared statements" dans notre modèle générale de requêtes.
+    - Nous avons aussi été vigiliant au texte saisie par l'utilsiateur, que nous avons systematiquement 'néttoyé' avec la fonction htmlspecialchar() pour éviter les failles XSS.
+    - Pour ce qui est du mot de passe nous avons choisis de ne pas le stocker dans la classe recette car ce n'est d'aucun besoin, les mot de passes ne transitent en clair que dans les mails,
+      dans lesquels on recommande des les changé, pour la BD on les stock de manière hashée avec password_hash() et blowfish.
+
 Configuration logicielle minimale:
     - PHP 5.6
     - PhpStorm version 2018.2.1
-    - TODO ...
 
 
 Configuration logicielle conseillée:
     - PHP 7.2.11 ou plus récent.
     - PhpStorm version 2018.2.4 ou plus récent
-    - TODO ...
 
 
 Liste des identifiants:
@@ -29,10 +35,8 @@ Liste des identifiants:
         - Identifiant: tuc
         - Mot de passe: chocho 
     - Site Web (utilisateur inscrit):
-        - Identifiant: 
-        - Mot de passe: 
-
-    - GitHub: voir si on met pas public (attention pas BD !! )
+        - Identifiant:  kelyan
+        - Mot de passe: w-qsundnbsxd
 
     - Base de données:
         - Adresse de la base de données = 'mysql-projetwebcookburn.alwaysdata.net'
@@ -41,13 +45,11 @@ Liste des identifiants:
 
     - Hébergeur:
         - nom: https://www.alwaysdata.com  |  Partie admin: https://admin.alwaysdata.com
-        - Identifiant:  TODO
-        - Mot de passe: TODO
+        - Identifiant:  baptiste.gasser@etu.univ-amu.fr
+        - Mot de passe: supermotdepassetest
 
     - Compte github:
         - Adresse du dêpot github: https://github.com/adrien-blettner/Cook-Burn
-        - Identifiant:
-        - Mot de passe:
         - Note: Suite à une mauvaise organisation en début de projet (nous n'utilisions pas git la 1ère semaine),
                 on observe au début des commits uniquemement émis par Adrien BLETTNER,
                 puis quelques commit de transition de modèle pour rattraper cette erreur de non utilisation de git.
