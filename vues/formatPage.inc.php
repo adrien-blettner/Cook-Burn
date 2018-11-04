@@ -27,8 +27,8 @@ function start_page($title = 'default', $additionalParams = array())
 function end_page ()
 {
     $dt = "\t\t";
-    echo $dt . '<div id="goBackTop">' . PHP_EOL;
-    echo "\t\t\t" . '<a onclick="topFunction();">Haut de page</a>' . PHP_EOL;
+    echo $dt . '<div id="goBackTop" onclick="topFunction();">' . PHP_EOL;
+    echo "\t\t\t" . '<p>Haut de page</p>' . PHP_EOL;
     echo $dt . '</div>' . PHP_EOL;
     echo "\t".'</body>'.PHP_EOL.'</html>';
 };

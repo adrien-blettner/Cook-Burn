@@ -10,11 +10,15 @@
     right: 0;
 }
 
-#goBackTop a{
+#goBackTop p{
     text-decoration: none;
     color: white;
 }
 
 #goBackTop:hover{
     background-color: white;
+}
+
+#goBackTop:hover p{
+    color: black;
 }

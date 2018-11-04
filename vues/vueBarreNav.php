@@ -12,14 +12,15 @@
                 <ul class="sous-menu">
                     <?php
                         if (Session::isConnected())
-                            echo "\t\t\t\t" . '<li><a href="/profil">Profil</a></li>';
-                    ?>
-                    <li id="CreationReponsive"><a href="/creationRecette">Créer une recette</a></li>
-                    <?php
+                            echo '<li><a href="/profil">Profil</a></li>' . PHP_EOL;
+
+                    if ($_GET['url'] !== 'editeur-de-recette/creer')
+                        echo "\t\t\t\t\t" . '<li id="CreationReponsive"><a href="/editeur-de-recette/creer">Créer une recette</a></li>' . PHP_EOL;
+
                     if (!Session::isConnected())
                         echo "\t\t\t\t" . '<li><a href="/connexion">Connexion</a></li>' . PHP_EOL;
                     else
-                        echo '<li>
+                        echo  "\t\t\t\t\t" . '<li>
                         <form action="/" id="deconnexionForm" method="post" >
                             <input id="deconnexionBouton" type="submit" name="action" value="Déconnexion"/>
                         </form>
@@ -29,7 +30,10 @@
             </li>
             <li id="C&B"> <a href="/">Cook & Burn</a></li>
             <li id="Recette"> <a href="/#conteneurRecettes">Recettes</a></li>
-            <li id="Creation"> <a href="/editeur-de-recette/creer">Créer une recette</a></li>
+            <?php
+            if ($_GET['url'] !== 'editeur-de-recette/creer')
+                echo "\t\t\t".'<li id="Creation"> <a href="/editeur-de-recette/creer">Créer une recette</a></li>'
+            ?>
             <li id="rechercheLi">
                 <div id="rechercheForm">
                     <input id="rechercheChamp" type="text" placeholder="Recherche..."/>
