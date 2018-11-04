@@ -55,6 +55,11 @@ class ControllerRecette extends Controller
             {
                 $this->alreadyLiked = true;
                 RequetesRecette::addLike($id, Session::getID());
+
+                // On met à jour les burns de la recette chargé car l'action 'like' peut modifier le nombre  de burn de la recette.
+                // Et on ne peut resoudre ce problème en mettant l'action 'like' avant le chargement de la recette,
+                // car c'est lors du chargement qu'on vérifie que l'id de recette demandé est valide.
+                $this->recette->updateBurn();
             }
             if ($_POST['action'] == 'favoris' and !$this->alreadyFavorie)
             {

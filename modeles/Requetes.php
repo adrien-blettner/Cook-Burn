@@ -72,7 +72,7 @@ class Requetes
      * Fonction qui va éxecuter une requête de manière sécurisée
      *
      * @param   string              $requete    La requête SQL sous la forme compatible avec le prepared statement 'SELECT x FROM y WHERE z = ?'.
-     * @param   string|null         $types      Les types des $valeurs associées dans l'ordre ('i' == int, 's' == string et 'd' == float).
+     * @param   string              $types      Les types des $valeurs associées dans l'ordre ('i' == int, 's' == string et 'd' == float).
      * @param   null                $valeurs    Les valeurs à "bind" à la requete.
      * @param   bool                $ecriture   Spécification du besoin du mode écriture (pour un insert par exemple).
      * @return  bool|mysqli_result              Le résultat de la requête ou vrai si MàJ ou faux si échec.
