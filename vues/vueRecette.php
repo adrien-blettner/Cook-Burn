@@ -21,8 +21,6 @@ start_page ($recette->getNOM(), array ('recette.css'));
             if (!$alreadyFavorie and Session::isConnected())
                 echo '<form method="post" action="/recette/'.$recette->getId().'"><button name="action" class="favoris" value="favoris">Ajouter aux favoris</button></form>' . PHP_EOL;
 
-            echo '</br>' . PHP_EOL;
-
             if (Session::isAdmin() or Session::getID() == $recette->getIDCreateur())
             {
                 echo '<form method="post" action="/editeur-de-recette/editer">';
@@ -30,6 +28,7 @@ start_page ($recette->getNOM(), array ('recette.css'));
                 echo '</form>';
             }
         ?>
+        <br>
         <p> <?php echo $recette->getDescriptionLongue();?> </p>
         <p>Ingrédients:</p>
         <ul>

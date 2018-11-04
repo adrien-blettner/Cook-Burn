@@ -84,8 +84,6 @@ class ControllerConnexion extends Controller
             if (!isset($_POST['pseudo']) or trim($_POST['pseudo']) == '')
                 Tools::redirectToConnexion($this->pageSuivante, self::OULIE_SAISIR_MAIL);
 
-            var_dump($_POST);
-
             $result = RequetesUtilisateur::lostPassword ($_POST['pseudo']);
 
             if ($result === false)

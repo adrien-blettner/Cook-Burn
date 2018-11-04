@@ -13,6 +13,7 @@ class ControllerModificationRecette extends Controller
     private $currentRecette;
     private $allDataAreSet = true;
     private $imageUrl = null;
+    private $needImage = true;
 
 
     /**
@@ -165,7 +166,12 @@ class ControllerModificationRecette extends Controller
 
                 // Vérification que l'image est valide.
                 if ((isset ($_FILES['photo']) or $_FILES['photo']['size'] == 0) and (null === $this->imageUrl = $this->getImageUrl() or strlen($this->imageUrl) < 5))
-                    $this->saveAndQuit(self::IMAGE_ERROR);
+                {
+                    if ($args === 'editer')
+                        $this->imageUrl = null;
+                    else
+                        $this->saveAndQuit(self::IMAGE_ERROR);
+                }
 
                 $recette = new Recette(Session::getRecetteAEditer(), Session::getID(), $_POST['nom'], $_POST['nbConvives'], $_POST['descCourte'], $_POST['descLongue'], $this->formatIngredients(), $this->imageUrl, $this->formatEtapes(), 0);
 
@@ -200,6 +206,8 @@ class ControllerModificationRecette extends Controller
 
                 // On sauvegarde les données récupérées de la recette à éditer
                 $this->currentRecette = $recette;
+
+                $this->needImage = false;
             }
         }
         catch (TimeToQuitException $ttq) {
@@ -211,6 +219,7 @@ class ControllerModificationRecette extends Controller
     {
         $messageErreur = $this->messageErreur;
         $recette = $this->currentRecette;
+        $needImage = $this->needImage;
         require 'vues/vueCreationRecette.php';
     }
 }

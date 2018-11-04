@@ -1,7 +1,7 @@
 <?php
 require 'formatPage.inc.php';
 
-start_page('accueil', array('accueil.css'));
+start_page('accueil', array('accueil.php'));
 ?>
     <div id="banniereImg"></div>
     <div id="description">

@@ -137,8 +137,8 @@ start_page('creation', array('creationRecette.css'));
                         {
                             echo '<li class="list_etape" id="list_etapes'.$i.'">';
                             echo '<input name="etapes[]" class="etape" value="'.$etape.'" readonly>';
-                            $r = 'remove("list_etapes'.$i.'");';
-                            echo '<button type="button" onclick="'.$r.'">x</button>';
+                            $r = 'list_etapes'.$i;
+                            echo '<button type="button" onclick="remove(&quot;list_etapes'.$i.'&quot;);">x</button>';
                             echo '</li>';
 
                             ++$i;
@@ -147,7 +147,7 @@ start_page('creation', array('creationRecette.css'));
                     ?>
                 </ul>
 
-                <input type="file" name="photo" placeholder="Image" <?php if ($imageUrl === null or $haveImage === false) echo 'required'?>/></br>
+                <input type="file" name="photo" placeholder="Image" <?php if ($needImage) echo 'required'?>/></br>
 
                 <input type="submit" class="submitButton" name="action" value="Poster recette" />
             </fieldset>

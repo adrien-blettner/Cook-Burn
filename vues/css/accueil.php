@@ -1,3 +1,7 @@
+<?php
+header('content-type: text/css');
+?>
+
 body {
     margin: 0;
     padding: 0;
@@ -91,7 +95,7 @@ h1{
 }
 
 #recettes img{
-    height: 250px;
+    height: 200px;
     border-radius: 50px;
 }
 
@@ -103,8 +107,46 @@ h1{
     width: 100%;
 }
 
+<?php
+/**
+ * Le code suivant est sensé lire la valeur du nombre de recette à afficher dans un fichier editer par l'admin, cependant ça ne marche pas et le temps pour réaliser cette fonction est top court.
+ *
+ */
+/*
+    $sizes = [
+      1 => '50%',
+      2 => '35%',
+      3 => '30%',
+      4 => '20%'
+    ];
+
+    $handle = fopen('https://projetwebcookburn.alwaysdata.net/files/accueilNBRecette.txt', 'r');
+
+    // valeur par défaut
+    $askedSize = 2;
+
+    // Si ça à ouvert le fichier
+
+    if ($handle)
+    {
+        $firstline = fgets($handle);
+        // Si on a pu récupérer la ligne.
+        if ($firstline)
+        {
+            // On récupère le nombre de recette à afficher si on a 0 (erreur ou vrai nombre), on remet la valeur par défaut.
+            if ($askedSize = intval($firstline) === 0)
+                $askedSize = 2;
+        }
+
+        fclose($handle);
+    }
+
+    $size = $sizes[$askedSize];
+ */
+?>
+
 .recetteContenue{
-    width: 33%;
+    width: 35%;
     margin-bottom: 2%;
     border : 1px white solid;
     border-radius: 75px;
