@@ -63,10 +63,6 @@ body {
     padding: 0 15px 4px 15px;
 }
 
-#rechercheChamp:hover{
-    background-color: revert;
-}
-
 #rechercheChamp {
     margin-top: 11px;
     float : left;
