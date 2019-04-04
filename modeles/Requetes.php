@@ -29,8 +29,8 @@ class Requetes
         // Si la connection n'est pas initialisée, le faire
         if (!isset(self::$connectionEcriture))
         {
-            self::$connectionEcriture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_write', 'aAmZCw*hR!Mv9WkbB');
-            mysqli_select_db(self::$connectionEcriture, 'projetwebcookburn_maindatabase');
+            self::$connectionEcriture = mysqli_connect('sql2.freemysqlhosting.net', 'sql2286690', 'sJ9*gR7!');
+            mysqli_select_db(self::$connectionEcriture, 'sql2286690');
         }
         return self::$connectionEcriture;
     }
@@ -46,8 +46,8 @@ class Requetes
         // Si la connection n'est pas initialisée, le faire
         if (!isset(self::$connectionLecture) or self::$connectionLecture === null)
         {
-            self::$connectionLecture = mysqli_connect('mysql-projetwebcookburn.alwaysdata.net', '167330_read', 'L@s88WQJUXJq4Xk0E');
-            mysqli_select_db(self::$connectionLecture, 'projetwebcookburn_maindatabase');
+            self::$connectionLecture = mysqli_connect('sql2.freemysqlhosting.net', 'sql2286690', 'sJ9*gR7!');
+            mysqli_select_db(self::$connectionLecture, 'sql2286690');
         }
         return self::$connectionLecture;
     }
